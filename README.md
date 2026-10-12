@@ -15,7 +15,23 @@ Meu trabalho vai da integração com o ERP à interface usada pela equipe, passa
 
 ## Projetos em destaque
 
-Os projetos abaixo são demonstrações pessoais com dados sintéticos. Seus repositórios documentam execução, decisões técnicas e limites de cada implementação.
+Projetos pessoais com dados abertos ou sintéticos, conforme o caso. Os repositórios documentam as fontes, a execução e as decisões técnicas.
+
+### [CycleOps](https://github.com/arthurjoanes/cycleops)
+
+Disponibilidade de estações de bicicletas de Oslo, com prioridade de incidentes, mapa e histórico. A demo reproduz uma gravação real do feed GBFS; o ambiente local permite coleta ao vivo.
+
+[Abrir demo (replay gravado)](https://arthurjoanes.github.io/cycleops/)
+
+**Python · FastAPI · PostgreSQL · React · TypeScript · MapLibre**
+
+### [QuakeExposure](https://github.com/arthurjoanes/quake-exposure)
+
+Consulta de ativos expostos a terremotos com eventos e ShakeMap do USGS, uma carteira fictícia e comparação entre publicações. A demo usa um snapshot calculado; o ambiente local inclui atualização da carteira via CDC.
+
+[Abrir demo (snapshot)](https://arthurjoanes.github.io/quake-exposure/)
+
+**Python · FastAPI · PostGIS · Kafka · Debezium · TypeScript · Leaflet**
 
 ### [EvidenceDesk](https://github.com/arthurjoanes/evidencedesk)
 
@@ -23,20 +39,10 @@ Investigação de divergências entre pedidos e pagamentos, reunindo fontes veri
 
 **Python · FastAPI · PostgreSQL · Next.js · Azure OpenAI opcional**
 
-### [Gestão de Recebíveis](https://github.com/arthurjoanes/gestao-recebiveis)
-
-Contas a receber com importação CSV, registro de pagamentos sem duplicação e recuperação de tarefas interrompidas. Os lembretes usam um provedor simulado, com distinção entre tentativa de envio e entrega confirmada.
-
-**Python · FastAPI · PostgreSQL · Next.js · Docker**
-
-### [Varejo Data Pipeline](https://github.com/arthurjoanes/varejo-data-pipeline)
-
-Pipeline de vendas com validação de cobertura, tratamento de revisões e publicação consistente de indicadores. Lotes bloqueados ou falhos preservam a publicação anterior, com cenários locais de falha e retomada.
-
-**Python · PySpark · Delta Lake · SQL · Docker**
-
 Também no portfólio:
 
+- [**Gestão de Recebíveis**](https://github.com/arthurjoanes/gestao-recebiveis) — contas a receber com importação CSV, pagamentos sem duplicação e recuperação de tarefas; lembretes por provedor simulado, distinguindo tentativa de envio e entrega confirmada.
+- [**Varejo Data Pipeline**](https://github.com/arthurjoanes/varejo-data-pipeline) — PySpark e Delta Lake para validar cobertura, tratar revisões e publicar indicadores; lotes bloqueados ou falhos preservam a publicação anterior.
 - [**Loja Assistente**](https://github.com/arthurjoanes/loja-assistente) — consultas de vendas em português, com autorização por loja, cálculo no backend e IA opcional.
 - [**API Sentinel**](https://github.com/arthurjoanes/api-sentinel) — API B2B com isolamento por organização, quotas compartilhadas e observabilidade de falhas e recuperação.
 - [**ContainerOps**](https://github.com/arthurjoanes/containerops) — laboratório de operação de API e worker, com recuperação de tarefas, backup, restauração e rollback.

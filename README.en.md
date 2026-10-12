@@ -15,7 +15,23 @@ My work connects ERP integrations to the interfaces used by teams, including acc
 
 ## Selected projects
 
-These are personal demonstrations using synthetic data. Each repository documents how to run it, technical decisions and implementation limits.
+Personal projects using open or synthetic data, depending on the use case. Each repository documents its sources, setup and technical decisions.
+
+### [CycleOps](https://github.com/arthurjoanes/cycleops)
+
+Bike station availability in Oslo, with incident prioritization, a map and history. The demo replays a real GBFS feed recording; the local environment supports live collection.
+
+[Open demo (recorded replay)](https://arthurjoanes.github.io/cycleops/)
+
+**Python · FastAPI · PostgreSQL · React · TypeScript · MapLibre**
+
+### [QuakeExposure](https://github.com/arthurjoanes/quake-exposure)
+
+Earthquake exposure queries using USGS events and ShakeMap, a fictional asset portfolio and comparisons between published results. The demo uses a calculated snapshot; the local environment includes portfolio updates through CDC.
+
+[Open demo (snapshot)](https://arthurjoanes.github.io/quake-exposure/)
+
+**Python · FastAPI · PostGIS · Kafka · Debezium · TypeScript · Leaflet**
 
 ### [EvidenceDesk](https://github.com/arthurjoanes/evidencedesk)
 
@@ -23,20 +39,10 @@ Investigates discrepancies between orders and payments using verifiable sources,
 
 **Python · FastAPI · PostgreSQL · Next.js · Optional Azure OpenAI**
 
-### [Gestão de Recebíveis](https://github.com/arthurjoanes/gestao-recebiveis)
-
-An accounts receivable application with CSV imports, payment recording without duplication and recovery of interrupted jobs. Reminders use a simulated provider, distinguishing delivery attempts from confirmed delivery.
-
-**Python · FastAPI · PostgreSQL · Next.js · Docker**
-
-### [Varejo Data Pipeline](https://github.com/arthurjoanes/varejo-data-pipeline)
-
-A sales data pipeline with coverage validation, revision handling and consistent publication of indicators. Blocked or failed batches preserve the previous publication, with local failure and recovery scenarios.
-
-**Python · PySpark · Delta Lake · SQL · Docker**
-
 Also in my portfolio:
 
+- [**Gestão de Recebíveis**](https://github.com/arthurjoanes/gestao-recebiveis) — accounts receivable with CSV imports, payment recording without duplication and job recovery; reminders use a simulated provider that distinguishes delivery attempts from confirmed delivery.
+- [**Varejo Data Pipeline**](https://github.com/arthurjoanes/varejo-data-pipeline) — PySpark and Delta Lake for coverage validation, revision handling and indicator publication; blocked or failed batches preserve the previous publication.
 - [**Loja Assistente**](https://github.com/arthurjoanes/loja-assistente) — sales queries in Portuguese, with store-level authorization, backend calculations and optional AI.
 - [**API Sentinel**](https://github.com/arthurjoanes/api-sentinel) — a B2B API with organization isolation, shared quotas and observability for failures and recovery.
 - [**ContainerOps**](https://github.com/arthurjoanes/containerops) — an API and worker operations lab covering job recovery, backup, restore and rollback.
