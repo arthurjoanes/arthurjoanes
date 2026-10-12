@@ -33,7 +33,7 @@ Exposição de uma **carteira fictícia** a terremotos, com eventos e ShakeMap d
 **[Abrir demo](https://arthurjoanes.github.io/quake-exposure/)** &nbsp; · &nbsp; [Ver repositório](https://github.com/arthurjoanes/quake-exposure)
 
 <a href="https://arthurjoanes.github.io/quake-exposure/">
-  <img src="assets/projects/quake-exposure.png" alt="QuakeExposure: mapa dos ativos e resumo de exposição de uma carteira fictícia no snapshot de demonstração" width="720">
+  <img src="assets/projects/quake-exposure.jpg" alt="QuakeExposure: mapa dos ativos e resumo de exposição de uma carteira fictícia no snapshot de demonstração" width="720">
 </a>
 
 `Python` `FastAPI` `PostGIS` `Kafka` `Debezium` `TypeScript` `Leaflet`

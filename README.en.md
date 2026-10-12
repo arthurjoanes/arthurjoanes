@@ -33,7 +33,7 @@ Earthquake exposure for a **fictional asset portfolio**, using USGS events and S
 **[Open demo](https://arthurjoanes.github.io/quake-exposure/)** &nbsp; · &nbsp; [View repository](https://github.com/arthurjoanes/quake-exposure)
 
 <a href="https://arthurjoanes.github.io/quake-exposure/">
-  <img src="assets/projects/quake-exposure.png" alt="QuakeExposure: asset map and exposure summary for a fictional portfolio in the demo snapshot" width="720">
+  <img src="assets/projects/quake-exposure.jpg" alt="QuakeExposure: asset map and exposure summary for a fictional portfolio in the demo snapshot" width="720">
 </a>
 
 `Python` `FastAPI` `PostGIS` `Kafka` `Debezium` `TypeScript` `Leaflet`
