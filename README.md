@@ -1,17 +1,10 @@
-<img src="assets/banner.png" alt="Arthur Joanes — IA, Microsoft Fabric, Azure, engenharia de dados e full stack" width="1200">
+<img src="assets/banner-v2.png" alt="Arthur Joanes, software, dados e IA com Python, FastAPI e Azure" width="1200">
 
 [English](README.en.md) · [LinkedIn](https://www.linkedin.com/in/arthur-joanes-6a2967373/) · [E-mail](mailto:arthurjoanes@hotmail.com)
 
 Sou **desenvolvedor de software pleno**, com mais de três anos em desenvolvimento. Trabalho com APIs em Python, aplicações web, engenharia de dados e IA aplicada a operações de varejo.
 
 Meu trabalho vai da integração com o ERP à interface usada pela equipe, passando por permissões de acesso, qualidade dos dados e acompanhamento das aplicações em produção.
-
-## Experiência na prática
-
-- **IA para consultar dados das lojas.** Desenvolvi a Sol, assistente no WhatsApp pela API oficial da Meta, com validação de permissões, isolamento de dados entre lojas e verificação das respostas.
-- **Automação financeira.** Integrei ERP e WhatsApp com Python, FastAPI e Next.js para automatizar a cobrança de boletos, liberando uma pessoa de uma rotina manual que ocupava o dia inteiro.
-- **Dados em escala.** Cuido dos pipelines no Microsoft Fabric de uma plataforma com **mais de 3,8 bilhões de registros**, que atende **mais de 800 lojas em 23 estados**. Implementei validações que bloqueiam dados incompletos e permitem reprocessar períodos sem duplicar registros.
-- **Visibilidade sobre a IA.** Desenvolvi um painel com FastAPI, Next.js e KQL no Azure Log Analytics para investigar falhas e acompanhar custo e qualidade das respostas.
 
 ## Projetos em destaque
 
@@ -46,6 +39,13 @@ Também no portfólio:
 - [**Loja Assistente**](https://github.com/arthurjoanes/loja-assistente) — consultas de vendas em português, com autorização por loja, cálculo no backend e IA opcional.
 - [**API Sentinel**](https://github.com/arthurjoanes/api-sentinel) — API B2B com isolamento por organização, quotas compartilhadas e observabilidade de falhas e recuperação.
 - [**ContainerOps**](https://github.com/arthurjoanes/containerops) — laboratório de operação de API e worker, com recuperação de tarefas, backup, restauração e rollback.
+
+## Experiência na prática
+
+- **IA para consultar dados das lojas.** Desenvolvi a Sol, assistente no WhatsApp pela API oficial da Meta, com validação de permissões, isolamento de dados entre lojas e verificação das respostas.
+- **Automação financeira.** Integrei ERP e WhatsApp com Python, FastAPI e Next.js para automatizar a cobrança de boletos, liberando uma pessoa de uma rotina manual que ocupava o dia inteiro.
+- **Dados em escala.** Cuido dos pipelines no Microsoft Fabric de uma plataforma com **mais de 3,8 bilhões de registros**, que atende **mais de 800 lojas em 23 estados**. Implementei validações que bloqueiam dados incompletos e permitem reprocessar períodos sem duplicar registros.
+- **Visibilidade sobre a IA.** Desenvolvi um painel com FastAPI, Next.js e KQL no Azure Log Analytics para investigar falhas e acompanhar custo e qualidade das respostas.
 
 ## Tecnologias no meu trabalho
 
