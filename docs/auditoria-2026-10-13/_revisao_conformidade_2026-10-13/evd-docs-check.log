@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\arthu\OneDrive\Documentos\Projetos Portifolio\evidencedesk\scripts\check_repository_docs.py", line 23, in <module>
+    from github_slugger import GithubSlugger
+ModuleNotFoundError: No module named 'github_slugger'

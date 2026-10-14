@@ -1,0 +1,12 @@
+{
+  "servers_stopped": [
+    "uvicorn 127.0.0.1:8119",
+    "Next dev localhost:3118"
+  ],
+  "container_removed": "auditoria-fix-rec-db",
+  "volumes_created": 0,
+  "temporary_linux_containers": "auditoria-fix-vdp-tests executados com --rm; nenhum restante",
+  "external_node_modules_removed": false,
+  "pending_path": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\_correcoes_2026-10-13\\rec-clean-install\\node_modules",
+  "reason": "Revisão automática de aprovação rejeitou Remove-Item após conferência do caminho absoluto ('blocked by policy'); sem tentativa de contorno."
+}

@@ -1,0 +1,191 @@
+{
+  "name": "cycleops",
+  "path": "CycleOps",
+  "findings": [
+    {
+      "id": "CYC-01",
+      "title": "Catálogo e eventos do replay não têm seus hashes conferidos",
+      "category": "Segurança e confiabilidade",
+      "severity": "Média",
+      "location": "apps/web/src/streams/artifact.ts:72-124; manifesto catalogSha256/eventsSha256",
+      "evidence": "loadArtifact valida schemas, stream e sequências, mas calcula SHA-256 somente de diagnostics.json. Em uma interceptação local de catalog.json, o nome da estação foi alterado para AUDITORIA_HASH_ALTERADO; a demo exibiu esse nome com o manifesto original. Recibo: browser-checks.json, catalogHashAccepted=1.",
+      "why": "Campos semanticamente diferentes continuam válidos no schema. O manifesto e o link compartilhado deixam de identificar os bytes efetivamente usados. Isso não demonstra invasão do servidor.",
+      "impact": "Um arquivo trocado ou uma publicação inconsistente pode apresentar dados diferentes com a identidade do artefato anterior.",
+      "fix": "Ler o catálogo como texto, conferir seu hash e o texto descomprimido dos eventos antes de JSON.parse/parseEvents. Usar a mesma codificação UTF-8 da geração Python. Manter a validação estrutural existente.",
+      "implementation": "```ts\nconst [catalogText, eventText] = await Promise.all([\n  fetchOk(`${base}catalog.json`, signal).then(r => r.text()),\n  loadEventText(base, signal), // extrair a descompressão já existente\n]);\nif (await sha256(catalogText) !== manifest.catalogSha256 ||\n    await sha256(eventText) !== manifest.eventsSha256) {\n  throw new InvalidPayloadError(\"artifact hash\");\n}\nconst catalog: unknown = JSON.parse(catalogText);\nconst events = parseEvents(eventText);\n```\nIntegrar esse trecho ao Promise.all atual, preservando a leitura paralela de diagnostics. loadEventText é uma função a extrair, não uma API já existente.",
+      "affected_files": [
+        "apps/web/src/streams/artifact.ts",
+        "apps/web/tests/unit/artifact-loading.test.ts"
+      ],
+      "validation": "Alterar um nome e uma contagem sem violar os schemas: ambos devem gerar InvalidPayloadError. Arquivos originais devem carregar, com e sem Content-Encoding:gzip. Repetir a interceptação do recibo.",
+      "effort": "médio",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Carregamento confere SHA-256 do catálogo e dos eventos descomprimidos contra o manifesto antes de decodificar os bytes; validações estruturais permanecem.",
+      "checks_executed": [
+        "Mutações de catálogo e eventos ainda válidas pelo schema são rejeitadas por hash; testes demonstraram a falha antes da correção.",
+        "118 testes frontend passaram, incluindo gzip como arquivo e como content-encoding; seis regressões de BOM cobrem catálogo, eventos e diagnósticos."
+      ],
+      "limitations": [],
+      "files_changed": [
+        "apps/web/src/streams/artifact.ts",
+        "apps/web/tests/unit/artifact-loading.test.ts",
+        "apps/web/tests/unit/logic.test.ts",
+        "apps/web/tests/unit/diagnostics.test.ts"
+      ]
+    },
+    {
+      "id": "CYC-02",
+      "title": "Abas Lista/Mapa anunciam um padrão de teclado que não implementam",
+      "category": "UI/UX e acessibilidade",
+      "severity": "Média",
+      "location": "apps/web/src/app/App.tsx:187-203",
+      "evidence": "Botões têm role=tab e aria-selected, ambos tabIndex=0, nenhum aria-controls. Em 390 px, ArrowRight com foco em Lista manteve o foco e a seleção em Lista (browser-checks.json).",
+      "why": "O padrão de abas espera navegação por setas e associação ao painel; usuários de tecnologia assistiva recebem semântica incompleta. Enter e clique continuam possíveis. Referência: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/.",
+      "impact": "Navegação móvel por teclado inconsistente; não é bloqueio total da troca de visão.",
+      "fix": "Como são duas opções simples de visualização, a correção menor é usar grupo de botões pressionáveis. Alternativamente implementar tabs completas com foco móvel e tabpanel.",
+      "implementation": "```tsx\n<div role=\"group\" aria-label=\"Visão\">\n  {([\"list\", \"map\"] as const).map(tab => (\n    <button key={tab} type=\"button\"\n      aria-pressed={hash.tab === tab}\n      onClick={() => setHash({ tab })}>\n      {tab === \"list\" ? \"Lista\" : \"Mapa\"}\n    </button>\n  ))}\n</div>\n```\nManter as classes e os ícones atuais. Se a opção for manter role=tab, usar aria-controls, IDs nos painéis, tabIndex 0/-1 e setas esquerda/direita.",
+      "affected_files": [
+        "apps/web/src/app/App.tsx",
+        "apps/web/tests/e2e/uiux.spec.ts"
+      ],
+      "validation": "Em 320 e 390 px, navegar somente com teclado e conferir nome, estado pressionado e foco visível; se mantiver tabs, ArrowRight/Left alternam o foco e existe somente uma entrada de Tab no grupo.",
+      "effort": "baixo",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Alternância entre análise e mapa usa grupo de botões com aria-pressed, estado selecionado e operação nativa por teclado.",
+      "checks_executed": [
+        "23 testes Playwright passaram, incluindo Tab/Shift+Tab/Enter/Espaço em 320 e 390 px, foco visível e axe."
+      ],
+      "limitations": [],
+      "files_changed": [
+        "apps/web/src/app/App.tsx",
+        "apps/web/tests/e2e/uiux.spec.ts",
+        "apps/web/tests/e2e/pages.spec.ts",
+        "apps/web/tests/media/identity.spec.ts"
+      ]
+    },
+    {
+      "id": "CYC-03",
+      "title": "Guia chama de pura uma função que modifica o estado recebido",
+      "category": "Documentação",
+      "severity": "Baixa",
+      "location": "CONTRIBUTING.md:10; apps/backend/src/cycleops/domain/engine.py:1-6, 70-82",
+      "evidence": "O guia diz \"pure, no I/O, no wall clock\". O módulo explica que step changes state in place e step atribui state.clock_now e state.policy_version.",
+      "why": "Pureza inclui ausência de mutação observável do argumento. Isolamento de I/O e determinismo são propriedades diferentes.",
+      "impact": "Quem reutiliza o estado anterior em comparação ou teste pode assumir uma garantia inexistente.",
+      "fix": "Corrigir a descrição do guia; não refatorar o motor só para satisfazer um adjetivo.",
+      "implementation": "Substituir a linha da seção Layout por:\n\n`domain/`: the engine. `step(state, input, policy) -> (state, events)` is deterministic, performs no database/network access or system-clock reads, and updates the supplied state in place. It may emit diagnostic warnings through logging. Callers that need the previous state must copy it before calling `step`.",
+      "affected_files": [
+        "CONTRIBUTING.md"
+      ],
+      "validation": "Ler a assinatura e o contrato lado a lado. Um teste de identidade deve continuar mostrando que o retorno contém o mesmo objeto recebido, e o guia deve declarar isso.",
+      "effort": "baixo",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "CONTRIBUTING e a instrução local descrevem o contrato determinístico com atualização do estado em memória, cópia pelo chamador quando necessária e ausência de logging no motor.",
+      "checks_executed": [
+        "Descrição confrontada com o motor e seus testes; 118 testes frontend passaram sem alterar o contrato do motor."
+      ],
+      "limitations": [
+        "AGENTS.md é ignorado pelo repositório; a orientação publicada está em CONTRIBUTING.md."
+      ],
+      "files_changed": [
+        "CONTRIBUTING.md",
+        "AGENTS.md (arquivo local ignorado pelo Git)"
+      ]
+    },
+    {
+      "id": "CYC-04",
+      "title": "Configuração aceita quota não finita e desativa a suspensão por tamanho",
+      "category": "Configuração e limites de recursos",
+      "severity": "Baixa",
+      "location": "apps/backend/src/cycleops/worker/main.py:95-99; worker/processor.py:119-135",
+      "evidence": "Settings converte a variável com float e rejeita apenas quota <= 0. No probe, NaN, inf e 1e999 foram aceitos; maintain com tamanho simulado de 2048 MiB manteve quota.exceeded=False. O controle 1024 ativou a suspensão.",
+      "why": "Comparar qualquer tamanho finito com NaN ou infinito positivo não detecta estouro. Uma configuração inválida passa pelo fail-fast, apesar da mensagem prometer valor acima de zero.",
+      "impact": "Erro de configuração pode remover o limite operacional sem aviso de configuração. Não há entrada remota para alterar essa variável e não foi observado disco cheio.",
+      "fix": "Rejeitar números não finitos ao ler CYCLEOPS_DB_QUOTA_MB, mantendo o erro de configuração e o código de saída já existentes.",
+      "implementation": "```python\nimport math\n\nif not math.isfinite(quota) or quota <= 0:\n    raise ConfigError(\"CYCLEOPS_DB_QUOTA_MB must be finite and above 0\")\n```\nAcrescentar NaN, inf, -inf e 1e999 aos casos de configuração recusada, com IDs curtos nos testes.",
+      "affected_files": [
+        "apps/backend/src/cycleops/worker/main.py",
+        "apps/backend/tests/test_worker_main.py"
+      ],
+      "validation": "As quatro entradas não finitas devem lançar ConfigError antes de abrir conexão. Valores positivos finitos, incluindo 0.5 e 1024, devem continuar aceitos; 0 e negativos recusados.",
+      "effort": "baixo",
+      "priority": "P2",
+      "effort_level": "baixo",
+      "status": "corrigido_validado",
+      "correction": "Configuração rejeita quotas não finitas e não positivas antes de inicializar o worker.",
+      "checks_executed": [
+        "NaN, inf, -inf, 1e999, zero e negativo recusados; 0.5 e 1024 aceitos.",
+        "30 testes de configuração e arquivo bruto passaram; Ruff e mypy aprovados."
+      ],
+      "limitations": [],
+      "files_changed": [
+        "apps/backend/src/cycleops/worker/main.py",
+        "apps/backend/tests/test_worker_main.py"
+      ]
+    },
+    {
+      "id": "CYC-05",
+      "title": "Documentação apresenta a limpeza do arquivo bruto como teto rígido de armazenamento",
+      "category": "Documentação operacional e retenção",
+      "severity": "Baixa",
+      "location": "SECURITY.md:11; apps/backend/src/cycleops/worker/archive.py:1-2,51-60,67-79,98",
+      "evidence": "SECURITY.md afirma teto de 500 MB. ArchiveWriter chama prune apenas em _open, na rotação/reinício; cada write posterior apenas escreve e faz flush. prune preserva keep mesmo acima do máximo; test_worker_archive.py:98-99 testa essa exceção explicitamente.",
+      "why": "O limite orienta a remoção dos arquivos anteriores durante a rotação. Ele não é uma garantia de espaço máximo, nem uma purga periódica independente de novas escritas. O ativo pode crescer entre duas rotações.",
+      "impact": "Quem dimensionar o volume supondo um teto rígido pode reservar espaço insuficiente. Não foi medido consumo real de 500 MiB; o achado é a promessa mais forte que o comportamento intencional.",
+      "fix": "Corrigir SECURITY.md e a docstring para explicar a política real. Manter a preservação do arquivo ativo; um teto físico exigiria decisão separada de rotação por tamanho e comportamento quando não houver espaço.",
+      "implementation": "Texto para substituir apenas a descrição do arquivo bruto:\n\n\"O arquivo bruto do live é dividido por hora. Ao abrir um novo arquivo, a limpeza remove arquivos anteriores com última escrita há mais de 48 horas e depois os mais antigos enquanto o conjunto ultrapassa 500 MiB. O arquivo em uso é preservado; por isso o volume pode passar desse valor entre rotações.\"\n\nDocstring correspondente: \"Hourly NDJSON.gz archive. On rotation, prune older files by a 48-hour retention target and a 500 MiB size threshold, preserving the active file; this is not a hard disk quota.\"",
+      "affected_files": [
+        "SECURITY.md",
+        "apps/backend/src/cycleops/worker/archive.py"
+      ],
+      "validation": "Conferir que a descrição identifica momento da limpeza, unidade MiB e exceção do arquivo ativo. Preservar os testes existentes e o probe com limiar reduzido; não rodar teste de carga contra o feed real.",
+      "effort": "baixo",
+      "priority": "P2",
+      "effort_level": "baixo",
+      "status": "corrigido_validado",
+      "correction": "Documentação identifica limpeza ao abrir arquivo, unidade 500 MiB e preservação do arquivo ativo, que pode crescer entre rotações.",
+      "checks_executed": [
+        "Política confrontada com implementação; testes de rotação, retenção e arquivo ativo preservados e aprovados."
+      ],
+      "limitations": [],
+      "files_changed": [
+        "SECURITY.md",
+        "apps/backend/src/cycleops/worker/archive.py"
+      ]
+    }
+  ],
+  "head_before": "330e4c6bfd61e264956add9785557857456f5aff",
+  "status_before": "",
+  "validation_logs": [
+    "cyc-web-unit.log",
+    "cyc-web-unit-parallel-timeout.log",
+    "cyc-web-unit-two-workers-timeout.log",
+    "cyc-bom-before.log",
+    "cyc-web-e2e.log",
+    "cyc-backend-tests.log"
+  ],
+  "checks": [
+    {
+      "command": "corepack pnpm test --maxWorkers=1 --testTimeout=30000",
+      "result": "118 passed",
+      "limitation": "Duas rodadas anteriores tiveram timeouts de 5 s em dois testes de lista inalterados (116 passaram). A rodada final usa um worker e prazo de 30 s apenas por CLI, mantendo todas as asserções e sem mudar a configuração versionada. Isso valida o comportamento, não o tempo de execução padrão sob carga."
+    },
+    {
+      "command": "corepack pnpm e2e tests/e2e/uiux.spec.ts tests/e2e/pages.spec.ts",
+      "result": "23 passed"
+    },
+    {
+      "command": "corepack pnpm typecheck; corepack pnpm lint",
+      "result": "Aprovados, repetidos após o ajuste final das fixtures"
+    },
+    {
+      "command": "pytest test_worker_main.py test_worker_archive.py; ruff; mypy",
+      "result": "30 passed; Ruff aprovado; mypy sem erros em 77 arquivos"
+    }
+  ],
+  "head_after": "330e4c6bfd61e264956add9785557857456f5aff",
+  "status_after": " M CONTRIBUTING.md\n M SECURITY.md\n M apps/backend/src/cycleops/worker/archive.py\n M apps/backend/src/cycleops/worker/main.py\n M apps/backend/tests/test_worker_main.py\n M apps/web/src/app/App.tsx\n M apps/web/src/streams/artifact.ts\n M apps/web/tests/e2e/pages.spec.ts\n M apps/web/tests/e2e/uiux.spec.ts\n M apps/web/tests/media/identity.spec.ts\n M apps/web/tests/unit/artifact-loading.test.ts\n M apps/web/tests/unit/diagnostics.test.ts\n M apps/web/tests/unit/logic.test.ts\n"
+}

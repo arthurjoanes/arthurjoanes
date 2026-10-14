@@ -1,0 +1,9 @@
+ Container pf-evidencedesk-e2e-publish-1013-seed-run-1550ede09195 Creating 
+ Container pf-evidencedesk-e2e-publish-1013-seed-run-1550ede09195 Created 
+{"package": "aurora-01", "state": "ready"}
+{"package": "aurora-02", "state": "ready"}
+{"package": "aurora-03", "state": "ready"}
+{"package": "horizonte-01", "state": "ready"}
+{"package": "horizonte-02", "state": "ready"}
+{"package": "horizonte-03", "state": "ready"}
+{"state": "seeded", "incidents": 30, "origin": "synthetic", "model_calls": 0}

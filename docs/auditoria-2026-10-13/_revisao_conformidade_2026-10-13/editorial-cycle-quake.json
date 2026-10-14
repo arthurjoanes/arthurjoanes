@@ -1,0 +1,98 @@
+{
+  "scope": "Revisão editorial com humanizer dos READMEs PT/EN e guias de entrada de CycleOps e QuakeExposure; sem nova investigação de runtime.",
+  "changes": "Quatro aberturas com sujeito explícito; instrução do replay CycleOps alinhada PT/EN. Guias de exploração e padrões documentais lidos, sem necessidade de alteração.",
+  "docs_read": [
+    "CycleOps/AGENTS.md",
+    "CycleOps/README.md",
+    "CycleOps/README.en.md",
+    "CycleOps/docs/explorar-dados.md",
+    "CycleOps/docs/padrao-documentacao.md",
+    "_auditoria_2026-10-13/sources/quake-exposure/README.md",
+    "_auditoria_2026-10-13/sources/quake-exposure/README.en.md",
+    "_auditoria_2026-10-13/sources/quake-exposure/docs/exploracao.md",
+    "_auditoria_2026-10-13/sources/quake-exposure/docs/padrao-documentacao.md"
+  ],
+  "instructions_consulted": [
+    "CycleOps/CONTRIBUTING.md: layout, comandos e regras; contrato já conferido na revisão anterior",
+    "_auditoria_2026-10-13/sources/quake-exposure/CONTRIBUTING.md: regras, domínio, coleta e verificação"
+  ],
+  "files": [
+    {
+      "file": "CycleOps\\README.md",
+      "before_sha256": "761bd125cf818869c2314b57969d64e53f549fccce7eb1461239bdee7c34f631",
+      "after_sha256": "734fe5645446ddf5cf89d198d11cc5e4cd7616cacb364a7710fd2af234072aa3",
+      "preservation_checks": {
+        "fenced_code": true,
+        "inline_code": true,
+        "markdown_targets": true,
+        "html_targets": true,
+        "numbers": true,
+        "headings": true
+      },
+      "diff": "--- before\n+++ after\n@@ -5,7 +5,7 @@\n   <img src=\"docs/brand/cycleops-lockup.svg\" alt=\"Marca CycleOps\" width=\"288\" height=\"64\">\n </picture>\n \n-Estações do Oslo Bysykkel sem bicicleta ou sem vaga, em ordem de prioridade, com o motivo e os dados usados no cálculo. Feed GBFS aberto, mapa de Oslo e replay de uma gravação real.\n+O CycleOps lista estações do Oslo Bysykkel sem bicicleta ou sem vaga, em ordem de prioridade, com o motivo e os dados usados no cálculo. Usa o feed GBFS aberto, um mapa de Oslo e o replay de uma gravação real.\n \n [Read in English](README.en.md)\n \n@@ -234,7 +234,7 @@\n \n Só uma pilha publica a porta 8080 por vez. Pare a anterior antes de trocar: `docker compose down` para a simulação ou `docker compose -p cycleops-live down` para o live. Use `--build` depois de mudar o código.\n \n-Para abrir só o replay, precisa de Node 24 com corepack:\n+Para abrir só o replay, use Node 24 com corepack:\n \n ```bash\n cd apps/web\n"
+    },
+    {
+      "file": "CycleOps\\README.en.md",
+      "before_sha256": "9493cc35ace6c76fbe06d152e109af2c52a8763987327e7ab519def01b0472a0",
+      "after_sha256": "fba727d28e04bf3782d931bcfecc0b522331fb22bd39babbfcdd5e410c88ac8e",
+      "preservation_checks": {
+        "fenced_code": true,
+        "inline_code": true,
+        "markdown_targets": true,
+        "html_targets": true,
+        "numbers": true,
+        "headings": true
+      },
+      "diff": "--- before\n+++ after\n@@ -5,7 +5,7 @@\n   <img src=\"docs/brand/cycleops-lockup.svg\" alt=\"CycleOps brand\" width=\"288\" height=\"64\">\n </picture>\n \n-Oslo Bysykkel stations with no bikes or no free docks, ordered by priority, with the reason and the data behind each decision. Open GBFS data, an Oslo map and a replay of a real recording.\n+CycleOps lists Oslo Bysykkel stations with no bikes or no free docks, ordered by priority, with the reason and the data behind each decision. It uses open GBFS data, an Oslo map and a replay of a real recording.\n \n [Leia em português](README.md)\n \n@@ -234,7 +234,7 @@\n \n Only one stack publishes port 8080 at a time. Stop the previous one before switching: `docker compose down` for simulation or `docker compose -p cycleops-live down` for live. Use `--build` after changing the code.\n \n-The standalone replay needs Node 24 with corepack:\n+To run the standalone replay, use Node 24 with corepack:\n \n ```bash\n cd apps/web\n"
+    },
+    {
+      "file": "_auditoria_2026-10-13\\sources\\quake-exposure\\README.md",
+      "before_sha256": "1acd9138e3685f21f0d95857120c1d0f8748c106e7688f387ae3afa80b95f74f",
+      "after_sha256": "bb60962f6e94181831acf291f0da20f2250a3b9fca3ee2780580760905d036ef",
+      "preservation_checks": {
+        "fenced_code": true,
+        "inline_code": true,
+        "markdown_targets": true,
+        "html_targets": true,
+        "numbers": true,
+        "headings": true
+      },
+      "diff": "--- before\n+++ after\n@@ -4,7 +4,7 @@\n \n # QuakeExposure\n \n-Consulta de ativos expostos a terremotos, com eventos e ShakeMap do USGS e uma carteira fictícia. O painel reúne mapa, gráficos, listas e comparação entre publicações. A coleta, o cálculo geográfico e a atualização da carteira via CDC mantêm o histórico de cada resultado.\n+O QuakeExposure permite consultar a exposição de uma carteira fictícia a terremotos, usando eventos e ShakeMap do USGS. O painel reúne mapa, gráficos, listas e comparação entre publicações. A coleta, o cálculo geográfico e a atualização da carteira via CDC mantêm o histórico de cada resultado.\n \n <p>\n   <a href=\"#demonstração\"><img src=\"docs/readme/badges/demo.svg\" alt=\"Demonstração\" width=\"139\" height=\"28\"></a>\n"
+    },
+    {
+      "file": "_auditoria_2026-10-13\\sources\\quake-exposure\\README.en.md",
+      "before_sha256": "271fcbfb62072c256f35a9978635edf350b3e4dc00ccb75791d1927d723a69bf",
+      "after_sha256": "b5d91a2a53907ee900636d3e5f6c7ff4fa2b5c821f59e5ed5646bac7ca7a8930",
+      "preservation_checks": {
+        "fenced_code": true,
+        "inline_code": true,
+        "markdown_targets": true,
+        "html_targets": true,
+        "numbers": true,
+        "headings": true
+      },
+      "diff": "--- before\n+++ after\n@@ -4,7 +4,7 @@\n \n # QuakeExposure\n \n-Asset exposure inspection using USGS earthquakes and ShakeMap data with a fictional portfolio. The dashboard combines a map, charts, lists, and publication comparison. Collection, geographic calculations, and portfolio updates through CDC preserve each result's history.\n+QuakeExposure lets you inspect a fictional portfolio's exposure to earthquakes using USGS events and ShakeMap data. The dashboard combines a map, charts, lists, and publication comparison. Collection, geographic calculations, and portfolio updates through CDC preserve each result's history.\n \n <p>\n   <a href=\"#demo\"><img src=\"docs/readme/badges/demo.en.svg\" alt=\"Demo\" width=\"139\" height=\"28\"></a>\n"
+    }
+  ],
+  "git_checks": [
+    {
+      "repo": "cycleops",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'apps/web/src/app/App.tsx', CRLF will be replaced by LF the next time Git touches it\n"
+    },
+    {
+      "repo": "quake",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "limits": [
+    "A revisão editorial não repete os testes do produto nem atualiza datas, números ou resultados históricos.",
+    "Nenhum Markdown global, PDF, comando, alvo de link, código Mermaid ou arquivo de imagem foi alterado nesta etapa.",
+    "Sem commit ou push por este agente."
+  ]
+}

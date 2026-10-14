@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:38008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\session-safety.spec.ts:149:5 › 401 de operação antiga não encerra o acesso de outra conta (3.3s)
+  ok 2 [chromium] › tests\session-safety.spec.ts:206:5 › 200 atrasado da conta anterior não reapresenta uma prévia protegida (2.4s)
+  ok 3 [chromium] › tests\workspace-navigation.spec.ts:4:5 › faixas e contagens usam rótulos de apresentação (4ms)
+
+  3 passed (7.7s)

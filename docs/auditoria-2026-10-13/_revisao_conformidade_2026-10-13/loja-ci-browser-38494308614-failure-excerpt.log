@@ -1,0 +1,1305 @@
+2026-10-14T01:43:09.1112093Z e2e-1       |   1) [chromium] › e2e/audit-regressions.spec.ts:160:5 › LOJ-01: a lost query response recovers its durable intent without posting twice 
+2026-10-14T01:43:09.1121334Z e2e-1       | 
+2026-10-14T01:43:09.1123712Z e2e-1       |     Error: expect(locator).toBeVisible() failed
+2026-10-14T01:43:09.1124076Z e2e-1       | 
+2026-10-14T01:43:09.1124522Z e2e-1       |     Locator: getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1124933Z e2e-1       |     Expected: visible
+2026-10-14T01:43:09.1125189Z e2e-1       |     Timeout: 5000ms
+2026-10-14T01:43:09.1125531Z e2e-1       |     Error: element(s) not found
+2026-10-14T01:43:09.1125886Z e2e-1       | 
+2026-10-14T01:43:09.1126164Z e2e-1       |     Call log:
+2026-10-14T01:43:09.1126767Z e2e-1       |       - Expect "toBeVisible" getByText(/Não foi possível confirmar a execução/) with timeout 5000ms
+2026-10-14T01:43:09.1127456Z e2e-1       |       - waiting for getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1127881Z e2e-1       | 
+2026-10-14T01:43:09.1128143Z e2e-1       | 
+2026-10-14T01:43:09.1128851Z e2e-1       |       180 |   await expect(
+2026-10-14T01:43:09.1129347Z e2e-1       |       181 |     page.getByText(/Não foi possível confirmar a execução/),
+2026-10-14T01:43:09.1129780Z e2e-1       |     > 182 |   ).toBeVisible();
+2026-10-14T01:43:09.1130101Z e2e-1       |           |     ^
+2026-10-14T01:43:09.1130408Z e2e-1       |       183 |   await expect(
+2026-10-14T01:43:09.1131081Z e2e-1       |       184 |     page.getByRole("button", { name: "Enviar pergunta" }),
+2026-10-14T01:43:09.1131522Z e2e-1       |       185 |   ).toBeDisabled();
+2026-10-14T01:43:09.1131965Z e2e-1       |         at /app/e2e/audit-regressions.spec.ts:182:5
+2026-10-14T01:43:09.1132340Z e2e-1       | 
+2026-10-14T01:43:09.1132925Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1133752Z e2e-1       |     test-results/audit-regressions-LOJ-01-a-cf020-ntent-without-posting-twice-chromium/test-failed-1.png
+2026-10-14T01:43:09.1134611Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1135285Z e2e-1       | 
+2026-10-14T01:43:09.1135873Z e2e-1       |     Error Context: test-results/audit-regressions-LOJ-01-a-cf020-ntent-without-posting-twice-chromium/error-context.md
+2026-10-14T01:43:09.1136508Z e2e-1       | 
+2026-10-14T01:43:09.1137074Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1137804Z e2e-1       |     test-results/audit-regressions-LOJ-01-a-cf020-ntent-without-posting-twice-chromium/trace.zip
+2026-10-14T01:43:09.1138579Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1138884Z e2e-1       | 
+2026-10-14T01:43:09.1139479Z e2e-1       |         npx playwright show-trace test-results/audit-regressions-LOJ-01-a-cf020-ntent-without-posting-twice-chromium/trace.zip
+2026-10-14T01:43:09.1140129Z e2e-1       | 
+2026-10-14T01:43:09.1140652Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1141119Z e2e-1       | 
+2026-10-14T01:43:09.1141741Z e2e-1       |   2) [chromium] › e2e/audit-regressions.spec.ts:252:5 › LOJ-01: navigation and favorites cannot clear an uncertain query 
+2026-10-14T01:43:09.1142370Z e2e-1       | 
+2026-10-14T01:43:09.1142696Z e2e-1       |     Error: expect(locator).toBeVisible() failed
+2026-10-14T01:43:09.1143061Z e2e-1       | 
+2026-10-14T01:43:09.1143506Z e2e-1       |     Locator: getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1143804Z e2e-1       |     Expected: visible
+2026-10-14T01:43:09.1144082Z e2e-1       |     Timeout: 5000ms
+2026-10-14T01:43:09.1144371Z e2e-1       |     Error: element(s) not found
+2026-10-14T01:43:09.1144606Z e2e-1       | 
+2026-10-14T01:43:09.1144805Z e2e-1       |     Call log:
+2026-10-14T01:43:09.1145254Z e2e-1       |       - Expect "toBeVisible" getByText(/Não foi possível confirmar a execução/) with timeout 5000ms
+2026-10-14T01:43:09.1145754Z e2e-1       |       - waiting for getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1146050Z e2e-1       | 
+2026-10-14T01:43:09.1146241Z e2e-1       | 
+2026-10-14T01:43:09.1146482Z e2e-1       |       282 |   await expect(
+2026-10-14T01:43:09.1146843Z e2e-1       |       283 |     page.getByText(/Não foi possível confirmar a execução/),
+2026-10-14T01:43:09.1147138Z e2e-1       |     > 284 |   ).toBeVisible();
+2026-10-14T01:43:09.1148075Z e2e-1       |           |     ^
+2026-10-14T01:43:09.1148594Z e2e-1       |       285 |   await page.locator(".history-menu > summary").click();
+2026-10-14T01:43:09.1149063Z e2e-1       |       286 |   await page
+2026-10-14T01:43:09.1149436Z e2e-1       |       287 |     .getByRole("navigation", { name: "Histórico pessoal" })
+2026-10-14T01:43:09.1149939Z e2e-1       |         at /app/e2e/audit-regressions.spec.ts:284:5
+2026-10-14T01:43:09.1150205Z e2e-1       | 
+2026-10-14T01:43:09.1150767Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1151544Z e2e-1       |     test-results/audit-regressions-LOJ-01-n-752e7-ot-clear-an-uncertain-query-chromium/test-failed-1.png
+2026-10-14T01:43:09.1152367Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1152695Z e2e-1       | 
+2026-10-14T01:43:09.1153313Z e2e-1       |     Error Context: test-results/audit-regressions-LOJ-01-n-752e7-ot-clear-an-uncertain-query-chromium/error-context.md
+2026-10-14T01:43:09.1160877Z e2e-1       | 
+2026-10-14T01:43:09.1161339Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1161913Z e2e-1       |     test-results/audit-regressions-LOJ-01-n-752e7-ot-clear-an-uncertain-query-chromium/trace.zip
+2026-10-14T01:43:09.1162361Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1162551Z e2e-1       | 
+2026-10-14T01:43:09.1163038Z e2e-1       |         npx playwright show-trace test-results/audit-regressions-LOJ-01-n-752e7-ot-clear-an-uncertain-query-chromium/trace.zip
+2026-10-14T01:43:09.1163795Z e2e-1       | 
+2026-10-14T01:43:09.1164208Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1164532Z e2e-1       | 
+2026-10-14T01:43:09.1165118Z e2e-1       |   3) [chromium] › e2e/audit-regressions.spec.ts:316:5 › LOJ-01: a missing admission resends the same intent with an accurate confirmation 
+2026-10-14T01:43:09.1165624Z e2e-1       | 
+2026-10-14T01:43:09.1165832Z e2e-1       |     Error: expect(locator).toBeVisible() failed
+2026-10-14T01:43:09.1166089Z e2e-1       | 
+2026-10-14T01:43:09.1166421Z e2e-1       |     Locator: getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1166763Z e2e-1       |     Expected: visible
+2026-10-14T01:43:09.1166984Z e2e-1       |     Timeout: 5000ms
+2026-10-14T01:43:09.1167206Z e2e-1       |     Error: element(s) not found
+2026-10-14T01:43:09.1167429Z e2e-1       | 
+2026-10-14T01:43:09.1167613Z e2e-1       |     Call log:
+2026-10-14T01:43:09.1168066Z e2e-1       |       - Expect "toBeVisible" getByText(/Não foi possível confirmar a execução/) with timeout 5000ms
+2026-10-14T01:43:09.1168722Z e2e-1       |       - waiting for getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1169035Z e2e-1       | 
+2026-10-14T01:43:09.1169190Z e2e-1       | 
+2026-10-14T01:43:09.1169375Z e2e-1       |       335 |   await expect(
+2026-10-14T01:43:09.1169768Z e2e-1       |       336 |     page.getByText(/Não foi possível confirmar a execução/),
+2026-10-14T01:43:09.1170106Z e2e-1       |     > 337 |   ).toBeVisible();
+2026-10-14T01:43:09.1170339Z e2e-1       |           |     ^
+2026-10-14T01:43:09.1170544Z e2e-1       |       338 |   await page
+2026-10-14T01:43:09.1170891Z e2e-1       |       339 |     .getByRole("button", { name: "Recarregar estado atual", exact: true })
+2026-10-14T01:43:09.1171247Z e2e-1       |       340 |     .click();
+2026-10-14T01:43:09.1171513Z e2e-1       |         at /app/e2e/audit-regressions.spec.ts:337:5
+2026-10-14T01:43:09.1171772Z e2e-1       | 
+2026-10-14T01:43:09.1172181Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1172578Z e2e-1       |     test-results/audit-regressions-LOJ-01-a-5380b-th-an-accurate-confirmation-chromium/test-failed-1.png
+2026-10-14T01:43:09.1173109Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1173302Z e2e-1       | 
+2026-10-14T01:43:09.1173581Z e2e-1       |     Error Context: test-results/audit-regressions-LOJ-01-a-5380b-th-an-accurate-confirmation-chromium/error-context.md
+2026-10-14T01:43:09.1173881Z e2e-1       | 
+2026-10-14T01:43:09.1174141Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1174501Z e2e-1       |     test-results/audit-regressions-LOJ-01-a-5380b-th-an-accurate-confirmation-chromium/trace.zip
+2026-10-14T01:43:09.1174866Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1174981Z e2e-1       | 
+2026-10-14T01:43:09.1175268Z e2e-1       |         npx playwright show-trace test-results/audit-regressions-LOJ-01-a-5380b-th-an-accurate-confirmation-chromium/trace.zip
+2026-10-14T01:43:09.1175576Z e2e-1       | 
+2026-10-14T01:43:09.1175816Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1176007Z e2e-1       | 
+2026-10-14T01:43:09.1176369Z e2e-1       |   4) [chromium] › e2e/audit-regressions.spec.ts:350:5 › LOJ-01: starting another analysis abandons local recovery without another automatic request 
+2026-10-14T01:43:09.1176689Z e2e-1       | 
+2026-10-14T01:43:09.1176822Z e2e-1       |     Error: expect(locator).toBeVisible() failed
+2026-10-14T01:43:09.1176986Z e2e-1       | 
+2026-10-14T01:43:09.1177178Z e2e-1       |     Locator: getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1177378Z e2e-1       |     Expected: visible
+2026-10-14T01:43:09.1177516Z e2e-1       |     Timeout: 5000ms
+2026-10-14T01:43:09.1177659Z e2e-1       |     Error: element(s) not found
+2026-10-14T01:43:09.1177797Z e2e-1       | 
+2026-10-14T01:43:09.1177899Z e2e-1       |     Call log:
+2026-10-14T01:43:09.1178179Z e2e-1       |       - Expect "toBeVisible" getByText(/Não foi possível confirmar a execução/) with timeout 5000ms
+2026-10-14T01:43:09.1178664Z e2e-1       |       - waiting for getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1178853Z e2e-1       | 
+2026-10-14T01:43:09.1179025Z e2e-1       | 
+2026-10-14T01:43:09.1179137Z e2e-1       |       371 |   await expect(
+2026-10-14T01:43:09.1179369Z e2e-1       |       372 |     page.getByText(/Não foi possível confirmar a execução/),
+2026-10-14T01:43:09.1179569Z e2e-1       |     > 373 |   ).toBeVisible();
+2026-10-14T01:43:09.1179714Z e2e-1       |           |     ^
+2026-10-14T01:43:09.1179981Z e2e-1       |       374 |   await page.getByRole("button", { name: "Nova análise", exact: true }).click();
+2026-10-14T01:43:09.1180301Z e2e-1       |       375 |   await expect(page.getByLabel("Pergunta", { exact: true })).toHaveValue("");
+2026-10-14T01:43:09.1180551Z e2e-1       |       376 |   expect(posts).toHaveLength(1);
+2026-10-14T01:43:09.1180881Z e2e-1       |         at /app/e2e/audit-regressions.spec.ts:373:5
+2026-10-14T01:43:09.1181044Z e2e-1       | 
+2026-10-14T01:43:09.1181301Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1181676Z e2e-1       |     test-results/audit-regressions-LOJ-01-s-49ed3-t-another-automatic-request-chromium/test-failed-1.png
+2026-10-14T01:43:09.1182090Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1182281Z e2e-1       | 
+2026-10-14T01:43:09.1182556Z e2e-1       |     Error Context: test-results/audit-regressions-LOJ-01-s-49ed3-t-another-automatic-request-chromium/error-context.md
+2026-10-14T01:43:09.1182922Z e2e-1       | 
+2026-10-14T01:43:09.1183176Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1183535Z e2e-1       |     test-results/audit-regressions-LOJ-01-s-49ed3-t-another-automatic-request-chromium/trace.zip
+2026-10-14T01:43:09.1183806Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1183920Z e2e-1       | 
+2026-10-14T01:43:09.1184204Z e2e-1       |         npx playwright show-trace test-results/audit-regressions-LOJ-01-s-49ed3-t-another-automatic-request-chromium/trace.zip
+2026-10-14T01:43:09.1184512Z e2e-1       | 
+2026-10-14T01:43:09.1184750Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1184948Z e2e-1       | 
+2026-10-14T01:43:09.1185294Z e2e-1       |   5) [chromium] › e2e/audit-regressions.spec.ts:389:5 › LOJ-01: changing accounts clears an uncertain intent without recovering or reposting it 
+2026-10-14T01:43:09.1185611Z e2e-1       | 
+2026-10-14T01:43:09.1185747Z e2e-1       |     Error: expect(locator).toBeVisible() failed
+2026-10-14T01:43:09.1185905Z e2e-1       | 
+2026-10-14T01:43:09.1186095Z e2e-1       |     Locator: getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1186296Z e2e-1       |     Expected: visible
+2026-10-14T01:43:09.1186432Z e2e-1       |     Timeout: 5000ms
+2026-10-14T01:43:09.1186574Z e2e-1       |     Error: element(s) not found
+2026-10-14T01:43:09.1186711Z e2e-1       | 
+2026-10-14T01:43:09.1186815Z e2e-1       |     Call log:
+2026-10-14T01:43:09.1187087Z e2e-1       |       - Expect "toBeVisible" getByText(/Não foi possível confirmar a execução/) with timeout 5000ms
+2026-10-14T01:43:09.1187417Z e2e-1       |       - waiting for getByText(/Não foi possível confirmar a execução/)
+2026-10-14T01:43:09.1187605Z e2e-1       | 
+2026-10-14T01:43:09.1187704Z e2e-1       | 
+2026-10-14T01:43:09.1187814Z e2e-1       |       444 |   await expect(
+2026-10-14T01:43:09.1188050Z e2e-1       |       445 |     page.getByText(/Não foi possível confirmar a execução/),
+2026-10-14T01:43:09.1188382Z e2e-1       |     > 446 |   ).toBeVisible();
+2026-10-14T01:43:09.1188524Z e2e-1       |           |     ^
+2026-10-14T01:43:09.1188820Z e2e-1       |       447 |   await page.getByRole("button", { name: "Sair", exact: true }).click();
+2026-10-14T01:43:09.1189111Z e2e-1       |       448 |   await page.getByRole("button", { name: "Entrar", exact: true }).click();
+2026-10-14T01:43:09.1189408Z e2e-1       |       449 |   await expect(page.getByText("Outra pessoa", { exact: true })).toBeVisible();
+2026-10-14T01:43:09.1189660Z e2e-1       |         at /app/e2e/audit-regressions.spec.ts:446:5
+2026-10-14T01:43:09.1189824Z e2e-1       | 
+2026-10-14T01:43:09.1190080Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1190460Z e2e-1       |     test-results/audit-regressions-LOJ-01-c-0a035--recovering-or-reposting-it-chromium/test-failed-1.png
+2026-10-14T01:43:09.1191049Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1191374Z e2e-1       | 
+2026-10-14T01:43:09.1191661Z e2e-1       |     Error Context: test-results/audit-regressions-LOJ-01-c-0a035--recovering-or-reposting-it-chromium/error-context.md
+2026-10-14T01:43:09.1191962Z e2e-1       | 
+2026-10-14T01:43:09.1192218Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1192578Z e2e-1       |     test-results/audit-regressions-LOJ-01-c-0a035--recovering-or-reposting-it-chromium/trace.zip
+2026-10-14T01:43:09.1192846Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1192959Z e2e-1       | 
+2026-10-14T01:43:09.1193242Z e2e-1       |         npx playwright show-trace test-results/audit-regressions-LOJ-01-c-0a035--recovering-or-reposting-it-chromium/trace.zip
+2026-10-14T01:43:09.1193654Z e2e-1       | 
+2026-10-14T01:43:09.1193888Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1194080Z e2e-1       | 
+2026-10-14T01:43:09.1194416Z e2e-1       |   6) [chromium] › e2e/evolution.spec.ts:110:5 › favoritos têm ações reais, nomes escapados, escopo fixo e cálculo histórico separado 
+2026-10-14T01:43:09.1194705Z e2e-1       | 
+2026-10-14T01:43:09.1194825Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1194976Z e2e-1       | 
+2026-10-14T01:43:09.1195137Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1195324Z e2e-1       | 
+2026-10-14T01:43:09.1195505Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1195782Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1196022Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1196207Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1196358Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1196539Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1196752Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1196948Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1197139Z e2e-1       |         at /app/e2e/evolution.spec.ts:114:20
+2026-10-14T01:43:09.1197294Z e2e-1       | 
+2026-10-14T01:43:09.1197549Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1197976Z e2e-1       |     test-results/evolution-favoritos-têm-aç-53717--cálculo-histórico-separado-chromium/test-failed-1.png
+2026-10-14T01:43:09.1198520Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1198719Z e2e-1       | 
+2026-10-14T01:43:09.1199030Z e2e-1       |     Error Context: test-results/evolution-favoritos-têm-aç-53717--cálculo-histórico-separado-chromium/error-context.md
+2026-10-14T01:43:09.1199309Z e2e-1       | 
+2026-10-14T01:43:09.1199661Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1200049Z e2e-1       |     test-results/evolution-favoritos-têm-aç-53717--cálculo-histórico-separado-chromium/trace.zip
+2026-10-14T01:43:09.1200299Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1200412Z e2e-1       | 
+2026-10-14T01:43:09.1200733Z e2e-1       |         npx playwright show-trace test-results/evolution-favoritos-têm-aç-53717--cálculo-histórico-separado-chromium/trace.zip
+2026-10-14T01:43:09.1201026Z e2e-1       | 
+2026-10-14T01:43:09.1201262Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1201558Z e2e-1       | 
+2026-10-14T01:43:09.1201839Z e2e-1       |   7) [chromium] › e2e/evolution.spec.ts:229:5 › lista autorizada tardia não reaparece após logout e outra conta 
+2026-10-14T01:43:09.1202094Z e2e-1       | 
+2026-10-14T01:43:09.1202213Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1202360Z e2e-1       | 
+2026-10-14T01:43:09.1202524Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1202711Z e2e-1       | 
+2026-10-14T01:43:09.1202885Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1203162Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1203397Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1203570Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1203721Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1203901Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1204106Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1204295Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1204487Z e2e-1       |         at /app/e2e/evolution.spec.ts:233:18
+2026-10-14T01:43:09.1204654Z e2e-1       | 
+2026-10-14T01:43:09.1204916Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1205338Z e2e-1       |     test-results/evolution-lista-autorizada-67886-e-após-logout-e-outra-conta-chromium/test-failed-1.png
+2026-10-14T01:43:09.1205747Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1205940Z e2e-1       | 
+2026-10-14T01:43:09.1206256Z e2e-1       |     Error Context: test-results/evolution-lista-autorizada-67886-e-após-logout-e-outra-conta-chromium/error-context.md
+2026-10-14T01:43:09.1206559Z e2e-1       | 
+2026-10-14T01:43:09.1206813Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1207205Z e2e-1       |     test-results/evolution-lista-autorizada-67886-e-após-logout-e-outra-conta-chromium/trace.zip
+2026-10-14T01:43:09.1207532Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1207646Z e2e-1       | 
+2026-10-14T01:43:09.1207973Z e2e-1       |         npx playwright show-trace test-results/evolution-lista-autorizada-67886-e-após-logout-e-outra-conta-chromium/trace.zip
+2026-10-14T01:43:09.1208422Z e2e-1       | 
+2026-10-14T01:43:09.1208681Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1208872Z e2e-1       | 
+2026-10-14T01:43:09.1209165Z e2e-1       |   8) [chromium] › e2e/evolution.spec.ts:303:5 › revisão de outra aba retorna 409, mantém edição e permite recarregar 
+2026-10-14T01:43:09.1209517Z e2e-1       | 
+2026-10-14T01:43:09.1209636Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1209782Z e2e-1       | 
+2026-10-14T01:43:09.1209938Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1210123Z e2e-1       | 
+2026-10-14T01:43:09.1210303Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1210687Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1210922Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1211095Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1211244Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1211418Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1211621Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1211814Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1212002Z e2e-1       |         at /app/e2e/evolution.spec.ts:307:18
+2026-10-14T01:43:09.1212158Z e2e-1       | 
+2026-10-14T01:43:09.1212532Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1212959Z e2e-1       |     test-results/evolution-revisão-de-outra-031a6-edição-e-permite-recarregar-chromium/test-failed-1.png
+2026-10-14T01:43:09.1213357Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1213548Z e2e-1       | 
+2026-10-14T01:43:09.1213860Z e2e-1       |     Error Context: test-results/evolution-revisão-de-outra-031a6-edição-e-permite-recarregar-chromium/error-context.md
+2026-10-14T01:43:09.1214144Z e2e-1       | 
+2026-10-14T01:43:09.1214398Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1214793Z e2e-1       |     test-results/evolution-revisão-de-outra-031a6-edição-e-permite-recarregar-chromium/trace.zip
+2026-10-14T01:43:09.1215047Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1215162Z e2e-1       | 
+2026-10-14T01:43:09.1215581Z e2e-1       |         npx playwright show-trace test-results/evolution-revisão-de-outra-031a6-edição-e-permite-recarregar-chromium/trace.zip
+2026-10-14T01:43:09.1215877Z e2e-1       | 
+2026-10-14T01:43:09.1216108Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1216300Z e2e-1       | 
+2026-10-14T01:43:09.1216562Z e2e-1       |   9) [chromium] › e2e/evolution.spec.ts:343:5 › favoritos usam sessão e CSRF pelo proxy e isolam contas 
+2026-10-14T01:43:09.1216803Z e2e-1       | 
+2026-10-14T01:43:09.1216921Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1217070Z e2e-1       | 
+2026-10-14T01:43:09.1217335Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1217629Z e2e-1       | 
+2026-10-14T01:43:09.1217803Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1218076Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1218455Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1218627Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1218774Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1218947Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1219152Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1219341Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1219525Z e2e-1       |         at /app/e2e/evolution.spec.ts:348:18
+2026-10-14T01:43:09.1219680Z e2e-1       | 
+2026-10-14T01:43:09.1219935Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1220320Z e2e-1       |     test-results/evolution-favoritos-usam-s-f9aa9--pelo-proxy-e-isolam-contas-chromium/test-failed-1.png
+2026-10-14T01:43:09.1220744Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1220935Z e2e-1       | 
+2026-10-14T01:43:09.1221215Z e2e-1       |     Error Context: test-results/evolution-favoritos-usam-s-f9aa9--pelo-proxy-e-isolam-contas-chromium/error-context.md
+2026-10-14T01:43:09.1221516Z e2e-1       | 
+2026-10-14T01:43:09.1221767Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1222128Z e2e-1       |     test-results/evolution-favoritos-usam-s-f9aa9--pelo-proxy-e-isolam-contas-chromium/trace.zip
+2026-10-14T01:43:09.1222403Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1222513Z e2e-1       | 
+2026-10-14T01:43:09.1222797Z e2e-1       |         npx playwright show-trace test-results/evolution-favoritos-usam-s-f9aa9--pelo-proxy-e-isolam-contas-chromium/trace.zip
+2026-10-14T01:43:09.1223109Z e2e-1       | 
+2026-10-14T01:43:09.1223443Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1223638Z e2e-1       | 
+2026-10-14T01:43:09.1223933Z e2e-1       |   10) [chromium] › e2e/evolution.spec.ts:409:5 › esclarecimento restaura após refresh, mostra escopo e conclui offline 
+2026-10-14T01:43:09.1224198Z e2e-1       | 
+2026-10-14T01:43:09.1224315Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1224459Z e2e-1       | 
+2026-10-14T01:43:09.1224617Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1224801Z e2e-1       | 
+2026-10-14T01:43:09.1224977Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1225256Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1225490Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1225663Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1225814Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1225986Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1226187Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1226382Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1226597Z e2e-1       |         at /app/e2e/evolution.spec.ts:413:18
+2026-10-14T01:43:09.1226753Z e2e-1       | 
+2026-10-14T01:43:09.1227007Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1227469Z e2e-1       |     test-results/evolution-esclarecimento-r-0379b-ra-escopo-e-conclui-offline-chromium/test-failed-1.png
+2026-10-14T01:43:09.1227883Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1228327Z e2e-1       | 
+2026-10-14T01:43:09.1228783Z e2e-1       |     Error Context: test-results/evolution-esclarecimento-r-0379b-ra-escopo-e-conclui-offline-chromium/error-context.md
+2026-10-14T01:43:09.1229269Z e2e-1       | 
+2026-10-14T01:43:09.1229695Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1230283Z e2e-1       |     test-results/evolution-esclarecimento-r-0379b-ra-escopo-e-conclui-offline-chromium/trace.zip
+2026-10-14T01:43:09.1230729Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1230910Z e2e-1       | 
+2026-10-14T01:43:09.1231383Z e2e-1       |         npx playwright show-trace test-results/evolution-esclarecimento-r-0379b-ra-escopo-e-conclui-offline-chromium/trace.zip
+2026-10-14T01:43:09.1231899Z e2e-1       | 
+2026-10-14T01:43:09.1232303Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1232630Z e2e-1       | 
+2026-10-14T01:43:09.1233162Z e2e-1       |   11) [chromium] › e2e/evolution.spec.ts:486:5 › pendência nova invalida a escolha anterior; cancelar e logout limpam controles 
+2026-10-14T01:43:09.1233702Z e2e-1       | 
+2026-10-14T01:43:09.1233899Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1234140Z e2e-1       | 
+2026-10-14T01:43:09.1234377Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1234565Z e2e-1       | 
+2026-10-14T01:43:09.1234743Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1235020Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1235263Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1235435Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1235585Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1235762Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1236112Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1236303Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1236490Z e2e-1       |         at /app/e2e/evolution.spec.ts:490:17
+2026-10-14T01:43:09.1236645Z e2e-1       | 
+2026-10-14T01:43:09.1236912Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1237334Z e2e-1       |     test-results/evolution-pendência-nova-i-7ba50-r-e-logout-limpam-controles-chromium/test-failed-1.png
+2026-10-14T01:43:09.1237742Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1238020Z e2e-1       | 
+2026-10-14T01:43:09.1238472Z e2e-1       |     Error Context: test-results/evolution-pendência-nova-i-7ba50-r-e-logout-limpam-controles-chromium/error-context.md
+2026-10-14T01:43:09.1238764Z e2e-1       | 
+2026-10-14T01:43:09.1239028Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1239420Z e2e-1       |     test-results/evolution-pendência-nova-i-7ba50-r-e-logout-limpam-controles-chromium/trace.zip
+2026-10-14T01:43:09.1239679Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1239792Z e2e-1       | 
+2026-10-14T01:43:09.1240118Z e2e-1       |         npx playwright show-trace test-results/evolution-pendência-nova-i-7ba50-r-e-logout-limpam-controles-chromium/trace.zip
+2026-10-14T01:43:09.1240581Z e2e-1       | 
+2026-10-14T01:43:09.1240965Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1241293Z e2e-1       | 
+2026-10-14T01:43:09.1241751Z e2e-1       |   12) [chromium] › e2e/evolution.spec.ts:551:5 › novos controles usam teclado e cabem em 360px e CSS zoom de 200% 
+2026-10-14T01:43:09.1242191Z e2e-1       | 
+2026-10-14T01:43:09.1242377Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1242625Z e2e-1       | 
+2026-10-14T01:43:09.1242871Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1243167Z e2e-1       | 
+2026-10-14T01:43:09.1243435Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1243882Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1244253Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1244530Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1244764Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1245048Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1245366Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1245666Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1246072Z e2e-1       |         at /app/e2e/evolution.spec.ts:556:18
+2026-10-14T01:43:09.1246353Z e2e-1       | 
+2026-10-14T01:43:09.1246763Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1247369Z e2e-1       |     test-results/evolution-novos-controles--08612-em-360px-e-CSS-zoom-de-200--chromium/test-failed-1.png
+2026-10-14T01:43:09.1248043Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1248465Z e2e-1       | 
+2026-10-14T01:43:09.1248898Z e2e-1       |     Error Context: test-results/evolution-novos-controles--08612-em-360px-e-CSS-zoom-de-200--chromium/error-context.md
+2026-10-14T01:43:09.1249478Z e2e-1       | 
+2026-10-14T01:43:09.1249887Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1250469Z e2e-1       |     test-results/evolution-novos-controles--08612-em-360px-e-CSS-zoom-de-200--chromium/trace.zip
+2026-10-14T01:43:09.1250879Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1251049Z e2e-1       | 
+2026-10-14T01:43:09.1251511Z e2e-1       |         npx playwright show-trace test-results/evolution-novos-controles--08612-em-360px-e-CSS-zoom-de-200--chromium/trace.zip
+2026-10-14T01:43:09.1252013Z e2e-1       | 
+2026-10-14T01:43:09.1252380Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1252686Z e2e-1       | 
+2026-10-14T01:43:09.1253143Z e2e-1       |   13) [chromium] › e2e/evolution.spec.ts:607:5 › CSRF de sessão substituída limpa dados protegidos na interface 
+2026-10-14T01:43:09.1253562Z e2e-1       | 
+2026-10-14T01:43:09.1253744Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1253977Z e2e-1       | 
+2026-10-14T01:43:09.1254231Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1254529Z e2e-1       | 
+2026-10-14T01:43:09.1254805Z e2e-1       |       41 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1255223Z e2e-1       |       42 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1255572Z e2e-1       |     > 43 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1255834Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1256059Z e2e-1       |       44 |     (reply) =>
+2026-10-14T01:43:09.1256334Z e2e-1       |       45 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1256661Z e2e-1       |       46 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1256969Z e2e-1       |         at ask (/app/e2e/evolution.spec.ts:43:25)
+2026-10-14T01:43:09.1257262Z e2e-1       |         at /app/e2e/evolution.spec.ts:611:18
+2026-10-14T01:43:09.1257507Z e2e-1       | 
+2026-10-14T01:43:09.1258088Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1258865Z e2e-1       |     test-results/evolution-CSRF-de-sessão-s-221c2-dos-protegidos-na-interface-chromium/test-failed-1.png
+2026-10-14T01:43:09.1259543Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1259877Z e2e-1       | 
+2026-10-14T01:43:09.1260416Z e2e-1       |     Error Context: test-results/evolution-CSRF-de-sessão-s-221c2-dos-protegidos-na-interface-chromium/error-context.md
+2026-10-14T01:43:09.1260923Z e2e-1       | 
+2026-10-14T01:43:09.1261335Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1261988Z e2e-1       |     test-results/evolution-CSRF-de-sessão-s-221c2-dos-protegidos-na-interface-chromium/trace.zip
+2026-10-14T01:43:09.1262405Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1262583Z e2e-1       | 
+2026-10-14T01:43:09.1263133Z e2e-1       |         npx playwright show-trace test-results/evolution-CSRF-de-sessão-s-221c2-dos-protegidos-na-interface-chromium/trace.zip
+2026-10-14T01:43:09.1263629Z e2e-1       | 
+2026-10-14T01:43:09.1264008Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1264331Z e2e-1       | 
+2026-10-14T01:43:09.1264811Z e2e-1       |   14) [chromium] › e2e/journeys.spec.ts:37:5 › gestor consulta receita, evidência, ranking, comparação e continuação 
+2026-10-14T01:43:09.1265257Z e2e-1       | 
+2026-10-14T01:43:09.1265445Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1265805Z e2e-1       | 
+2026-10-14T01:43:09.1266061Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1266360Z e2e-1       | 
+2026-10-14T01:43:09.1266633Z e2e-1       |       21 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1267086Z e2e-1       |       22 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1267469Z e2e-1       |     > 23 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1267750Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1267987Z e2e-1       |       24 |     (response) =>
+2026-10-14T01:43:09.1268371Z e2e-1       |       25 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1268708Z e2e-1       |       26 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1269016Z e2e-1       |         at ask (/app/e2e/journeys.spec.ts:23:25)
+2026-10-14T01:43:09.1269310Z e2e-1       |         at /app/e2e/journeys.spec.ts:50:19
+2026-10-14T01:43:09.1269553Z e2e-1       | 
+2026-10-14T01:43:09.1269975Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1270673Z e2e-1       |     test-results/journeys-gestor-consulta-r-f4cbe-ng-comparação-e-continuação-chromium/test-failed-1.png
+2026-10-14T01:43:09.1271336Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1271646Z e2e-1       | 
+2026-10-14T01:43:09.1272154Z e2e-1       |     Error Context: test-results/journeys-gestor-consulta-r-f4cbe-ng-comparação-e-continuação-chromium/error-context.md
+2026-10-14T01:43:09.1272629Z e2e-1       | 
+2026-10-14T01:43:09.1273038Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1273685Z e2e-1       |     test-results/journeys-gestor-consulta-r-f4cbe-ng-comparação-e-continuação-chromium/trace.zip
+2026-10-14T01:43:09.1274111Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1274287Z e2e-1       | 
+2026-10-14T01:43:09.1274814Z e2e-1       |         npx playwright show-trace test-results/journeys-gestor-consulta-r-f4cbe-ng-comparação-e-continuação-chromium/trace.zip
+2026-10-14T01:43:09.1275308Z e2e-1       | 
+2026-10-14T01:43:09.1275807Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1276129Z e2e-1       | 
+2026-10-14T01:43:09.1276627Z e2e-1       |   15) [chromium] › e2e/journeys.spec.ts:160:5 › paráfrase e cortesia preservam cálculo; qualificador recusado não vira total 
+2026-10-14T01:43:09.1277075Z e2e-1       | 
+2026-10-14T01:43:09.1277254Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1277488Z e2e-1       | 
+2026-10-14T01:43:09.1277741Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1278139Z e2e-1       | 
+2026-10-14T01:43:09.1278521Z e2e-1       |       21 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1278969Z e2e-1       |       22 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1279359Z e2e-1       |     > 23 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1279648Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1279894Z e2e-1       |       24 |     (response) =>
+2026-10-14T01:43:09.1280192Z e2e-1       |       25 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1280519Z e2e-1       |       26 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1280818Z e2e-1       |         at ask (/app/e2e/journeys.spec.ts:23:25)
+2026-10-14T01:43:09.1281099Z e2e-1       |         at /app/e2e/journeys.spec.ts:164:21
+2026-10-14T01:43:09.1281329Z e2e-1       | 
+2026-10-14T01:43:09.1281729Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1282416Z e2e-1       |     test-results/journeys-paráfrase-e-corte-8aa2a-dor-recusado-não-vira-total-chromium/test-failed-1.png
+2026-10-14T01:43:09.1283073Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1283394Z e2e-1       | 
+2026-10-14T01:43:09.1283908Z e2e-1       |     Error Context: test-results/journeys-paráfrase-e-corte-8aa2a-dor-recusado-não-vira-total-chromium/error-context.md
+2026-10-14T01:43:09.1284389Z e2e-1       | 
+2026-10-14T01:43:09.1284803Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1285445Z e2e-1       |     test-results/journeys-paráfrase-e-corte-8aa2a-dor-recusado-não-vira-total-chromium/trace.zip
+2026-10-14T01:43:09.1285873Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1286056Z e2e-1       | 
+2026-10-14T01:43:09.1286599Z e2e-1       |         npx playwright show-trace test-results/journeys-paráfrase-e-corte-8aa2a-dor-recusado-não-vira-total-chromium/trace.zip
+2026-10-14T01:43:09.1287094Z e2e-1       | 
+2026-10-14T01:43:09.1287476Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1287794Z e2e-1       | 
+2026-10-14T01:43:09.1288485Z e2e-1       |   16) [chromium] › e2e/journeys.spec.ts:199:5 › login e análise atendem verificações automatizadas de acessibilidade 
+2026-10-14T01:43:09.1288916Z e2e-1       | 
+2026-10-14T01:43:09.1289101Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1289338Z e2e-1       | 
+2026-10-14T01:43:09.1289589Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1289900Z e2e-1       | 
+2026-10-14T01:43:09.1290182Z e2e-1       |       21 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1290638Z e2e-1       |       22 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1291127Z e2e-1       |     > 23 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1291404Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1291651Z e2e-1       |       24 |     (response) =>
+2026-10-14T01:43:09.1291953Z e2e-1       |       25 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1292298Z e2e-1       |       26 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1292615Z e2e-1       |         at ask (/app/e2e/journeys.spec.ts:23:25)
+2026-10-14T01:43:09.1292912Z e2e-1       |         at /app/e2e/journeys.spec.ts:226:3
+2026-10-14T01:43:09.1293157Z e2e-1       | 
+2026-10-14T01:43:09.1293577Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1294268Z e2e-1       |     test-results/journeys-login-e-análise-a-69321-matizadas-de-acessibilidade-chromium/test-failed-1.png
+2026-10-14T01:43:09.1294947Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1295270Z e2e-1       | 
+2026-10-14T01:43:09.1295791Z e2e-1       |     Error Context: test-results/journeys-login-e-análise-a-69321-matizadas-de-acessibilidade-chromium/error-context.md
+2026-10-14T01:43:09.1296283Z e2e-1       | 
+2026-10-14T01:43:09.1296697Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1297348Z e2e-1       |     test-results/journeys-login-e-análise-a-69321-matizadas-de-acessibilidade-chromium/trace.zip
+2026-10-14T01:43:09.1297773Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1297953Z e2e-1       | 
+2026-10-14T01:43:09.1298566Z e2e-1       |         npx playwright show-trace test-results/journeys-login-e-análise-a-69321-matizadas-de-acessibilidade-chromium/trace.zip
+2026-10-14T01:43:09.1299016Z e2e-1       | 
+2026-10-14T01:43:09.1299412Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1299739Z e2e-1       | 
+2026-10-14T01:43:09.1300196Z e2e-1       |   17) [chromium] › e2e/journeys.spec.ts:238:5 › troca de usuário isola histórico, resposta e evidência no backend 
+2026-10-14T01:43:09.1300616Z e2e-1       | 
+2026-10-14T01:43:09.1300922Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1301159Z e2e-1       | 
+2026-10-14T01:43:09.1301409Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1301718Z e2e-1       | 
+2026-10-14T01:43:09.1301990Z e2e-1       |       21 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1302437Z e2e-1       |       22 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1302829Z e2e-1       |     > 23 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1303115Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1303359Z e2e-1       |       24 |     (response) =>
+2026-10-14T01:43:09.1303655Z e2e-1       |       25 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1303993Z e2e-1       |       26 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1304307Z e2e-1       |         at ask (/app/e2e/journeys.spec.ts:23:25)
+2026-10-14T01:43:09.1304601Z e2e-1       |         at /app/e2e/journeys.spec.ts:242:15
+2026-10-14T01:43:09.1304844Z e2e-1       | 
+2026-10-14T01:43:09.1305268Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1305959Z e2e-1       |     test-results/journeys-troca-de-usuário--93780-osta-e-evidência-no-backend-chromium/test-failed-1.png
+2026-10-14T01:43:09.1306618Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1307045Z e2e-1       | 
+2026-10-14T01:43:09.1307554Z e2e-1       |     Error Context: test-results/journeys-troca-de-usuário--93780-osta-e-evidência-no-backend-chromium/error-context.md
+2026-10-14T01:43:09.1308028Z e2e-1       | 
+2026-10-14T01:43:09.1308548Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1309202Z e2e-1       |     test-results/journeys-troca-de-usuário--93780-osta-e-evidência-no-backend-chromium/trace.zip
+2026-10-14T01:43:09.1309619Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1309794Z e2e-1       | 
+2026-10-14T01:43:09.1310330Z e2e-1       |         npx playwright show-trace test-results/journeys-troca-de-usuário--93780-osta-e-evidência-no-backend-chromium/trace.zip
+2026-10-14T01:43:09.1310818Z e2e-1       | 
+2026-10-14T01:43:09.1311196Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1311515Z e2e-1       | 
+2026-10-14T01:43:09.1312012Z e2e-1       |   18) [chromium] › e2e/journeys.spec.ts:278:5 › limitação, provedor indisponível e expiração têm estados recuperáveis 
+2026-10-14T01:43:09.1312451Z e2e-1       | 
+2026-10-14T01:43:09.1312640Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1312878Z e2e-1       | 
+2026-10-14T01:43:09.1313243Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1313548Z e2e-1       | 
+2026-10-14T01:43:09.1313825Z e2e-1       |       21 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1314280Z e2e-1       |       22 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1314668Z e2e-1       |     > 23 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1314944Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1315190Z e2e-1       |       24 |     (response) =>
+2026-10-14T01:43:09.1315483Z e2e-1       |       25 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1315832Z e2e-1       |       26 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1316142Z e2e-1       |         at ask (/app/e2e/journeys.spec.ts:23:25)
+2026-10-14T01:43:09.1316434Z e2e-1       |         at /app/e2e/journeys.spec.ts:283:23
+2026-10-14T01:43:09.1316680Z e2e-1       | 
+2026-10-14T01:43:09.1317100Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1317785Z e2e-1       |     test-results/journeys-limitação-provedo-b55ac-ão-têm-estados-recuperáveis-chromium/test-failed-1.png
+2026-10-14T01:43:09.1318546Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1318864Z e2e-1       | 
+2026-10-14T01:43:09.1319377Z e2e-1       |     Error Context: test-results/journeys-limitação-provedo-b55ac-ão-têm-estados-recuperáveis-chromium/error-context.md
+2026-10-14T01:43:09.1319962Z e2e-1       | 
+2026-10-14T01:43:09.1320379Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1321021Z e2e-1       |     test-results/journeys-limitação-provedo-b55ac-ão-têm-estados-recuperáveis-chromium/trace.zip
+2026-10-14T01:43:09.1321444Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1321619Z e2e-1       | 
+2026-10-14T01:43:09.1322148Z e2e-1       |         npx playwright show-trace test-results/journeys-limitação-provedo-b55ac-ão-têm-estados-recuperáveis-chromium/trace.zip
+2026-10-14T01:43:09.1322639Z e2e-1       | 
+2026-10-14T01:43:09.1323019Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1323343Z e2e-1       | 
+2026-10-14T01:43:09.1323807Z e2e-1       |   19) [chromium] › e2e/journeys.spec.ts:315:5 › celular permite teclado, filtros e leitura sem overflow horizontal 
+2026-10-14T01:43:09.1324250Z e2e-1       | 
+2026-10-14T01:43:09.1324435Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1324669Z e2e-1       | 
+2026-10-14T01:43:09.1324919Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1325222Z e2e-1       | 
+2026-10-14T01:43:09.1325512Z e2e-1       |       358 |   await page.getByLabel("Loja", { exact: true }).selectOption("a002");
+2026-10-14T01:43:09.1326058Z e2e-1       |       359 |   await page.getByLabel("Período", { exact: true }).selectOption("week");
+2026-10-14T01:43:09.1326492Z e2e-1       |     > 360 |   const response = page.waitForResponse((response) =>
+2026-10-14T01:43:09.1326807Z e2e-1       |           |                         ^
+2026-10-14T01:43:09.1327111Z e2e-1       |       361 |     response.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1327388Z e2e-1       |       362 |   );
+2026-10-14T01:43:09.1327582Z e2e-1       |       363 |   await page
+2026-10-14T01:43:09.1327826Z e2e-1       |         at /app/e2e/journeys.spec.ts:360:25
+2026-10-14T01:43:09.1328067Z e2e-1       | 
+2026-10-14T01:43:09.1328568Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1329186Z e2e-1       |     test-results/journeys-celular-permite-t-5dab8-ura-sem-overflow-horizontal-chromium/test-failed-1.png
+2026-10-14T01:43:09.1329980Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1330292Z e2e-1       | 
+2026-10-14T01:43:09.1330747Z e2e-1       |     Error Context: test-results/journeys-celular-permite-t-5dab8-ura-sem-overflow-horizontal-chromium/error-context.md
+2026-10-14T01:43:09.1331244Z e2e-1       | 
+2026-10-14T01:43:09.1331661Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1332257Z e2e-1       |     test-results/journeys-celular-permite-t-5dab8-ura-sem-overflow-horizontal-chromium/trace.zip
+2026-10-14T01:43:09.1332821Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1333000Z e2e-1       | 
+2026-10-14T01:43:09.1333513Z e2e-1       |         npx playwright show-trace test-results/journeys-celular-permite-t-5dab8-ura-sem-overflow-horizontal-chromium/trace.zip
+2026-10-14T01:43:09.1334029Z e2e-1       | 
+2026-10-14T01:43:09.1334419Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1334741Z e2e-1       | 
+2026-10-14T01:43:09.1335259Z e2e-1       |   20) [chromium] › e2e/operational-story.spec.ts:23:5 › operational story: calculation, unsupported dimension and valid recovery 
+2026-10-14T01:43:09.1335739Z e2e-1       | 
+2026-10-14T01:43:09.1335925Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1336161Z e2e-1       | 
+2026-10-14T01:43:09.1336415Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1336718Z e2e-1       | 
+2026-10-14T01:43:09.1337008Z e2e-1       |        7 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1337463Z e2e-1       |        8 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1337848Z e2e-1       |     >  9 |   const waiting = page.waitForResponse(
+2026-10-14T01:43:09.1338130Z e2e-1       |          |                        ^
+2026-10-14T01:43:09.1338461Z e2e-1       |       10 |     (response) =>
+2026-10-14T01:43:09.1338760Z e2e-1       |       11 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1339096Z e2e-1       |       12 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1339427Z e2e-1       |         at ask (/app/e2e/operational-story.spec.ts:9:24)
+2026-10-14T01:43:09.1339757Z e2e-1       |         at /app/e2e/operational-story.spec.ts:36:17
+2026-10-14T01:43:09.1340019Z e2e-1       | 
+2026-10-14T01:43:09.1340440Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1341075Z e2e-1       |     test-results/operational-story-operatio-622ea-imension-and-valid-recovery-chromium/test-failed-1.png
+2026-10-14T01:43:09.1341756Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1342190Z e2e-1       | 
+2026-10-14T01:43:09.1342646Z e2e-1       |     Error Context: test-results/operational-story-operatio-622ea-imension-and-valid-recovery-chromium/error-context.md
+2026-10-14T01:43:09.1343141Z e2e-1       | 
+2026-10-14T01:43:09.1343554Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1344147Z e2e-1       |     test-results/operational-story-operatio-622ea-imension-and-valid-recovery-chromium/trace.zip
+2026-10-14T01:43:09.1344586Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1344761Z e2e-1       | 
+2026-10-14T01:43:09.1345318Z e2e-1       |         npx playwright show-trace test-results/operational-story-operatio-622ea-imension-and-valid-recovery-chromium/trace.zip
+2026-10-14T01:43:09.1345825Z e2e-1       | 
+2026-10-14T01:43:09.1346200Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1346521Z e2e-1       | 
+2026-10-14T01:43:09.1346947Z e2e-1       |   21) [chromium] › e2e/quality.spec.ts:38:5 › histórico tardio não apaga a conversa recém-criada ───
+2026-10-14T01:43:09.1347328Z e2e-1       | 
+2026-10-14T01:43:09.1347515Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1347760Z e2e-1       | 
+2026-10-14T01:43:09.1348025Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1348428Z e2e-1       | 
+2026-10-14T01:43:09.1348706Z e2e-1       |       14 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1349156Z e2e-1       |       15 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1349548Z e2e-1       |     > 16 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1349824Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1350064Z e2e-1       |       17 |     (response) =>
+2026-10-14T01:43:09.1350367Z e2e-1       |       18 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1350703Z e2e-1       |       19 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1351014Z e2e-1       |         at query (/app/e2e/quality.spec.ts:16:25)
+2026-10-14T01:43:09.1351306Z e2e-1       |         at /app/e2e/quality.spec.ts:65:5
+2026-10-14T01:43:09.1351542Z e2e-1       | 
+2026-10-14T01:43:09.1351955Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1352629Z e2e-1       |     test-results/quality-histórico-tardio-não-apaga-a-conversa-recém-criada-chromium/test-failed-1.png
+2026-10-14T01:43:09.1353284Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1353604Z e2e-1       | 
+2026-10-14T01:43:09.1354092Z e2e-1       |     Error Context: test-results/quality-histórico-tardio-não-apaga-a-conversa-recém-criada-chromium/error-context.md
+2026-10-14T01:43:09.1354674Z e2e-1       | 
+2026-10-14T01:43:09.1355089Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1355728Z e2e-1       |     test-results/quality-histórico-tardio-não-apaga-a-conversa-recém-criada-chromium/trace.zip
+2026-10-14T01:43:09.1356139Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1356313Z e2e-1       | 
+2026-10-14T01:43:09.1356824Z e2e-1       |         npx playwright show-trace test-results/quality-histórico-tardio-não-apaga-a-conversa-recém-criada-chromium/trace.zip
+2026-10-14T01:43:09.1357300Z e2e-1       | 
+2026-10-14T01:43:09.1357675Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1357984Z e2e-1       | 
+2026-10-14T01:43:09.1358543Z e2e-1       |   22) [chromium] › e2e/quality.spec.ts:87:5 › histórico distingue horários, revela título longo e drawer devolve foco 
+2026-10-14T01:43:09.1358966Z e2e-1       | 
+2026-10-14T01:43:09.1359166Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1359402Z e2e-1       | 
+2026-10-14T01:43:09.1359643Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1359936Z e2e-1       | 
+2026-10-14T01:43:09.1360211Z e2e-1       |       14 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1360661Z e2e-1       |       15 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1361045Z e2e-1       |     > 16 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1361476Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1361716Z e2e-1       |       17 |     (response) =>
+2026-10-14T01:43:09.1362013Z e2e-1       |       18 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1362358Z e2e-1       |       19 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1362671Z e2e-1       |         at query (/app/e2e/quality.spec.ts:16:25)
+2026-10-14T01:43:09.1362965Z e2e-1       |         at /app/e2e/quality.spec.ts:93:18
+2026-10-14T01:43:09.1363200Z e2e-1       | 
+2026-10-14T01:43:09.1363600Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1364280Z e2e-1       |     test-results/quality-histórico-distingu-18e1c-longo-e-drawer-devolve-foco-chromium/test-failed-1.png
+2026-10-14T01:43:09.1364945Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1365271Z e2e-1       | 
+2026-10-14T01:43:09.1365791Z e2e-1       |     Error Context: test-results/quality-histórico-distingu-18e1c-longo-e-drawer-devolve-foco-chromium/error-context.md
+2026-10-14T01:43:09.1366278Z e2e-1       | 
+2026-10-14T01:43:09.1366692Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1367461Z e2e-1       |     test-results/quality-histórico-distingu-18e1c-longo-e-drawer-devolve-foco-chromium/trace.zip
+2026-10-14T01:43:09.1367879Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1368057Z e2e-1       | 
+2026-10-14T01:43:09.1368685Z e2e-1       |         npx playwright show-trace test-results/quality-histórico-distingu-18e1c-longo-e-drawer-devolve-foco-chromium/trace.zip
+2026-10-14T01:43:09.1369173Z e2e-1       | 
+2026-10-14T01:43:09.1369545Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1369860Z e2e-1       | 
+2026-10-14T01:43:09.1370341Z e2e-1       |   23) [chromium] › e2e/quality.spec.ts:135:5 › evidência, foco, alvos e refluxo permanecem acessíveis em sete geometrias 
+2026-10-14T01:43:09.1370769Z e2e-1       | 
+2026-10-14T01:43:09.1370958Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1371197Z e2e-1       | 
+2026-10-14T01:43:09.1371460Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1371760Z e2e-1       | 
+2026-10-14T01:43:09.1372037Z e2e-1       |       14 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1372493Z e2e-1       |       15 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1372871Z e2e-1       |     > 16 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1373148Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1373391Z e2e-1       |       17 |     (response) =>
+2026-10-14T01:43:09.1383570Z e2e-1       |       18 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1384122Z e2e-1       |       19 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1384442Z e2e-1       |         at query (/app/e2e/quality.spec.ts:16:25)
+2026-10-14T01:43:09.1384739Z e2e-1       |         at /app/e2e/quality.spec.ts:139:18
+2026-10-14T01:43:09.1384980Z e2e-1       | 
+2026-10-14T01:43:09.1385433Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1386131Z e2e-1       |     test-results/quality-evidência-foco-alv-f2a29-essíveis-em-sete-geometrias-chromium/test-failed-1.png
+2026-10-14T01:43:09.1386800Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1387121Z e2e-1       | 
+2026-10-14T01:43:09.1387632Z e2e-1       |     Error Context: test-results/quality-evidência-foco-alv-f2a29-essíveis-em-sete-geometrias-chromium/error-context.md
+2026-10-14T01:43:09.1388109Z e2e-1       | 
+2026-10-14T01:43:09.1388928Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1389567Z e2e-1       |     test-results/quality-evidência-foco-alv-f2a29-essíveis-em-sete-geometrias-chromium/trace.zip
+2026-10-14T01:43:09.1389983Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1390168Z e2e-1       | 
+2026-10-14T01:43:09.1390691Z e2e-1       |         npx playwright show-trace test-results/quality-evidência-foco-alv-f2a29-essíveis-em-sete-geometrias-chromium/trace.zip
+2026-10-14T01:43:09.1391183Z e2e-1       | 
+2026-10-14T01:43:09.1391565Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1391885Z e2e-1       | 
+2026-10-14T01:43:09.1392413Z e2e-1       |   24) [chromium] › e2e/quality.spec.ts:475:5 › zero coberto, receita de 90 dias e cobertura parcial preservam o significado dos números 
+2026-10-14T01:43:09.1392904Z e2e-1       | 
+2026-10-14T01:43:09.1393088Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1393320Z e2e-1       | 
+2026-10-14T01:43:09.1393578Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1393879Z e2e-1       | 
+2026-10-14T01:43:09.1394278Z e2e-1       |       14 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1394732Z e2e-1       |       15 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1395122Z e2e-1       |     > 16 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1395403Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1395643Z e2e-1       |       17 |     (response) =>
+2026-10-14T01:43:09.1395938Z e2e-1       |       18 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1396284Z e2e-1       |       19 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1396686Z e2e-1       |         at query (/app/e2e/quality.spec.ts:16:25)
+2026-10-14T01:43:09.1396980Z e2e-1       |         at /app/e2e/quality.spec.ts:479:16
+2026-10-14T01:43:09.1397218Z e2e-1       | 
+2026-10-14T01:43:09.1397638Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1398532Z e2e-1       |     test-results/quality-zero-coberto-recei-303d4-m-o-significado-dos-números-chromium/test-failed-1.png
+2026-10-14T01:43:09.1399199Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1399519Z e2e-1       | 
+2026-10-14T01:43:09.1400044Z e2e-1       |     Error Context: test-results/quality-zero-coberto-recei-303d4-m-o-significado-dos-números-chromium/error-context.md
+2026-10-14T01:43:09.1400529Z e2e-1       | 
+2026-10-14T01:43:09.1400938Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1401602Z e2e-1       |     test-results/quality-zero-coberto-recei-303d4-m-o-significado-dos-números-chromium/trace.zip
+2026-10-14T01:43:09.1402021Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1402192Z e2e-1       | 
+2026-10-14T01:43:09.1402743Z e2e-1       |         npx playwright show-trace test-results/quality-zero-coberto-recei-303d4-m-o-significado-dos-números-chromium/trace.zip
+2026-10-14T01:43:09.1403247Z e2e-1       | 
+2026-10-14T01:43:09.1403619Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1403936Z e2e-1       | 
+2026-10-14T01:43:09.1404392Z e2e-1       |   25) [chromium] › e2e/quality.spec.ts:539:5 › preferência de movimento reduzido evita rolagem animada da conversa 
+2026-10-14T01:43:09.1404811Z e2e-1       | 
+2026-10-14T01:43:09.1404992Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1405223Z e2e-1       | 
+2026-10-14T01:43:09.1405479Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1405783Z e2e-1       | 
+2026-10-14T01:43:09.1406057Z e2e-1       |       14 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1406497Z e2e-1       |       15 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1407005Z e2e-1       |     > 16 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1407281Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1407521Z e2e-1       |       17 |     (response) =>
+2026-10-14T01:43:09.1407812Z e2e-1       |       18 |       response.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1408145Z e2e-1       |       19 |       response.request().method() === "POST",
+2026-10-14T01:43:09.1408547Z e2e-1       |         at query (/app/e2e/quality.spec.ts:16:25)
+2026-10-14T01:43:09.1408841Z e2e-1       |         at /app/e2e/quality.spec.ts:558:3
+2026-10-14T01:43:09.1409080Z e2e-1       | 
+2026-10-14T01:43:09.1409499Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1410185Z e2e-1       |     test-results/quality-preferência-de-mov-f1082-rolagem-animada-da-conversa-chromium/test-failed-1.png
+2026-10-14T01:43:09.1410861Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1411181Z e2e-1       | 
+2026-10-14T01:43:09.1411686Z e2e-1       |     Error Context: test-results/quality-preferência-de-mov-f1082-rolagem-animada-da-conversa-chromium/error-context.md
+2026-10-14T01:43:09.1412164Z e2e-1       | 
+2026-10-14T01:43:09.1412575Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1413215Z e2e-1       |     test-results/quality-preferência-de-mov-f1082-rolagem-animada-da-conversa-chromium/trace.zip
+2026-10-14T01:43:09.1413749Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1413929Z e2e-1       | 
+2026-10-14T01:43:09.1414469Z e2e-1       |         npx playwright show-trace test-results/quality-preferência-de-mov-f1082-rolagem-animada-da-conversa-chromium/trace.zip
+2026-10-14T01:43:09.1414966Z e2e-1       | 
+2026-10-14T01:43:09.1415355Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1415675Z e2e-1       | 
+2026-10-14T01:43:09.1416175Z e2e-1       |   26) [chromium] › e2e/result-selection.spec.ts:17:5 › rever um resultado preserva os dados e a continuação do último plano 
+2026-10-14T01:43:09.1416640Z e2e-1       | 
+2026-10-14T01:43:09.1416828Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1417063Z e2e-1       | 
+2026-10-14T01:43:09.1417312Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1417611Z e2e-1       | 
+2026-10-14T01:43:09.1417883Z e2e-1       |        5 |   if (!(await page.getByLabel("Pergunta", { exact: true }).isVisible()))
+2026-10-14T01:43:09.1418435Z e2e-1       |        6 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1418833Z e2e-1       |     >  7 |   const response = page.waitForResponse((reply) =>
+2026-10-14T01:43:09.1419124Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1419517Z e2e-1       |        8 |     reply.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1419791Z e2e-1       |        9 |   );
+2026-10-14T01:43:09.1420093Z e2e-1       |       10 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1420474Z e2e-1       |         at ask (/app/e2e/result-selection.spec.ts:7:25)
+2026-10-14T01:43:09.1420794Z e2e-1       |         at /app/e2e/result-selection.spec.ts:27:17
+2026-10-14T01:43:09.1421051Z e2e-1       | 
+2026-10-14T01:43:09.1421469Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1422155Z e2e-1       |     test-results/result-selection-rever-um--363ed-continuação-do-último-plano-chromium/test-failed-1.png
+2026-10-14T01:43:09.1422809Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1423126Z e2e-1       | 
+2026-10-14T01:43:09.1423652Z e2e-1       |     Error Context: test-results/result-selection-rever-um--363ed-continuação-do-último-plano-chromium/error-context.md
+2026-10-14T01:43:09.1424121Z e2e-1       | 
+2026-10-14T01:43:09.1424537Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1425183Z e2e-1       |     test-results/result-selection-rever-um--363ed-continuação-do-último-plano-chromium/trace.zip
+2026-10-14T01:43:09.1425600Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1425778Z e2e-1       | 
+2026-10-14T01:43:09.1426302Z e2e-1       |         npx playwright show-trace test-results/result-selection-rever-um--363ed-continuação-do-último-plano-chromium/trace.zip
+2026-10-14T01:43:09.1426915Z e2e-1       | 
+2026-10-14T01:43:09.1427295Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1427608Z e2e-1       | 
+2026-10-14T01:43:09.1428034Z e2e-1       |   27) [chromium] › e2e/review.spec.ts:3:5 › filtro não suportado não aparece como receita geral ────
+2026-10-14T01:43:09.1428500Z e2e-1       | 
+2026-10-14T01:43:09.1428681Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1428909Z e2e-1       | 
+2026-10-14T01:43:09.1429156Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1429451Z e2e-1       | 
+2026-10-14T01:43:09.1429633Z e2e-1       |        6 |   await page.goto("/");
+2026-10-14T01:43:09.1429953Z e2e-1       |        7 |   await page.getByRole("button", { name: "Entrar" }).click();
+2026-10-14T01:43:09.1430332Z e2e-1       |     >  8 |   const response = page.waitForResponse((value) =>
+2026-10-14T01:43:09.1430627Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1430908Z e2e-1       |        9 |     value.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1431187Z e2e-1       |       10 |   );
+2026-10-14T01:43:09.1431387Z e2e-1       |       11 |   await page
+2026-10-14T01:43:09.1431625Z e2e-1       |         at /app/e2e/review.spec.ts:8:25
+2026-10-14T01:43:09.1431861Z e2e-1       | 
+2026-10-14T01:43:09.1432270Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1432937Z e2e-1       |     test-results/review-filtro-não-suportado-não-aparece-como-receita-geral-chromium/test-failed-1.png
+2026-10-14T01:43:09.1433625Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1433937Z e2e-1       | 
+2026-10-14T01:43:09.1434426Z e2e-1       |     Error Context: test-results/review-filtro-não-suportado-não-aparece-como-receita-geral-chromium/error-context.md
+2026-10-14T01:43:09.1434895Z e2e-1       | 
+2026-10-14T01:43:09.1435304Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1436059Z e2e-1       |     test-results/review-filtro-não-suportado-não-aparece-como-receita-geral-chromium/trace.zip
+2026-10-14T01:43:09.1436463Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1436641Z e2e-1       | 
+2026-10-14T01:43:09.1437155Z e2e-1       |         npx playwright show-trace test-results/review-filtro-não-suportado-não-aparece-como-receita-geral-chromium/trace.zip
+2026-10-14T01:43:09.1437630Z e2e-1       | 
+2026-10-14T01:43:09.1438004Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1438418Z e2e-1       | 
+2026-10-14T01:43:09.1438958Z e2e-1       |   28) [chromium] › e2e/round-2-fields.spec.ts:64:5 › datas personalizadas mantêm edição real, bloqueiam inválidas e enviam recorte exato 
+2026-10-14T01:43:09.1439555Z e2e-1       | 
+2026-10-14T01:43:09.1439735Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1439971Z e2e-1       | 
+2026-10-14T01:43:09.1440221Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1440533Z e2e-1       | 
+2026-10-14T01:43:09.1440803Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1441236Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1441616Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1441898Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1442169Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1442435Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1442747Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1443133Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1443444Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:98:18
+2026-10-14T01:43:09.1443695Z e2e-1       | 
+2026-10-14T01:43:09.1444121Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1444726Z e2e-1       |     test-results/round-2-fields-datas-perso-cae02-idas-e-enviam-recorte-exato-chromium/test-failed-1.png
+2026-10-14T01:43:09.1445402Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1445713Z e2e-1       | 
+2026-10-14T01:43:09.1446152Z e2e-1       |     Error Context: test-results/round-2-fields-datas-perso-cae02-idas-e-enviam-recorte-exato-chromium/error-context.md
+2026-10-14T01:43:09.1446662Z e2e-1       | 
+2026-10-14T01:43:09.1447061Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1447643Z e2e-1       |     test-results/round-2-fields-datas-perso-cae02-idas-e-enviam-recorte-exato-chromium/trace.zip
+2026-10-14T01:43:09.1448072Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1448450Z e2e-1       | 
+2026-10-14T01:43:09.1448896Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-datas-perso-cae02-idas-e-enviam-recorte-exato-chromium/trace.zip
+2026-10-14T01:43:09.1449391Z e2e-1       | 
+2026-10-14T01:43:09.1449767Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1450088Z e2e-1       | 
+2026-10-14T01:43:09.1450592Z e2e-1       |   29) [chromium] › e2e/round-2-fields.spec.ts:113:5 › lojas e períodos rápidos refletem seleção e datas explícitas prevalecem 
+2026-10-14T01:43:09.1451036Z e2e-1       | 
+2026-10-14T01:43:09.1451323Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1451555Z e2e-1       | 
+2026-10-14T01:43:09.1451801Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1452106Z e2e-1       | 
+2026-10-14T01:43:09.1452391Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1452824Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1453205Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1453495Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1453781Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1454043Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1454346Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1454745Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1455075Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:126:20
+2026-10-14T01:43:09.1455329Z e2e-1       | 
+2026-10-14T01:43:09.1455734Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1456430Z e2e-1       |     test-results/round-2-fields-lojas-e-per-924b8-datas-explícitas-prevalecem-chromium/test-failed-1.png
+2026-10-14T01:43:09.1457100Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1457527Z e2e-1       | 
+2026-10-14T01:43:09.1458043Z e2e-1       |     Error Context: test-results/round-2-fields-lojas-e-per-924b8-datas-explícitas-prevalecem-chromium/error-context.md
+2026-10-14T01:43:09.1458611Z e2e-1       | 
+2026-10-14T01:43:09.1459023Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1459670Z e2e-1       |     test-results/round-2-fields-lojas-e-per-924b8-datas-explícitas-prevalecem-chromium/trace.zip
+2026-10-14T01:43:09.1460091Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1460267Z e2e-1       | 
+2026-10-14T01:43:09.1460914Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-lojas-e-per-924b8-datas-explícitas-prevalecem-chromium/trace.zip
+2026-10-14T01:43:09.1461399Z e2e-1       | 
+2026-10-14T01:43:09.1461775Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1462088Z e2e-1       | 
+2026-10-14T01:43:09.1462619Z e2e-1       |   30) [chromium] › e2e/round-2-fields.spec.ts:140:5 › pergunta respeita espaços, acentos, quebra de linha, tamanho e múltiplas métricas 
+2026-10-14T01:43:09.1463105Z e2e-1       | 
+2026-10-14T01:43:09.1463288Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1463521Z e2e-1       | 
+2026-10-14T01:43:09.1463779Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1464078Z e2e-1       | 
+2026-10-14T01:43:09.1464280Z e2e-1       |       162 |   await input.press("Shift+Enter");
+2026-10-14T01:43:09.1464599Z e2e-1       |       163 |   await input.pressSequentially("  ontem?  ");
+2026-10-14T01:43:09.1464947Z e2e-1       |     > 164 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1465242Z e2e-1       |           |                         ^
+2026-10-14T01:43:09.1465533Z e2e-1       |       165 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1465800Z e2e-1       |       166 |   );
+2026-10-14T01:43:09.1466017Z e2e-1       |       167 |   await input.press("Enter");
+2026-10-14T01:43:09.1466302Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:164:25
+2026-10-14T01:43:09.1466573Z e2e-1       | 
+2026-10-14T01:43:09.1466998Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1467835Z e2e-1       |     test-results/round-2-fields-pergunta-re-ffcd6-amanho-e-múltiplas-métricas-chromium/test-failed-1.png
+2026-10-14T01:43:09.1468596Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1468919Z e2e-1       | 
+2026-10-14T01:43:09.1469449Z e2e-1       |     Error Context: test-results/round-2-fields-pergunta-re-ffcd6-amanho-e-múltiplas-métricas-chromium/error-context.md
+2026-10-14T01:43:09.1469934Z e2e-1       | 
+2026-10-14T01:43:09.1470347Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1470996Z e2e-1       |     test-results/round-2-fields-pergunta-re-ffcd6-amanho-e-múltiplas-métricas-chromium/trace.zip
+2026-10-14T01:43:09.1471422Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1471600Z e2e-1       | 
+2026-10-14T01:43:09.1472150Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-pergunta-re-ffcd6-amanho-e-múltiplas-métricas-chromium/trace.zip
+2026-10-14T01:43:09.1472665Z e2e-1       | 
+2026-10-14T01:43:09.1473048Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1473367Z e2e-1       | 
+2026-10-14T01:43:09.1473999Z e2e-1       |   31) [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha network preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1474475Z e2e-1       | 
+2026-10-14T01:43:09.1474657Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1474892Z e2e-1       | 
+2026-10-14T01:43:09.1475141Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1475435Z e2e-1       | 
+2026-10-14T01:43:09.1475717Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1476156Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1476543Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1476824Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1477097Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1477361Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1477674Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1478065Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1478476Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:197:19
+2026-10-14T01:43:09.1478723Z e2e-1       | 
+2026-10-14T01:43:09.1479140Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1479739Z e2e-1       |     test-results/round-2-fields-falha-netwo-47e14--e-permite-tentar-novamente-chromium/test-failed-1.png
+2026-10-14T01:43:09.1480552Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1480863Z e2e-1       | 
+2026-10-14T01:43:09.1481292Z e2e-1       |     Error Context: test-results/round-2-fields-falha-netwo-47e14--e-permite-tentar-novamente-chromium/error-context.md
+2026-10-14T01:43:09.1481779Z e2e-1       | 
+2026-10-14T01:43:09.1482189Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1482769Z e2e-1       |     test-results/round-2-fields-falha-netwo-47e14--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1483196Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1483366Z e2e-1       | 
+2026-10-14T01:43:09.1483813Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-falha-netwo-47e14--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1484312Z e2e-1       | 
+2026-10-14T01:43:09.1484696Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1485019Z e2e-1       | 
+2026-10-14T01:43:09.1485527Z e2e-1       |   32) [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha 409 preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1485992Z e2e-1       | 
+2026-10-14T01:43:09.1486186Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1486415Z e2e-1       | 
+2026-10-14T01:43:09.1486662Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1486959Z e2e-1       | 
+2026-10-14T01:43:09.1487229Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1487669Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1488057Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1488506Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1488786Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1489052Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1489355Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1489850Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1490166Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:197:19
+2026-10-14T01:43:09.1490412Z e2e-1       | 
+2026-10-14T01:43:09.1490822Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1491444Z e2e-1       |     test-results/round-2-fields-falha-409-p-cfeac--e-permite-tentar-novamente-chromium/test-failed-1.png
+2026-10-14T01:43:09.1492106Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1492524Z e2e-1       | 
+2026-10-14T01:43:09.1492958Z e2e-1       |     Error Context: test-results/round-2-fields-falha-409-p-cfeac--e-permite-tentar-novamente-chromium/error-context.md
+2026-10-14T01:43:09.1493434Z e2e-1       | 
+2026-10-14T01:43:09.1493837Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1494435Z e2e-1       |     test-results/round-2-fields-falha-409-p-cfeac--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1494857Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1495033Z e2e-1       | 
+2026-10-14T01:43:09.1495496Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-falha-409-p-cfeac--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1495996Z e2e-1       | 
+2026-10-14T01:43:09.1496381Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1496695Z e2e-1       | 
+2026-10-14T01:43:09.1497213Z e2e-1       |   33) [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha 503 preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1497679Z e2e-1       | 
+2026-10-14T01:43:09.1497862Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1498095Z e2e-1       | 
+2026-10-14T01:43:09.1498432Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1498716Z e2e-1       | 
+2026-10-14T01:43:09.1498995Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1499441Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1499828Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1500119Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1500398Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1500669Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1500972Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1501366Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1501682Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:197:19
+2026-10-14T01:43:09.1502040Z e2e-1       | 
+2026-10-14T01:43:09.1502461Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1503071Z e2e-1       |     test-results/round-2-fields-falha-503-p-03782--e-permite-tentar-novamente-chromium/test-failed-1.png
+2026-10-14T01:43:09.1503728Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1504039Z e2e-1       | 
+2026-10-14T01:43:09.1504470Z e2e-1       |     Error Context: test-results/round-2-fields-falha-503-p-03782--e-permite-tentar-novamente-chromium/error-context.md
+2026-10-14T01:43:09.1505284Z e2e-1       | 
+2026-10-14T01:43:09.1505820Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1506494Z e2e-1       |     test-results/round-2-fields-falha-503-p-03782--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1506924Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1507113Z e2e-1       | 
+2026-10-14T01:43:09.1507652Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-falha-503-p-03782--e-permite-tentar-novamente-chromium/trace.zip
+2026-10-14T01:43:09.1508135Z e2e-1       | 
+2026-10-14T01:43:09.1508596Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1508661Z e2e-1       | 
+2026-10-14T01:43:09.1509049Z e2e-1       |   34) [chromium] › e2e/round-2-fields.spec.ts:232:5 › resposta lenta bloqueia envio duplicado e alterações de escopo 
+2026-10-14T01:43:09.1509126Z e2e-1       | 
+2026-10-14T01:43:09.1509212Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1509279Z e2e-1       | 
+2026-10-14T01:43:09.1509422Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1509484Z e2e-1       | 
+2026-10-14T01:43:09.1509669Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1509846Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1509973Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1510054Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1510173Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1510243Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1510424Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1510672Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1510783Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:236:3
+2026-10-14T01:43:09.1510849Z e2e-1       | 
+2026-10-14T01:43:09.1511285Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1511677Z e2e-1       |     test-results/round-2-fields-resposta-le-97a78-cado-e-alterações-de-escopo-chromium/test-failed-1.png
+2026-10-14T01:43:09.1511963Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1512025Z e2e-1       | 
+2026-10-14T01:43:09.1512457Z e2e-1       |     Error Context: test-results/round-2-fields-resposta-le-97a78-cado-e-alterações-de-escopo-chromium/error-context.md
+2026-10-14T01:43:09.1512519Z e2e-1       | 
+2026-10-14T01:43:09.1512840Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1513197Z e2e-1       |     test-results/round-2-fields-resposta-le-97a78-cado-e-alterações-de-escopo-chromium/trace.zip
+2026-10-14T01:43:09.1513267Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1513332Z e2e-1       | 
+2026-10-14T01:43:09.1513790Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-resposta-le-97a78-cado-e-alterações-de-escopo-chromium/trace.zip
+2026-10-14T01:43:09.1513856Z e2e-1       | 
+2026-10-14T01:43:09.1514138Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1514204Z e2e-1       | 
+2026-10-14T01:43:09.1514619Z e2e-1       |   35) [chromium] › e2e/round-2-fields.spec.ts:266:5 › histórico, operação indisponível e nova análise mantêm contexto e foco 
+2026-10-14T01:43:09.1514682Z e2e-1       | 
+2026-10-14T01:43:09.1514777Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1514940Z e2e-1       | 
+2026-10-14T01:43:09.1515097Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1515159Z e2e-1       | 
+2026-10-14T01:43:09.1515346Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1515533Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1515660Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1515744Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1515863Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1515934Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1516113Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1516240Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1516358Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:270:18
+2026-10-14T01:43:09.1516422Z e2e-1       | 
+2026-10-14T01:43:09.1516746Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1517125Z e2e-1       |     test-results/round-2-fields-histórico-o-053bc-lise-mantêm-contexto-e-foco-chromium/test-failed-1.png
+2026-10-14T01:43:09.1517414Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1517477Z e2e-1       | 
+2026-10-14T01:43:09.1517892Z e2e-1       |     Error Context: test-results/round-2-fields-histórico-o-053bc-lise-mantêm-contexto-e-foco-chromium/error-context.md
+2026-10-14T01:43:09.1517957Z e2e-1       | 
+2026-10-14T01:43:09.1518426Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1518760Z e2e-1       |     test-results/round-2-fields-histórico-o-053bc-lise-mantêm-contexto-e-foco-chromium/trace.zip
+2026-10-14T01:43:09.1518838Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1518903Z e2e-1       | 
+2026-10-14T01:43:09.1519336Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-histórico-o-053bc-lise-mantêm-contexto-e-foco-chromium/trace.zip
+2026-10-14T01:43:09.1519398Z e2e-1       | 
+2026-10-14T01:43:09.1519797Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1519859Z e2e-1       | 
+2026-10-14T01:43:09.1520231Z e2e-1       |   36) [chromium] › e2e/round-2-fields.spec.ts:342:5 › evidência com falha pode ser repetida sem perder o resultado 
+2026-10-14T01:43:09.1520293Z e2e-1       | 
+2026-10-14T01:43:09.1520388Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1520453Z e2e-1       | 
+2026-10-14T01:43:09.1520608Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1520770Z e2e-1       | 
+2026-10-14T01:43:09.1520954Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1521134Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1521258Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1521350Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1521470Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1521538Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1521722Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1521847Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1521962Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:346:18
+2026-10-14T01:43:09.1522023Z e2e-1       | 
+2026-10-14T01:43:09.1522338Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1522715Z e2e-1       |     test-results/round-2-fields-evidência-c-24706-tida-sem-perder-o-resultado-chromium/test-failed-1.png
+2026-10-14T01:43:09.1522999Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1523074Z e2e-1       | 
+2026-10-14T01:43:09.1523492Z e2e-1       |     Error Context: test-results/round-2-fields-evidência-c-24706-tida-sem-perder-o-resultado-chromium/error-context.md
+2026-10-14T01:43:09.1523557Z e2e-1       | 
+2026-10-14T01:43:09.1523879Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1524213Z e2e-1       |     test-results/round-2-fields-evidência-c-24706-tida-sem-perder-o-resultado-chromium/trace.zip
+2026-10-14T01:43:09.1524283Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1524345Z e2e-1       | 
+2026-10-14T01:43:09.1524790Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-evidência-c-24706-tida-sem-perder-o-resultado-chromium/trace.zip
+2026-10-14T01:43:09.1524853Z e2e-1       | 
+2026-10-14T01:43:09.1525140Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1525206Z e2e-1       | 
+2026-10-14T01:43:09.1525639Z e2e-1       |   37) [chromium] › e2e/round-2-fields.spec.ts:362:5 › erro tardio de evidência antiga não expira a nova identidade 
+2026-10-14T01:43:09.1525702Z e2e-1       | 
+2026-10-14T01:43:09.1525793Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1525859Z e2e-1       | 
+2026-10-14T01:43:09.1526013Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1526077Z e2e-1       | 
+2026-10-14T01:43:09.1526259Z e2e-1       |       14 |     await page.getByRole("button", { name: "Editar pergunta" }).click();
+2026-10-14T01:43:09.1526503Z e2e-1       |       15 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1526631Z e2e-1       |     > 16 |   const response = page.waitForResponse((r) =>
+2026-10-14T01:43:09.1526713Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1526836Z e2e-1       |       17 |     r.url().endsWith("/api/assistant/query"),
+2026-10-14T01:43:09.1526908Z e2e-1       |       18 |   );
+2026-10-14T01:43:09.1527091Z e2e-1       |       19 |   await page.getByRole("button", { name: "Enviar pergunta" }).click();
+2026-10-14T01:43:09.1527219Z e2e-1       |         at submit (/app/e2e/round-2-fields.spec.ts:16:25)
+2026-10-14T01:43:09.1527333Z e2e-1       |         at /app/e2e/round-2-fields.spec.ts:366:3
+2026-10-14T01:43:09.1527398Z e2e-1       | 
+2026-10-14T01:43:09.1527716Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1528098Z e2e-1       |     test-results/round-2-fields-erro-tardio-a0bd0-ão-expira-a-nova-identidade-chromium/test-failed-1.png
+2026-10-14T01:43:09.1528484Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1528546Z e2e-1       | 
+2026-10-14T01:43:09.1528986Z e2e-1       |     Error Context: test-results/round-2-fields-erro-tardio-a0bd0-ão-expira-a-nova-identidade-chromium/error-context.md
+2026-10-14T01:43:09.1529047Z e2e-1       | 
+2026-10-14T01:43:09.1529371Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1529710Z e2e-1       |     test-results/round-2-fields-erro-tardio-a0bd0-ão-expira-a-nova-identidade-chromium/trace.zip
+2026-10-14T01:43:09.1529779Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1529843Z e2e-1       | 
+2026-10-14T01:43:09.1530280Z e2e-1       |         npx playwright show-trace test-results/round-2-fields-erro-tardio-a0bd0-ão-expira-a-nova-identidade-chromium/trace.zip
+2026-10-14T01:43:09.1530355Z e2e-1       | 
+2026-10-14T01:43:09.1530637Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1530702Z e2e-1       | 
+2026-10-14T01:43:09.1531239Z e2e-1       |   38) [chromium] › e2e/uiux.spec.ts:97:5 › esclarecimento permanece acessível com a próxima consulta recolhida e restaura contexto 
+2026-10-14T01:43:09.1531301Z e2e-1       | 
+2026-10-14T01:43:09.1531397Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1531458Z e2e-1       | 
+2026-10-14T01:43:09.1531612Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1531676Z e2e-1       | 
+2026-10-14T01:43:09.1531766Z e2e-1       |       27 |   await editor(page);
+2026-10-14T01:43:09.1531941Z e2e-1       |       28 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1532064Z e2e-1       |     > 29 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1532154Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1532230Z e2e-1       |       30 |     (reply) =>
+2026-10-14T01:43:09.1532366Z e2e-1       |       31 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1532477Z e2e-1       |       32 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1532587Z e2e-1       |         at ask (/app/e2e/uiux.spec.ts:29:25)
+2026-10-14T01:43:09.1532686Z e2e-1       |         at /app/e2e/uiux.spec.ts:104:18
+2026-10-14T01:43:09.1532749Z e2e-1       | 
+2026-10-14T01:43:09.1533066Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1533431Z e2e-1       |     test-results/uiux-esclarecimento-perman-1d21e-colhida-e-restaura-contexto-chromium/test-failed-1.png
+2026-10-14T01:43:09.1533714Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1533883Z e2e-1       | 
+2026-10-14T01:43:09.1534236Z e2e-1       |     Error Context: test-results/uiux-esclarecimento-perman-1d21e-colhida-e-restaura-contexto-chromium/error-context.md
+2026-10-14T01:43:09.1534302Z e2e-1       | 
+2026-10-14T01:43:09.1534606Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1534904Z e2e-1       |     test-results/uiux-esclarecimento-perman-1d21e-colhida-e-restaura-contexto-chromium/trace.zip
+2026-10-14T01:43:09.1534970Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1535033Z e2e-1       | 
+2026-10-14T01:43:09.1535395Z e2e-1       |         npx playwright show-trace test-results/uiux-esclarecimento-perman-1d21e-colhida-e-restaura-contexto-chromium/trace.zip
+2026-10-14T01:43:09.1535458Z e2e-1       | 
+2026-10-14T01:43:09.1535742Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1535802Z e2e-1       | 
+2026-10-14T01:43:09.1536243Z e2e-1       |   39) [chromium] › e2e/uiux.spec.ts:172:5 › falha de consulta mantém pergunta, filtros e resultado recebido até uma tentativa explícita 
+2026-10-14T01:43:09.1536305Z e2e-1       | 
+2026-10-14T01:43:09.1536398Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1536462Z e2e-1       | 
+2026-10-14T01:43:09.1536688Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1536756Z e2e-1       | 
+2026-10-14T01:43:09.1536841Z e2e-1       |       27 |   await editor(page);
+2026-10-14T01:43:09.1537019Z e2e-1       |       28 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1537141Z e2e-1       |     > 29 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1537225Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1537299Z e2e-1       |       30 |     (reply) =>
+2026-10-14T01:43:09.1537430Z e2e-1       |       31 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1537544Z e2e-1       |       32 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1537647Z e2e-1       |         at ask (/app/e2e/uiux.spec.ts:29:25)
+2026-10-14T01:43:09.1537746Z e2e-1       |         at /app/e2e/uiux.spec.ts:176:20
+2026-10-14T01:43:09.1537807Z e2e-1       | 
+2026-10-14T01:43:09.1538131Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1538613Z e2e-1       |     test-results/uiux-falha-de-consulta-man-da22a-até-uma-tentativa-explícita-chromium/test-failed-1.png
+2026-10-14T01:43:09.1538901Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1538966Z e2e-1       | 
+2026-10-14T01:43:09.1539382Z e2e-1       |     Error Context: test-results/uiux-falha-de-consulta-man-da22a-até-uma-tentativa-explícita-chromium/error-context.md
+2026-10-14T01:43:09.1539448Z e2e-1       | 
+2026-10-14T01:43:09.1539870Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1540209Z e2e-1       |     test-results/uiux-falha-de-consulta-man-da22a-até-uma-tentativa-explícita-chromium/trace.zip
+2026-10-14T01:43:09.1540277Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1540338Z e2e-1       | 
+2026-10-14T01:43:09.1540784Z e2e-1       |         npx playwright show-trace test-results/uiux-falha-de-consulta-man-da22a-até-uma-tentativa-explícita-chromium/trace.zip
+2026-10-14T01:43:09.1540846Z e2e-1       | 
+2026-10-14T01:43:09.1541130Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1541194Z e2e-1       | 
+2026-10-14T01:43:09.1541597Z e2e-1       |   40) [chromium] › e2e/uiux.spec.ts:231:5 › conflito de favorito conserva edição e recarrega sem substituir filtros e pergunta 
+2026-10-14T01:43:09.1541662Z e2e-1       | 
+2026-10-14T01:43:09.1541752Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1541825Z e2e-1       | 
+2026-10-14T01:43:09.1541980Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1542046Z e2e-1       | 
+2026-10-14T01:43:09.1542136Z e2e-1       |       27 |   await editor(page);
+2026-10-14T01:43:09.1542318Z e2e-1       |       28 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1542440Z e2e-1       |     > 29 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1542522Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1542599Z e2e-1       |       30 |     (reply) =>
+2026-10-14T01:43:09.1542730Z e2e-1       |       31 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1542842Z e2e-1       |       32 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1542947Z e2e-1       |         at ask (/app/e2e/uiux.spec.ts:29:25)
+2026-10-14T01:43:09.1543045Z e2e-1       |         at /app/e2e/uiux.spec.ts:235:20
+2026-10-14T01:43:09.1543111Z e2e-1       | 
+2026-10-14T01:43:09.1543430Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1543744Z e2e-1       |     test-results/uiux-conflito-de-favorito--24785-bstituir-filtros-e-pergunta-chromium/test-failed-1.png
+2026-10-14T01:43:09.1544177Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1544243Z e2e-1       | 
+2026-10-14T01:43:09.1544594Z e2e-1       |     Error Context: test-results/uiux-conflito-de-favorito--24785-bstituir-filtros-e-pergunta-chromium/error-context.md
+2026-10-14T01:43:09.1544656Z e2e-1       | 
+2026-10-14T01:43:09.1544973Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1545252Z e2e-1       |     test-results/uiux-conflito-de-favorito--24785-bstituir-filtros-e-pergunta-chromium/trace.zip
+2026-10-14T01:43:09.1545396Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1545461Z e2e-1       | 
+2026-10-14T01:43:09.1545824Z e2e-1       |         npx playwright show-trace test-results/uiux-conflito-de-favorito--24785-bstituir-filtros-e-pergunta-chromium/trace.zip
+2026-10-14T01:43:09.1545888Z e2e-1       | 
+2026-10-14T01:43:09.1546177Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1546241Z e2e-1       | 
+2026-10-14T01:43:09.1546690Z e2e-1       |   41) [chromium] › e2e/uiux.spec.ts:310:5 › favorito abre cálculo histórico sem execução e reexecuta o plano fixo mesmo após mudar filtros 
+2026-10-14T01:43:09.1546755Z e2e-1       | 
+2026-10-14T01:43:09.1546851Z e2e-1       |     Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1546914Z e2e-1       | 
+2026-10-14T01:43:09.1547069Z e2e-1       |     Error: page.waitForResponse: Test timeout of 45000ms exceeded.
+2026-10-14T01:43:09.1547130Z e2e-1       | 
+2026-10-14T01:43:09.1547232Z e2e-1       |       27 |   await editor(page);
+2026-10-14T01:43:09.1547408Z e2e-1       |       28 |   await page.getByLabel("Pergunta", { exact: true }).fill(question);
+2026-10-14T01:43:09.1547526Z e2e-1       |     > 29 |   const response = page.waitForResponse(
+2026-10-14T01:43:09.1547614Z e2e-1       |          |                         ^
+2026-10-14T01:43:09.1547697Z e2e-1       |       30 |     (reply) =>
+2026-10-14T01:43:09.1547834Z e2e-1       |       31 |       reply.url().endsWith("/api/assistant/query") &&
+2026-10-14T01:43:09.1547945Z e2e-1       |       32 |       reply.request().method() === "POST",
+2026-10-14T01:43:09.1548052Z e2e-1       |         at ask (/app/e2e/uiux.spec.ts:29:25)
+2026-10-14T01:43:09.1548145Z e2e-1       |         at /app/e2e/uiux.spec.ts:314:20
+2026-10-14T01:43:09.1548210Z e2e-1       | 
+2026-10-14T01:43:09.1548627Z e2e-1       |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1548998Z e2e-1       |     test-results/uiux-favorito-abre-cálculo-63533-xo-mesmo-após-mudar-filtros-chromium/test-failed-1.png
+2026-10-14T01:43:09.1549281Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1549343Z e2e-1       | 
+2026-10-14T01:43:09.1549914Z e2e-1       |     Error Context: test-results/uiux-favorito-abre-cálculo-63533-xo-mesmo-após-mudar-filtros-chromium/error-context.md
+2026-10-14T01:43:09.1549981Z e2e-1       | 
+2026-10-14T01:43:09.1550289Z e2e-1       |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1550619Z e2e-1       |     test-results/uiux-favorito-abre-cálculo-63533-xo-mesmo-após-mudar-filtros-chromium/trace.zip
+2026-10-14T01:43:09.1550688Z e2e-1       |     Usage:
+2026-10-14T01:43:09.1550752Z e2e-1       | 
+2026-10-14T01:43:09.1551173Z e2e-1       |         npx playwright show-trace test-results/uiux-favorito-abre-cálculo-63533-xo-mesmo-após-mudar-filtros-chromium/trace.zip
+2026-10-14T01:43:09.1551338Z e2e-1       | 
+2026-10-14T01:43:09.1551621Z e2e-1       |     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:43:09.1551684Z e2e-1       | 
+2026-10-14T01:43:09.1551755Z e2e-1       |   41 failed
+2026-10-14T01:43:09.1552193Z e2e-1       |     [chromium] › e2e/audit-regressions.spec.ts:160:5 › LOJ-01: a lost query response recovers its durable intent without posting twice 
+2026-10-14T01:43:09.1552568Z e2e-1       |     [chromium] › e2e/audit-regressions.spec.ts:252:5 › LOJ-01: navigation and favorites cannot clear an uncertain query 
+2026-10-14T01:43:09.1553005Z e2e-1       |     [chromium] › e2e/audit-regressions.spec.ts:316:5 › LOJ-01: a missing admission resends the same intent with an accurate confirmation 
+2026-10-14T01:43:09.1553468Z e2e-1       |     [chromium] › e2e/audit-regressions.spec.ts:350:5 › LOJ-01: starting another analysis abandons local recovery without another automatic request 
+2026-10-14T01:43:09.1553934Z e2e-1       |     [chromium] › e2e/audit-regressions.spec.ts:389:5 › LOJ-01: changing accounts clears an uncertain intent without recovering or reposting it 
+2026-10-14T01:43:09.1554361Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:110:5 › favoritos têm ações reais, nomes escapados, escopo fixo e cálculo histórico separado 
+2026-10-14T01:43:09.1554717Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:229:5 › lista autorizada tardia não reaparece após logout e outra conta 
+2026-10-14T01:43:09.1555079Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:303:5 › revisão de outra aba retorna 409, mantém edição e permite recarregar 
+2026-10-14T01:43:09.1555400Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:343:5 › favoritos usam sessão e CSRF pelo proxy e isolam contas 
+2026-10-14T01:43:09.1555778Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:409:5 › esclarecimento restaura após refresh, mostra escopo e conclui offline 
+2026-10-14T01:43:09.1556185Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:486:5 › pendência nova invalida a escolha anterior; cancelar e logout limpam controles 
+2026-10-14T01:43:09.1556543Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:551:5 › novos controles usam teclado e cabem em 360px e CSS zoom de 200% 
+2026-10-14T01:43:09.1556896Z e2e-1       |     [chromium] › e2e/evolution.spec.ts:607:5 › CSRF de sessão substituída limpa dados protegidos na interface 
+2026-10-14T01:43:09.1557256Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:37:5 › gestor consulta receita, evidência, ranking, comparação e continuação 
+2026-10-14T01:43:09.1557645Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:160:5 › paráfrase e cortesia preservam cálculo; qualificador recusado não vira total 
+2026-10-14T01:43:09.1557999Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:199:5 › login e análise atendem verificações automatizadas de acessibilidade 
+2026-10-14T01:43:09.1558446Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:238:5 › troca de usuário isola histórico, resposta e evidência no backend 
+2026-10-14T01:43:09.1558825Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:278:5 › limitação, provedor indisponível e expiração têm estados recuperáveis 
+2026-10-14T01:43:09.1559287Z e2e-1       |     [chromium] › e2e/journeys.spec.ts:315:5 › celular permite teclado, filtros e leitura sem overflow horizontal 
+2026-10-14T01:43:09.1559697Z e2e-1       |     [chromium] › e2e/operational-story.spec.ts:23:5 › operational story: calculation, unsupported dimension and valid recovery 
+2026-10-14T01:43:09.1560004Z e2e-1       |     [chromium] › e2e/quality.spec.ts:38:5 › histórico tardio não apaga a conversa recém-criada ─────
+2026-10-14T01:43:09.1560367Z e2e-1       |     [chromium] › e2e/quality.spec.ts:87:5 › histórico distingue horários, revela título longo e drawer devolve foco 
+2026-10-14T01:43:09.1560725Z e2e-1       |     [chromium] › e2e/quality.spec.ts:135:5 › evidência, foco, alvos e refluxo permanecem acessíveis em sete geometrias 
+2026-10-14T01:43:09.1561225Z e2e-1       |     [chromium] › e2e/quality.spec.ts:475:5 › zero coberto, receita de 90 dias e cobertura parcial preservam o significado dos números 
+2026-10-14T01:43:09.1561581Z e2e-1       |     [chromium] › e2e/quality.spec.ts:539:5 › preferência de movimento reduzido evita rolagem animada da conversa 
+2026-10-14T01:43:09.1561972Z e2e-1       |     [chromium] › e2e/result-selection.spec.ts:17:5 › rever um resultado preserva os dados e a continuação do último plano 
+2026-10-14T01:43:09.1562277Z e2e-1       |     [chromium] › e2e/review.spec.ts:3:5 › filtro não suportado não aparece como receita geral ──────
+2026-10-14T01:43:09.1562707Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:64:5 › datas personalizadas mantêm edição real, bloqueiam inválidas e enviam recorte exato 
+2026-10-14T01:43:09.1563104Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:113:5 › lojas e períodos rápidos refletem seleção e datas explícitas prevalecem 
+2026-10-14T01:43:09.1563545Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:140:5 › pergunta respeita espaços, acentos, quebra de linha, tamanho e múltiplas métricas 
+2026-10-14T01:43:09.1563962Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha network preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1564378Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha 409 preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1564781Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:193:7 › falha 503 preserva pergunta, resultado anterior e permite tentar novamente 
+2026-10-14T01:43:09.1565140Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:232:5 › resposta lenta bloqueia envio duplicado e alterações de escopo 
+2026-10-14T01:43:09.1565547Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:266:5 › histórico, operação indisponível e nova análise mantêm contexto e foco 
+2026-10-14T01:43:09.1565934Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:342:5 › evidência com falha pode ser repetida sem perder o resultado 
+2026-10-14T01:43:09.1566293Z e2e-1       |     [chromium] › e2e/round-2-fields.spec.ts:362:5 › erro tardio de evidência antiga não expira a nova identidade 
+2026-10-14T01:43:09.1566773Z e2e-1       |     [chromium] › e2e/uiux.spec.ts:97:5 › esclarecimento permanece acessível com a próxima consulta recolhida e restaura contexto 
+2026-10-14T01:43:09.1567202Z e2e-1       |     [chromium] › e2e/uiux.spec.ts:172:5 › falha de consulta mantém pergunta, filtros e resultado recebido até uma tentativa explícita 
+2026-10-14T01:43:09.1567594Z e2e-1       |     [chromium] › e2e/uiux.spec.ts:231:5 › conflito de favorito conserva edição e recarrega sem substituir filtros e pergunta 
+2026-10-14T01:43:09.1568015Z e2e-1       |     [chromium] › e2e/uiux.spec.ts:310:5 › favorito abre cálculo histórico sem execução e reexecuta o plano fixo mesmo após mudar filtros 
+2026-10-14T01:43:09.1568105Z e2e-1       |   57 passed (28.3m)

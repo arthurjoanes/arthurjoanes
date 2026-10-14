@@ -1,0 +1,61 @@
+{
+  "repo": "gestao-recebiveis",
+  "base_head": "d0681de47923eeeea9aadd88201d8111c69e68b2",
+  "status": "published_main_remote_ci_passed",
+  "remote_run": 38495246726,
+  "remote_job": 115629424090,
+  "url": "https://github.com/arthurjoanes/gestao-recebiveis/actions/runs/38495246726/job/115629424090",
+  "confirmed_result": "220 backend passed, 2 warnings; upgrade probe passou; 38 Chromium passed, 1 failed. O teste compacto com reset e retorno de foco passou. O teste de retorno do título passou pelas asserções anteriormente bloqueadas e falhou depois, na expectativa de título em dia.",
+  "failure_evidence": "recebiveis-ci-d0681de-failure-excerpt.log",
+  "summary_evidence": "rec-ci-d0681de-summary.log",
+  "diagnosis": "A jornada filtra o Resumo por código e vencimento de um título vencido. Ao voltar ao Resumo, a URL conserva corretamente esse recorte independente dos filtros da carteira. Pedir Ver títulos em dia com a mesma busca/data produz lista vazia; a linha 814 ainda esperava um badge Em aberto. O teste agora valida a preservação dos filtros do Resumo e os limpa explicitamente antes do cenário em dia.",
+  "files_changed": [
+    "frontend/tests/journey.spec.ts"
+  ],
+  "changes": "Acrescenta asserções de busca e duas datas preservadas no Resumo, limpeza explícita e asserções dos três campos vazios e Carteira completa. Conserva navegação por teclado, foco em main-content, situação current e badge Em aberto; não altera runtime, timeout, retry ou skip.",
+  "checks": [
+    {
+      "command": "npx prettier --check tests/journey.spec.ts",
+      "exit_code": 0,
+      "result": "All matched files use Prettier code style."
+    },
+    {
+      "command": "npx eslint tests/journey.spec.ts",
+      "exit_code": 0,
+      "result": "Saída silenciosa; a execução encadeada conferiu LASTEXITCODE=0 antes de seguir para typecheck. Tee-Object não criou arquivo porque não recebeu linhas; não há log separado."
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "receipt": "rec-ci-followup-types.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "receipt": "rec-ci-followup-diff-check.log"
+    }
+  ],
+  "diff": "rec-ci-followup.diff",
+  "limitations": [
+    "Não executado Playwright local por bloqueio anterior da inicialização do servidor; nenhuma nova tentativa de contornar. A próxima CI validará a jornada completa.",
+    "Nenhum build repetido porque o ajuste adicional é exclusivo do teste e não muda o bundle da aplicação.",
+    "README alterado simultaneamente pela tarefa de apresentação; esse arquivo está descrito em visual-presentation-billing.json e não integra a correção da jornada.",
+    "Nenhum commit ou push realizado pelo agente."
+  ],
+  "publication_by_root": {
+    "branch": "main",
+    "sha": "bd5eef405232e7bc8f49c8f642926e44af7b4b71",
+    "ci_run": 38496290602,
+    "ci_snapshot": "gestao-recebiveis-ci-published-latest.json",
+    "browser_status": "39 Chromium passed; CI completed success"
+  },
+  "remote_success": {
+    "sha": "bd5eef405232e7bc8f49c8f642926e44af7b4b71",
+    "run": 38496290602,
+    "job": 115632681667,
+    "result": "220 backend passed, 2 warnings; upgrade passed; 39 Chromium passed (1.5m), inclusive retorno ao título e reset compacto.",
+    "log": "recebiveis-ci-bd5eef4-success-summary.log",
+    "artifact_id": 11864471455,
+    "snapshot": "gestao-recebiveis-ci-published-latest.json"
+  }
+}

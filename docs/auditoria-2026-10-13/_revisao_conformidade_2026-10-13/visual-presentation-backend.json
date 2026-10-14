@@ -1,0 +1,175 @@
+{
+  "recorded_at_utc": "2026-10-14T01:33:25.690Z",
+  "scope": "Apresentação documental de EvidenceDesk, CycleOps e QuakeExposure. Remoção de blocos de paleta e seleção de capturas reais existentes; sem alterar CSS, imagens, aplicação, artefatos de dados ou relatórios globais.",
+  "repos": [
+    {
+      "repo": "evidencedesk",
+      "head": "aff085acea3cb44122b4316b4a358700fdc447d5",
+      "files_changed": [
+        "README.md",
+        "docs/brand.md"
+      ],
+      "docs_check": {
+        "documents": 45,
+        "readme": "README.md",
+        "links": 827,
+        "external_not_checked": 83,
+        "problems": []
+      },
+      "docs_log": "presentation-evidencedesk-docs.log",
+      "diff_check_exit": 0,
+      "images": [
+        {
+          "path": "evidencedesk/docs/images/payment-story-20260922/01-pagamento-e-divergencias.png",
+          "sha256": "2a4db6f793a17dcfd019fed2fc7cccf2abd73c8af70eefe91d878d9496120e2c",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        },
+        {
+          "path": "evidencedesk/docs/images/payment-story-20260922/05-dossie-com-fonte.png",
+          "sha256": "f71978397c12f60a997eb95a20a466dcb46f54b736ee09a40072e656d79cb074",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        },
+        {
+          "path": "evidencedesk/docs/images/workspace-desktop.png",
+          "sha256": "038d9e75ed121d8844331b30839d1812ecef00b5c64979aed2bb393c41a07e92",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        }
+      ],
+      "selected_main_image": "evidencedesk/docs/images/payment-story-20260922/01-pagamento-e-divergencias.png"
+    },
+    {
+      "repo": "cycleops",
+      "head": "2a1dc6a02ad2f7958a4b7933600254e8c507420f",
+      "files_changed": [
+        "docs/brand/README.md",
+        "docs/padrao-documentacao.md",
+        "docs/results/identity-20261009.md",
+        "docs/ui-ux.md"
+      ],
+      "docs_check": {
+        "documents": 28,
+        "readme": "README.md",
+        "links": 344,
+        "external_not_checked": 28,
+        "problems": []
+      },
+      "docs_log": "presentation-cycleops-docs.log",
+      "diff_check_exit": 0,
+      "images": [
+        {
+          "path": "CycleOps/docs/media/uiux-desktop.png",
+          "sha256": "5ecf01e761acc92903f1c8cfa32648cae6df6128c6beb8c301eca76a2840511d",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        },
+        {
+          "path": "CycleOps/docs/media/uiux-analysis.png",
+          "sha256": "ac7a2af87a72d59f5b5503da9bf32c6282f9190c2a04bf56b74400f60a701fda",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        }
+      ],
+      "selected_main_image": "CycleOps/docs/media/uiux-desktop.png"
+    },
+    {
+      "repo": "quake-exposure",
+      "head": "47fda4c96259e6442c89d0e1ce09fe3f055fff5d",
+      "files_changed": [
+        "CONTRIBUTING.md",
+        "docs/identidade-visual.md",
+        "docs/progress.md"
+      ],
+      "docs_check": {
+        "documents": 18,
+        "readme": "README.md",
+        "links": 237,
+        "external_not_checked": 21,
+        "problems": []
+      },
+      "docs_log": "presentation-quake-docs.log",
+      "diff_check_exit": 0,
+      "images": [
+        {
+          "path": "_auditoria_2026-10-13/sources/quake-exposure/docs/results/ui-ux-desktop.jpg",
+          "sha256": "c86af70d8a6df00982df8f1185be9a7b24cfa7ca4aa323a1cf967b2445e935b4",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        },
+        {
+          "path": "_auditoria_2026-10-13/sources/quake-exposure/docs/results/ui-ux-charts.jpg",
+          "sha256": "eeedda6dddf8e4818f2dab009a3e607470c9ef74aca623187cb0933680b45e7c",
+          "unchanged_from_head": true,
+          "opened_individually_in_pixels": true
+        }
+      ],
+      "selected_main_image": "_auditoria_2026-10-13/sources/quake-exposure/docs/results/ui-ux-desktop.jpg"
+    }
+  ],
+  "decisions": [
+    {
+      "repo": "evidencedesk",
+      "selection": "docs/images/payment-story-20260922/01-pagamento-e-divergencias.png",
+      "reason": "Mostra a investigação da aplicação com fonte de pagamento aberta ao lado de duas divergências do mesmo pedido, além de 222 pedidos no snapshot. O layout e o contexto são mais informativos que a lista de incidentes anterior.",
+      "alternatives": "O dossiê com fonte é uma captura alta (1440×1859); o recorte workspace-desktop é legível, mas não mostra o contexto da aplicação. Ambos foram abertos em pixels. A nova imagem é uma captura da aplicação, distinta do workbench HTML offline.",
+      "caption": "Registro histórico de 22/09/2026, dados sintéticos, duas divergências do mesmo pedido, IA desativada, link ao browser-review.json original.",
+      "removed_palette": "README: imagem e parágrafo de paleta. docs/brand.md: quadro de cores, hexadecimal e explicação de tokens; preservados tipografia, rótulos, foco e medições de contraste.",
+      "historical_media": "home.png, palette.svg e demais arquivos históricos preservados."
+    },
+    {
+      "repo": "cycleops",
+      "selection": "docs/media/uiux-desktop.png",
+      "reason": "A captura já mostra a página principal com mapa de Oslo, fila e contagens (24 sem bicicletas e 12 sem vagas naquele instante). Foi mantida nos READMEs PT/EN após inspeção individual. A análise da gravação também foi aberta e permanece como segunda imagem.",
+      "caption": "Captura de 12/10/2026 do build Pages; replay de gravação real com horários da gravação, conforme README e docs/results/uiux-20261012.md. Nenhuma captura nova foi alegada.",
+      "removed_palette": "Quadro de cores da marca e códigos da navegação removidos de docs/brand/README.md. Referências em guias e linha descritiva histórica atualizadas. Regras de contraste, legenda e acessibilidade preservadas."
+    },
+    {
+      "repo": "quake-exposure",
+      "selection": "docs/results/ui-ux-desktop.jpg",
+      "reason": "A imagem inicial já mostra mapa e resultados: 46 classificados, 1.972 elegíveis e totais separados em BRL/USD. Foi mantida nos READMEs PT/EN após inspeção individual. Os quatro gráficos também foram abertos e permanecem na galeria.",
+      "caption": "Captura de 12/10/2026 do site público com snapshot REPLAY de 11/10/2026 23:42 em São Paulo, carteira fictícia e ausência de CDC naquele exemplo, conforme README e docs/progress.md. Não é coleta ao vivo nem estimativa de perdas.",
+      "removed_palette": "Quadro hexadecimal removido de docs/identidade-visual.md; referências em CONTRIBUTING.md e progress.md ajustadas. Semântica de classificação e legendas preservada."
+    }
+  ],
+  "coverage": {
+    "individual_images_opened": 7,
+    "image_edits": 0,
+    "changed_markdown_files": 9,
+    "docs_checked": 91,
+    "links_checked": 1408,
+    "external_urls_not_queried": 132,
+    "local_link_problems": 0,
+    "diff_checks_passed": 3,
+    "all_seven_candidate_hashes_equal_git_head": true,
+    "old_heading_anchors_preserved": true,
+    "palette_mentions_in_markdown_or_html_search": 0
+  },
+  "docs_read": [
+    "CycleOps/AGENTS.md",
+    "CycleOps/CONTRIBUTING.md",
+    "CycleOps/docs/brand/README.md",
+    "CycleOps/docs/padrao-documentacao.md",
+    "CycleOps/docs/ui-ux.md (trecho alterado)",
+    "CycleOps/docs/results/identity-20261009.md (trecho alterado)",
+    "CycleOps/docs/results/uiux-20261012.md",
+    "CycleOps/README.md e README.en.md (demonstração)",
+    "evidencedesk/README.md (visão geral, demonstração e mapa documental)",
+    "evidencedesk/docs/brand.md",
+    "evidencedesk/docs/evidence/screenshots-20260922.json (entradas das candidatas)",
+    "evidencedesk/docs/evidence/editorial-payment-20260922/browser-review.json (data e imagens)",
+    "evidencedesk/docs/evidence/editorial-payment-20260922/payment-story.json (resultados da jornada)",
+    "quake-exposure/CONTRIBUTING.md (instruções pertinentes)",
+    "quake-exposure/docs/identidade-visual.md",
+    "quake-exposure/docs/progress.md (registros de marca e capturas)",
+    "quake-exposure/README.md e README.en.md (demonstração)"
+  ],
+  "checks_command": "evidencedesk/.venv/Scripts/python.exe _revisao_conformidade_2026-10-13/check_visual_presentation_backend.py",
+  "limitations": [
+    "As sete imagens foram abertas individualmente; isso não é uma nova execução funcional nem recaptura da aplicação.",
+    "As datas e resultados históricos foram mantidos; a seleção documental não afirma que as capturas exibem o checkout atual.",
+    "A validação de links é offline. Não houve nova consulta das URLs externas.",
+    "Nenhuma suíte de produto foi repetida por alteração de apresentação. Sem commit/push pelo agente."
+  ]
+}

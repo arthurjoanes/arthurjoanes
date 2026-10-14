@@ -1,0 +1,4 @@
+src\loja_assistente\conversations\pagination.py:24: error: Function is missing a return type annotation  [no-untyped-def]
+src\loja_assistente\conversations\pagination.py:51: error: Function is missing a type annotation  [no-untyped-def]
+src\loja_assistente\conversations\routes.py:53: error: Need type annotation for "visible" (hint: "visible: list[<type>] = ...")  [var-annotated]
+Found 3 errors in 2 files (checked 48 source files)

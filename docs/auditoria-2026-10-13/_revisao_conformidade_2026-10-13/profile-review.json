@@ -1,0 +1,21 @@
+{
+  "repo": "arthurjoanes",
+  "docs_read": [
+    "profile-readme/README.md",
+    "profile-readme/README.en.md"
+  ],
+  "findings_reviewed": [
+    "PER-01: dois demos públicos adicionados em PT/EN, distinção entre dados públicos e carteiras/casos fictícios."
+  ],
+  "visual_files": [
+    {
+      "path": "profile-readme/assets/banner.png",
+      "visual_content_reviewed": true,
+      "observation": "Banner de Arthur Joanes, 2508 × 627 px, identidade azul e branca e fluxo técnico conceitual. Os rótulos laterais pequenos exigem abrir o original. Não é captura de produto nem comprovação de experiência ou escala declarada."
+    }
+  ],
+  "limitations": [
+    "Biografia é declaração do autor, não confirmação independente de emprego ou impacto.",
+    "GitHub remoto e alterações locais são estados diferentes; nenhuma publicação feita."
+  ]
+}

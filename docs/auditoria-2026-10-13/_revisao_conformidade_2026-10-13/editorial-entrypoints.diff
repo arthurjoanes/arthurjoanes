@@ -1,0 +1,122 @@
+--- varejo-data-pipeline/docs/problem-solution.md (antes editorial)
++++ varejo-data-pipeline/docs/problem-solution.md (depois editorial)
+@@ -74,6 +74,6 @@
+ 
+ ## Limites
+ 
+-Além de manter a publicação diante de um lote inválido, é necessário recuperar seu histórico. A [prova em volume novo](state-recovery.md) preservou três publicações e suas versões, incluindo a correção de R$ 64 para R$ 77. Isso fecha uma lacuna operacional demonstrável no mesmo host; recuperação externa continua sendo trabalho separado.
++Além de manter a publicação diante de um lote inválido, é necessário recuperar seu histórico. A [prova em volume novo](state-recovery.md) preservou três publicações e suas versões no mesmo host, incluindo a correção de R$ 64 para R$ 77. A recuperação em outro computador continua pendente.
+ 
+ Azure/Fabric não estão provisionados; a medição local não representa desempenho de produção. O calendário é aprovado pelo operador local; não há autenticação multiusuário. A atomicidade é um protocolo de publicação sobre filesystem local Linux, não uma transação Delta multitabela ou lock distribuído. Sem VACUUM automático: leitores antigos dependem da retenção das versões referenciadas.
+--- api-sentinel/README.md (antes editorial)
++++ api-sentinel/README.md (depois editorial)
+@@ -1,6 +1,6 @@
+ # API Sentinel
+ 
+-API de vendas por organização, com quota compartilhada e central de incidentes. Consulta comercial e ERP sintético executam no mesmo laboratório local.
++API de vendas por organização, com quota compartilhada e central de incidentes. A API e o ERP sintético rodam no mesmo ambiente local.
+ 
+ <!-- Navegação do README -->
+ <p>
+@@ -69,7 +69,7 @@
+ 
+ ![Cliente com Bearer passa por NGINX e API; PostgreSQL guarda identidade e vendas, Redis coordena quota e cache, ERP fornece estoque; Prometheus e Jaeger acompanham o mesmo host](docs/readme/architecture.svg)
+ 
+-O resumo comercial usa PostgreSQL e Redis; estoque consulta o ERP. Uma falha do ERP pode coexistir com vendas. [Sequências e limites](docs/architecture.md).
++O resumo comercial usa PostgreSQL e Redis; estoque consulta o ERP. As consultas de vendas não dependem da resposta do ERP. [Sequências e limites](docs/architecture.md).
+ 
+ <details>
+ <summary>Diagrama completo, portas e responsabilidades</summary>
+@@ -155,7 +155,7 @@
+ | Texto | `#1B2E40` | Conteúdo principal |
+ | Texto secundário | `#4C6374` | Metadados e orientação |
+ 
+-A paleta identifica a marca e a navegação. Estados de incidente mantêm verde, vermelho e âmbar acompanhados de texto; o acento petróleo não indica saúde do serviço. Os vetores da marca e os quatro selos de navegação tiveram cores alinhadas, preservando desenho e fontes. O selo do LinkedIn conserva a cor da plataforma.
++A paleta identifica a marca e a navegação. Estados de incidente mantêm verde, vermelho e âmbar acompanhados de texto; o acento petróleo não indica saúde do serviço. A marca e os quatro selos de navegação usam essa paleta. O selo do LinkedIn conserva a cor da plataforma.
+ 
+ </details>
+ 
+@@ -229,7 +229,7 @@
+ - `QUOTA_ALGORITHM=fixed-window` preserva a janela de um segundo e sua rajada na fronteira. `gcra` usa capacidade total `QUOTA_BURST_CAPACITY`, padrão 10; todas as réplicas precisam usar a mesma política. [Semântica e transição do ensaio](docs/architecture.md#políticas-de-quota).
+ - Dados comerciais imutáveis e duas réplicas no mesmo host. O laboratório não demonstra SLO mensal, capacidade máxima ou disponibilidade entre máquinas. [Escopo das provas](docs/verification.md#escopo).
+ - Serviços publicados em loopback; tokens e runtime ficam fora do Git. Scans dizem respeito às imagens e bases identificadas em cada execução. [Controles e limites](docs/security.md).
+-- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) cobre os 18 itens recebidos, as correções de rate limit e os testes com PostgreSQL e Redis descartáveis.
++- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) registra a avaliação de 18 itens de segurança, as correções de rate limit e os testes com PostgreSQL e Redis descartáveis.
+ - A central exige atualização manual. “Sem incidentes” não prova saúde. [Leitura dos registros e do probe](docs/incident-console.md) · [contrato da interface](docs/decisoes-tecnicas.md#histórico-durável-e-uma-interface-que-não-inventa-recuperação).
+ 
+ </details>
+--- api-sentinel/docs/problem-solution.md (antes editorial)
++++ api-sentinel/docs/problem-solution.md (depois editorial)
+@@ -1,6 +1,6 @@
+ # Problemas resolvidos e como conferir
+ 
+-Cada caso liga o contrato ao código e aos testes. Os valores monetários vêm da [fixture sintética](../data/fixtures/manual-sales.json); as contagens de carga pertencem à [execução completa de 22/09/2026](evidence/editorial-20260922/full-run.json).
++Os valores monetários vêm da [fixture sintética](../data/fixtures/manual-sales.json); as contagens de carga pertencem à [execução completa de 22/09/2026](evidence/editorial-20260922/full-run.json).
+ 
+ Desenvolvi o laboratório para uma integração de lojas que consulta vendas e disponibilidade no ERP. Clientes, vendas e ERP são sintéticos. O resultado demonstrado é técnico: consultas com escopo correto, contenção de falhas e histórico verificável. Não houve piloto com operadores reais, medição de economia ou operação em produção.
+ 
+@@ -66,7 +66,7 @@
+ 
+ Uma consulta do probe validada também não comprova saúde global. Resultado vencido perde a indicação de validação; probe desativado ou sem observação não aparece saudável. [UI](../alert_receiver/ui.py), [expiração no navegador](../alert_receiver/snapshot.js) e [testes de estados](../tests/unit/test_receiver_ui.py) preservam essa distinção. Os links de investigação usam a configuração da mesma execução; sem ela, a navegação mostra erro explícito. Não há fallback para ferramentas de outra stack.
+ 
+-A [história operacional](operational-story.md) mostra entregas reais e a mesma ocorrência recuperada. O cenário de entrega antiga fora de ordem é verificado pelos testes automatizados; não atribuo quatro entregas a uma captura que registra apenas duas.
++A [história operacional](operational-story.md) registra duas entregas reais da mesma ocorrência, incluindo a recuperação. A sequência de quatro entregas com firing atrasado é exercitada pelos testes automatizados.
+ 
+ ## O que mudou depois das medições
+ 
+--- api-sentinel/docs/demo.md (antes editorial)
++++ api-sentinel/docs/demo.md (depois editorial)
+@@ -4,7 +4,7 @@
+ 
+ O cliente da API é uma integração de lojas; o operador precisa reconhecer falha, encontrar a dependência envolvida e confirmar recuperação. Dados comerciais e ERP são sintéticos. PostgreSQL, Redis, proxy, regras e entrega de alertas são executados localmente.
+ 
+-A [verificação atual](verification.md) e a [prova completa de 22/09 às 12:12 UTC](evidence/editorial-20260922/full-run.json) identificam a imagem e os resultados desta revisão. A [sequência de capturas das 12:49 UTC](evidence/editorial-20260922/capture-run.json) usa outra imagem, com sincronização do coletor corrigida, e não repete o benchmark. O roteiro abaixo pode ser repetido em um projeto Docker descartável.
++A [documentação de verificação](verification.md) descreve os comandos e critérios. A [prova completa de 22/09 às 12:12 UTC](evidence/editorial-20260922/full-run.json) identifica a imagem e os resultados daquela execução. A [sequência de capturas das 12:49 UTC](evidence/editorial-20260922/capture-run.json) usa outra imagem, com sincronização do coletor corrigida, e não repete o benchmark. O roteiro abaixo pode ser repetido em um projeto Docker descartável.
+ 
+ Para acompanhar um exemplo já executado, veja a [consulta conhecida, incidente e recuperação](operational-story.md), com três capturas reais e observações da mesma execução. Esse cenário limitado tem identidade própria e não substitui a prova completa de carga.
+ 
+--- containerops/README.md (antes editorial)
++++ containerops/README.md (depois editorial)
+@@ -183,7 +183,7 @@
+ snapshot igual, novo job, credenciais próprias e hashes originais preservados.
+ Builds das duas releases, auditorias OCI/SBOM/provenance, qualidade, PostgreSQL,
+ rollback, release 2, TLS e hardening passaram. Os scans finais da aplicação 1/2,
+-banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política atual.
++banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política daquela rodada.
+ O [relatório dessa rodada](docs/evidence/containerops-evolution-20261012/report.html)
+ mantém suas identidades separadas das provas históricas abaixo.
+ 
+@@ -223,7 +223,7 @@
+ - A demo permite atraso de até 15 s; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
+ - Backup local compartilha a falha do computador. O pacote permite transporte; proteção contra perda do host exige cópia física e destino independentes, ainda fora da prova local. TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
+ - O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md).
+-- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) cobre os 18 itens recebidos, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
++- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) registra a avaliação de 18 itens de segurança, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
+ 
+ ## Documentação
+ 
+--- containerops/docs/problem-solution.md (antes editorial)
++++ containerops/docs/problem-solution.md (depois editorial)
+@@ -36,7 +36,7 @@
+ 
+ Em uma falha separada, o texto `Recuperar depois de término abrupto` tem cinco palavras. O worker morreu quando o job estava `running`, tentativa 1; a nova aquisição concluiu o mesmo UUID na tentativa 2. O trabalho pode repetir; a recuperação não demonstra execução única. O [registro de recuperação](evidence/editorial-20260922/recovery.json) conserva antes/depois, SIGTERM, reinício e verificações do banco.
+ 
+-A proteção contra resultado antigo não é provada apenas pelo retorno após SIGKILL. O teste `test_stale_worker_cannot_renew_or_overwrite_result`, em [test_integration.py](../app/tests/test_integration.py), tenta renovar e concluir com uma posse obsoleta em PostgreSQL real; ambos são recusados. Ele integra os 116 casos aprovados da [rodada atual](evidence/editorial-20260922/execution.json). Essa regra protege a gravação local, não efeitos externos como cobrar ou enviar uma mensagem.
++A proteção contra resultado antigo não é provada apenas pelo retorno após SIGKILL. O teste `test_stale_worker_cannot_renew_or_overwrite_result`, em [test_integration.py](../app/tests/test_integration.py), tenta renovar e concluir com uma posse obsoleta em PostgreSQL real; ambos são recusados. Ele integra os 116 casos aprovados da [rodada de 22/09/2026](evidence/editorial-20260922/execution.json). Essa regra protege a gravação local, não efeitos externos como cobrar ou enviar uma mensagem.
+ 
+ ## Exemplo: o dump existe, mas o serviço voltou?
+ 
+--- containerops/docs/demo.md (antes editorial)
++++ containerops/docs/demo.md (depois editorial)
+@@ -103,9 +103,9 @@
+ 
+ A execução verificou primeiro a aplicação (`a1560b0d…`, 12:31:52–12:36:05 UTC) e depois a sequência de operações (`53365744…`, 12:36:06–12:38:26 UTC). A base foi `46d43bf`, sem alterações nas fontes da aplicação, do relatório ou dos comandos. O [recibo](evidence/editorial-20260922/execution.json) registra hashes das fontes, locks, digests e limites; o [manifesto operacional original](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/manifest.json) foi copiado byte a byte, com LF.
+ 
+-A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a partir dos Dockerfiles/locks atuais, usando cache e tags próprias. Não foi um build frio. A execução usou os helpers existentes com uma pasta de evidências própria e aliases fixos apontados temporariamente às imagens novas. Os IDs anteriores foram registrados, conferidos antes de cada troca e restaurados no final. Imagens históricas e volumes compartilhados foram preservados. Os JSONs públicos não incluem credenciais ou dumps.
++A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a partir dos Dockerfiles/locks daquela execução, usando cache e tags próprias. Não foi um build frio. A execução usou os helpers existentes com uma pasta de evidências própria e aliases fixos apontados temporariamente às imagens novas. Os IDs anteriores foram registrados, conferidos antes de cada troca e restaurados no final. Imagens históricas e volumes compartilhados foram preservados. Os JSONs públicos não incluem credenciais ou dumps.
+ 
+-Esse build local usou `--provenance=false`: **não produziu uma nova prova de SBOM/attestations**. O Trivy posterior está registrado separadamente em [segurança](evidence/editorial-20260922/security.json). Os scans históricos e o CI de outra imagem não passam a aprovar estas imagens. A prova demonstra instalação e comportamento local do código atual; a cadeia de suprimentos completa continua sendo o cenário padrão `prove`.
++Esse build local usou `--provenance=false`: **não produziu uma nova prova de SBOM/attestations**. O Trivy posterior está registrado separadamente em [segurança](evidence/editorial-20260922/security.json). Os scans históricos e o CI de outra imagem não passam a aprovar estas imagens. A prova demonstra instalação e comportamento local do código daquela execução; a cadeia de suprimentos completa continua sendo o cenário padrão `prove`.
+ 
+ | Caso e esperado independente                          | Observado                                                                      | Evidência                                                                                                                               |
+ | ----------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |

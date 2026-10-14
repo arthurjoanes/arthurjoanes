@@ -1,0 +1,291 @@
+{
+  "repos": [
+    {
+      "name": "cycleops",
+      "head": "330e4c6bfd61e264956add9785557857456f5aff",
+      "topics": [
+        "Configuração e limites de recursos",
+        "Retenção de dados",
+        "Segurança de rede e logs",
+        "CI/CD"
+      ],
+      "files_read": [
+        "AGENTS.md (instrução local, não publicação)",
+        "SECURITY.md",
+        "apps/backend/src/cycleops/worker/main.py (configuração e liderança)",
+        "apps/backend/src/cycleops/worker/processor.py",
+        "apps/backend/src/cycleops/worker/archive.py",
+        "apps/backend/src/cycleops/collection/client.py",
+        "apps/backend/src/cycleops/adapters/postgres/maintenance.py",
+        "apps/backend/src/cycleops/api/app.py",
+        "apps/backend/src/cycleops/jsonlog.py",
+        "infra/caddy/Caddyfile",
+        ".github/workflows/ci.yml",
+        ".github/workflows/pages.yml",
+        "apps/web/package.json",
+        "apps/backend/tests/test_worker_main.py",
+        "apps/backend/tests/test_worker_archive.py"
+      ],
+      "checks": [
+        {
+          "command": "git status --short; rev-parse HEAD; ls-remote origin refs/heads/main",
+          "result": "Clone limpo e mesmo commit remoto da primeira rodada.",
+          "limitation": "Consulta do estado atual; não certifica commits futuros."
+        },
+        {
+          "command": "round2/root_probes.py: Settings.from_env e maintain reais, com medição de banco substituída por 2048 MiB",
+          "result": "1024 suspende; NaN, inf e 1e999 são aceitos e não suspendem.",
+          "limitation": "Sem PostgreSQL; prova da validação/comparação, não de esgotamento real de disco."
+        },
+        {
+          "command": "round2/root_probes.py: ArchiveWriter real; prune com limite reduzido para 4096 bytes",
+          "result": "Arquivo ativo chegou a 19402 bytes após uma escrita, sem rejeição ou nova limpeza.",
+          "limitation": "Dado sintético em diretório temporário. Não demonstra que o feed Oslo atinja 500 MiB nem propõe carga contra ele."
+        },
+        {
+          "command": "pytest tests/test_worker_main.py tests/test_worker_archive.py -q -p no:cacheprovider -o addopts=\"\"",
+          "result": "22 testes passaram em 4,37 s no Python 3.14 existente.",
+          "limitation": "Somente esses dois módulos; não reexecuta integração/Compose."
+        },
+        {
+          "command": "API pública GitHub: actions/runs?per_page=5",
+          "result": "CI 38476397466 e Pages 38477189965 concluídos com success no HEAD auditado.",
+          "limitation": "Estado reportado pelo GitHub; logs completos e cada artefato do runner não foram reavaliados."
+        }
+      ],
+      "findings": [
+        {
+          "id": "CYC-04",
+          "title": "Configuração aceita quota não finita e desativa a suspensão por tamanho",
+          "category": "Configuração e limites de recursos",
+          "severity": "Baixa",
+          "location": "apps/backend/src/cycleops/worker/main.py:95-99; worker/processor.py:119-135",
+          "evidence": "Settings converte a variável com float e rejeita apenas quota <= 0. No probe, NaN, inf e 1e999 foram aceitos; maintain com tamanho simulado de 2048 MiB manteve quota.exceeded=False. O controle 1024 ativou a suspensão.",
+          "why": "Comparar qualquer tamanho finito com NaN ou infinito positivo não detecta estouro. Uma configuração inválida passa pelo fail-fast, apesar da mensagem prometer valor acima de zero.",
+          "impact": "Erro de configuração pode remover o limite operacional sem aviso de configuração. Não há entrada remota para alterar essa variável e não foi observado disco cheio.",
+          "fix": "Rejeitar números não finitos ao ler CYCLEOPS_DB_QUOTA_MB, mantendo o erro de configuração e o código de saída já existentes.",
+          "implementation": "```python\nimport math\n\nif not math.isfinite(quota) or quota <= 0:\n    raise ConfigError(\"CYCLEOPS_DB_QUOTA_MB must be finite and above 0\")\n```\nAcrescentar NaN, inf, -inf e 1e999 aos casos de configuração recusada, com IDs curtos nos testes.",
+          "affected_files": [
+            "apps/backend/src/cycleops/worker/main.py",
+            "apps/backend/tests/test_worker_main.py"
+          ],
+          "validation": "As quatro entradas não finitas devem lançar ConfigError antes de abrir conexão. Valores positivos finitos, incluindo 0.5 e 1024, devem continuar aceitos; 0 e negativos recusados.",
+          "effort": "baixo",
+          "priority": "P2"
+        },
+        {
+          "id": "CYC-05",
+          "title": "Documentação apresenta a limpeza do arquivo bruto como teto rígido de armazenamento",
+          "category": "Documentação operacional e retenção",
+          "severity": "Baixa",
+          "location": "SECURITY.md:11; apps/backend/src/cycleops/worker/archive.py:1-2,51-60,67-79,98",
+          "evidence": "SECURITY.md afirma teto de 500 MB. ArchiveWriter chama prune apenas em _open, na rotação/reinício; cada write posterior apenas escreve e faz flush. prune preserva keep mesmo acima do máximo; test_worker_archive.py:98-99 testa essa exceção explicitamente.",
+          "why": "O limite orienta a remoção dos arquivos anteriores durante a rotação. Ele não é uma garantia de espaço máximo, nem uma purga periódica independente de novas escritas. O ativo pode crescer entre duas rotações.",
+          "impact": "Quem dimensionar o volume supondo um teto rígido pode reservar espaço insuficiente. Não foi medido consumo real de 500 MiB; o achado é a promessa mais forte que o comportamento intencional.",
+          "fix": "Corrigir SECURITY.md e a docstring para explicar a política real. Manter a preservação do arquivo ativo; um teto físico exigiria decisão separada de rotação por tamanho e comportamento quando não houver espaço.",
+          "implementation": "Texto para substituir apenas a descrição do arquivo bruto:\n\n\"O arquivo bruto do live é dividido por hora. Ao abrir um novo arquivo, a limpeza remove arquivos anteriores com última escrita há mais de 48 horas e depois os mais antigos enquanto o conjunto ultrapassa 500 MiB. O arquivo em uso é preservado; por isso o volume pode passar desse valor entre rotações.\"\n\nDocstring correspondente: \"Hourly NDJSON.gz archive. On rotation, prune older files by a 48-hour retention target and a 500 MiB size threshold, preserving the active file; this is not a hard disk quota.\"",
+          "affected_files": [
+            "SECURITY.md",
+            "apps/backend/src/cycleops/worker/archive.py"
+          ],
+          "validation": "Conferir que a descrição identifica momento da limpeza, unidade MiB e exceção do arquivo ativo. Preservar os testes existentes e o probe com limiar reduzido; não rodar teste de carga contra o feed real.",
+          "effort": "baixo",
+          "priority": "P2"
+        }
+      ],
+      "strengths": [
+        "A coleta exige HTTPS no host/caminho permitidos, rejeita redirects, desliga proxy do ambiente, limita corpo decodificado e aplica deadline total em asyncio.timeout (collection/client.py).",
+        "O edge substitui X-Forwarded-For e a API usa limites separados de REST/SSE; requests têm identificador validado e resposta de erro sem traceback (Caddyfile e api/app.py). Isso foi conferido por código, não por ataque de rede.",
+        "O CI declara migrações do zero, integração PostgreSQL, checks de contratos e testes Compose. Pages usa o head_sha do CI aprovado, com permissões de publicação restritas ao job deploy. A consulta pública indicou sucesso no HEAD."
+      ],
+      "limitations": [
+        "Docker continua indisponível; não houve novo ensaio de recuperação do worker, disco cheio, SSE sob carga ou restore PostgreSQL.",
+        "O teste de arquivo usa limiar reduzido e é compatível com a exceção intencional já coberta pelo projeto. Não é falha de segurança remota.",
+        "Não foi repetida varredura de vulnerabilidades de todas as dependências nem de imagens; CI verde não é certificação de segurança."
+      ],
+      "sources": [
+        {
+          "title": "Python: math.isfinite",
+          "url": "https://docs.python.org/3/library/math.html#math.isfinite"
+        },
+        {
+          "title": "CycleOps CI no commit auditado",
+          "url": "https://github.com/arthurjoanes/cycleops/actions/runs/38476397466"
+        },
+        {
+          "title": "CycleOps publicação Pages no commit auditado",
+          "url": "https://github.com/arthurjoanes/cycleops/actions/runs/38477189965"
+        }
+      ]
+    },
+    {
+      "name": "quake-exposure",
+      "head": "a928c1f6e7faa5ee542f127e243320515c9ceab4",
+      "topics": [
+        "Integridade de armazenamento",
+        "Privacidade, backup e restauração",
+        "Fronteira de rede",
+        "CI/CD e implantação"
+      ],
+      "files_read": [
+        "src/quakeexposure/privacy/ledger.py",
+        "src/quakeexposure/privacy/backup.py",
+        "src/quakeexposure/privacy/erasure.py",
+        "src/quakeexposure/ingestion/blobs.py",
+        "src/quakeexposure/ingestion/http.py",
+        "src/quakeexposure/ingestion/projection.py (project_pending/project_capture)",
+        "src/quakeexposure/exposure/worker.py (claim,run,run_pending,_load_grid)",
+        "src/quakeexposure/db.py",
+        "src/quakeexposure/api/__init__.py (contrato local e dependência db)",
+        "compose.yaml (serviços de dados, worker e API)",
+        "Dockerfile",
+        "docs/operacao.md (recuperação CDC, exclusão e backups)",
+        "README.md (operação e limites)",
+        ".github/workflows/ci.yaml",
+        ".github/workflows/pages.yaml"
+      ],
+      "checks": [
+        {
+          "command": "round2/root_probes.py: BlobStore real em pasta temporária",
+          "result": "put(A), substituição por gzip válido B, get(A) retorna B; novo put(A) devolve o mesmo hash/caminho sem reparar nem recusar B.",
+          "limitation": "Prova do armazenamento local; não é exploração remota, falha real do volume publicado ou execução de cálculo/PostGIS."
+        },
+        {
+          "command": "git status --porcelain; rev-parse HEAD; API pública de Actions",
+          "result": "Cópia de auditoria limpa; CI 38202998983 com success no HEAD. A última publicação Demo REPLAY listada está no commit 0979d3118a2d3fc172dcdcef90b310db9bec0fb5.",
+          "limitation": "Deploy tem filtro de paths web/**; estar em commit anterior após mudanças apenas de backend não caracteriza erro. Não foram baixados todos os logs."
+        },
+        {
+          "command": "Leitura cruzada de backup, erasure, ledger, API, Compose e runbook",
+          "result": "Ledger é sincronizado antes do bloqueio local; restore valida hashes, exige ledger presente e usa banco marcado/sem CONNECT da API. API é explicitamente local, sem login, e tenant é filtro.",
+          "limitation": "Inspeção estática. Não atesta adequação jurídica, anonimização completa nem desastre/recovery executado."
+        }
+      ],
+      "findings": [
+        {
+          "id": "QEX-04",
+          "title": "Blob armazenado é reutilizado sem conferir a identidade SHA-256",
+          "category": "Integridade de armazenamento e recuperação",
+          "severity": "Média",
+          "location": "src/quakeexposure/ingestion/blobs.py:13-31; ingestion/projection.py:117; exposure/worker.py:184-189",
+          "evidence": "BlobStore.get apenas descomprime o arquivo; put retorna cedo se o caminho existir. A projeção e o cálculo não revalidam o hash antes de consumir os bytes. No probe, um gzip B válido no caminho identificado por A foi aceito, inclusive após novo put(A).",
+          "why": "CRC do gzip verifica o próprio gzip, não a correspondência entre conteúdo, nome SHA-256 e registro control.capture. Uma troca por outro arquivo válido pode conservar proveniência A para conteúdo B.",
+          "impact": "Após cópia/restauração incorreta ou adulteração local, projeções/cálculos podem consumir bytes diferentes da captura registrada. Corrupção aleatória que quebra gzip pode ser detectada; o caso demonstrado é gzip válido com conteúdo errado. Não foi demonstrado acesso remoto ao volume.",
+          "fix": "Verificar SHA-256 dos bytes descomprimidos contra control.capture antes de projetar/calcular. Validar também o arquivo existente no caminho rápido de put e recusar divergência com erro operacional explícito.",
+          "implementation": "```python\nclass BlobIntegrityError(ValueError):\n    pass\n\ndef get(self, rel: str, *, expected_sha256: str) -> bytes:\n    body = gzip.decompress((self.root / rel).read_bytes())\n    if hashlib.sha256(body).hexdigest() != expected_sha256:\n        raise BlobIntegrityError(\"blob diverge da captura registrada\")\n    return body\n```\nEm project_capture, passar capture.sha256. Em _load_grid, selecionar blob_path e sha256 e passar ambos ao armazenamento. Em put, quando o caminho existe, conferir o conteúdo com o hash já calculado antes de retornar. Tratar divergência como inconsistência do arquivo e registrar identificadores, sem payload; preservar o arquivo suspeito para investigação e refazer a captura por procedimento explícito. Atualizar os call sites e testes da mudança de assinatura.",
+          "affected_files": [
+            "src/quakeexposure/ingestion/blobs.py",
+            "src/quakeexposure/ingestion/projection.py",
+            "src/quakeexposure/exposure/worker.py",
+            "tests/unit (novos testes de BlobStore)",
+            "tests/integration/test_collector.py",
+            "tests/integration/test_exposure.py"
+          ],
+          "validation": "Gravar A, substituir por gzip B válido e exigir BlobIntegrityError em get e put(A). Confirmar leitura/reutilização de A intacto. Cobrir gzip truncado separadamente. Provar que projeção/cálculo não avança com hash divergente; a integração em PostgreSQL deve ser executada quando Docker estiver disponível.",
+          "effort": "médio",
+          "priority": "P1"
+        }
+      ],
+      "strengths": [
+        "O runbook distingue backup de duas bases, reaplicação do ledger, restauração da origem e resíduos em Kafka/WAL/dumps. A política manual de expiração está explicitada; não foi convertida em defeito por ausência de automação.",
+        "restore_verify recusa banco existente sem a marca esperada, verifica SHA dos dumps e nega conexão da API ao banco restaurado.",
+        "O cliente USGS verifica TLS, rejeita redirecionamento e limita hosts/tamanho; get_product confere length e SHA declarados ao baixar. QEX-04 fica na reutilização posterior do arquivo, não na verificação do download.",
+        "A ausência de login não é falha de autorização no escopo declarado: Compose publica a API em loopback e o módulo explica que tenant funciona como filtro. Exposição pública de dados reais exigiria outro modelo, que não foi presumido nesta revisão."
+      ],
+      "limitations": [
+        "Sem teste de restauração, privacidade concorrente, CDC real, PostGIS ou volume Docker nesta rodada.",
+        "Leitura de políticas e jobs não equivale a certificação de segurança ou conformidade de proteção de dados.",
+        "Nenhum novo achado é atribuído a IA. Bibliotecas, tags de imagens e cabeçalhos foram examinados como configuração, sem alegação de CVE não verificada."
+      ],
+      "sources": [
+        {
+          "title": "QuakeExposure CI no commit auditado",
+          "url": "https://github.com/arthurjoanes/quake-exposure/actions/runs/38202998983"
+        }
+      ]
+    },
+    {
+      "name": "arthurjoanes",
+      "head": "603c69d889f19d0781f486238a55e242ca55b66e",
+      "topics": [
+        "Proveniência e comunicação pública"
+      ],
+      "files_read": [
+        "README.md",
+        "README.en.md",
+        "inventário público atualizado"
+      ],
+      "checks": [
+        {
+          "command": "Releitura PT/EN e inventário GitHub",
+          "result": "11 repositórios públicos permanecem no inventário; propósito e alegações profissionais correspondem nas duas versões.",
+          "limitation": "Não valida métricas do empregador ou trajetória pessoal."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "PER-01 continua sendo a mudança objetiva de descoberta das demos; não foi criado novo achado para repetir esse ponto. Tradução preserva o sentido das experiências declaradas."
+      ],
+      "limitations": [
+        "Perfil não tem superfície de execução para auditar sessão, banco ou deploy. Não há base para contestar métricas privadas como falsas."
+      ],
+      "sources": []
+    },
+    {
+      "name": "delta",
+      "head": "cffa94f9e2e9a4d672e994021755f3f8ec125fc7",
+      "topics": [
+        "Escopo autoral, integração e atribuição"
+      ],
+      "files_read": [
+        "python/delta/tables.py nas versões padrão e autoral",
+        "diff completo do commit autoral",
+        "refs remotos e metadados públicos do PR"
+      ],
+      "checks": [
+        {
+          "command": "git show --stat do commit autoral; consulta atual do PR na API pública",
+          "result": "Diff autoral permanece limitado ao mesmo exemplo; PR segue aberto e merged_at nulo, com mesmo SHA da primeira rodada.",
+          "limitation": "Sem reexecução da suíte completa upstream; as provas funcionais anteriores permanecem registradas."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Contribuição atribuída apenas ao diff do autor; o tamanho, a arquitetura e os controles upstream não foram usados como evidência de sua autoria.",
+        "Estar aberto não é defeito do PR nem comprovação de aceitação. Não surgiu novo defeito autoral nos materiais revisitados."
+      ],
+      "limitations": [
+        "A revisão complementar dos forks continua restrita à contribuição autoral; não é auditoria da base upstream."
+      ],
+      "sources": []
+    },
+    {
+      "name": "fastapi-pagination",
+      "head": "b626a76fd4f32d4f9328d3bfc1376bfa16a68109",
+      "topics": [
+        "Escopo autoral, integração e atribuição"
+      ],
+      "files_read": [
+        "docs/learn/tutorial_advanced/custom_paginate.md nas versões padrão e autoral",
+        "diff completo do commit autoral",
+        "refs remotos e metadados públicos do PR"
+      ],
+      "checks": [
+        {
+          "command": "git show --stat do commit autoral; consulta atual do PR na API pública",
+          "result": "Diff autoral permanece limitado ao mesmo exemplo; PR segue aberto e merged_at nulo, com mesmo SHA da primeira rodada.",
+          "limitation": "Sem reexecução da suíte completa upstream; as provas funcionais anteriores permanecem registradas."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Contribuição atribuída apenas ao diff do autor; o tamanho, a arquitetura e os controles upstream não foram usados como evidência de sua autoria.",
+        "Estar aberto não é defeito do PR nem comprovação de aceitação. Não surgiu novo defeito autoral nos materiais revisitados."
+      ],
+      "limitations": [
+        "A revisão complementar dos forks continua restrita à contribuição autoral; não é auditoria da base upstream."
+      ],
+      "sources": []
+    }
+  ]
+}
