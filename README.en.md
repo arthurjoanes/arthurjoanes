@@ -1,8 +1,8 @@
-<img src="assets/banner.png" alt="Arthur Joanes — IA, Microsoft Fabric, Azure, engenharia de dados e full stack" width="1200">
+<img src="assets/banner.png" alt="Arthur Joanes: AI, Microsoft Fabric, Azure, data engineering and full-stack development" width="1200">
 
 [Português](README.md) · [LinkedIn](https://www.linkedin.com/in/arthur-joanes-6a2967373/) · [Email](mailto:arthurjoanes@hotmail.com)
 
-I'm a **mid-level software developer** with over three years of software development experience. I work on Python APIs, web applications, data engineering and applied AI for retail operations.
+I'm a **mid-level software developer** with over three years of experience. I work on Python APIs, web applications, data engineering and applied AI for retail operations.
 
 My work connects ERP integrations to the interfaces used by teams, including access permissions, data quality and monitoring applications in production.
 
@@ -15,7 +15,12 @@ My work connects ERP integrations to the interfaces used by teams, including acc
 
 ## Selected projects
 
-These are personal demonstrations using synthetic data. Each repository documents how to run it, technical decisions and implementation limits.
+These are personal demonstrations. The retail and operations scenarios use synthetic data; CycleOps and QuakeExposure also use public data, with sources and limits described in their repositories.
+
+### Browser demos
+
+- [CycleOps](https://arthurjoanes.github.io/cycleops/): Oslo bike-share availability, priorities and replay of a recorded GBFS feed. [Source](https://github.com/arthurjoanes/cycleops).
+- [QuakeExposure](https://arthurjoanes.github.io/quake-exposure/): earthquake exposure for a fictional portfolio, with a map and publication comparisons. [Source](https://github.com/arthurjoanes/quake-exposure).
 
 ### [EvidenceDesk](https://github.com/arthurjoanes/evidencedesk)
 
