@@ -1,0 +1,212 @@
+{
+  "name": "containerops",
+  "path": "containerops",
+  "findings": [
+    {
+      "id": "OPS-01",
+      "title": "A tabela de recursos arredonda quotas de CPU para valores diferentes da configuração",
+      "category": "UI/UX / comunicação técnica",
+      "severity": "Baixa",
+      "location": "scripts/report.py:32–42 e 144–172; docs/examples/report.html, painel Verificação → identidade dos processos",
+      "evidence": "`shown` formata todo float com uma casa decimal. `resource_table` passa `nano_cpus / 1_000_000_000`; limites 0.25 e 0.75 aparecem como 0,2 e 0,8. A chamada direta do formatador reproduziu ambos os valores.",
+      "why": "É aceitável arredondar uma duração resumida; um limite configurado deve ser apresentado com a precisão necessária para identificar a quota efetiva. 0,2 sugere 20% de CPU, enquanto o container tem 25%.",
+      "impact": "O relatório dificulta comparar Docker inspect/Compose com a evidência exibida e passa uma configuração incorreta ao avaliador.",
+      "fix": "Permitir precisão por campo ou usar formatador específico para quota de CPU; preservar duas casas nesse campo e rótulo claro de CPUs.",
+      "implementation": "```python\nfrom decimal import Decimal\n\ndef cpu_quota(nano_cpus: int) -> str:\n    value = Decimal(nano_cpus) / Decimal(1_000_000_000)\n    return format(value.normalize(), 'f').replace('.', ',')\n```\nValidar o tipo/intervalo antes de formatar; `250_000_000` deve produzir `0,25`. Não alterar a regra de resumo das durações.",
+      "affected_files": [
+        "scripts/report.py",
+        "scripts/test_report.py",
+        "docs/examples/report.html (regenerar)"
+      ],
+      "validation": "Gerar tabela com 250000000, 500000000 e 750000000 nanocpus e verificar 0,25 / 0,5 / 0,75; comparar com o JSON de hardening e garantir que a tabela ainda cabe nas larguras suportadas.",
+      "effort": "baixo",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "Quota de CPU usa Decimal, preserva fração exata e valida tipo/intervalo; tabela identifica CPUs.",
+      "files_changed": [
+        "scripts/report.py",
+        "scripts/test_report.py",
+        "docs/examples/report.html"
+      ],
+      "checks_executed": [
+        "Casos 0,25/0,5/0,75, uma nanocpu, inteiros e entradas inválidas; relatório regenerado; tabela conferida no browser."
+      ],
+      "limitations": []
+    },
+    {
+      "id": "OPS-02",
+      "title": "Guias copiados para a sessão conservam links relativos para arquivos ausentes",
+      "category": "Documentação / UX",
+      "severity": "Média",
+      "location": "scripts/report.py:415–458, guide_urls; docs/report-guide.md → Gerar um relatório",
+      "evidence": "`guide_urls` copia uma lista de Markdown sem transformar os links. A cópia de README.md contém `(compose.yaml)` e links para app/src, scripts e imagens que não acompanham a pasta. Fixture confirmou README presente, referência Compose presente e destino inexistente.",
+      "why": "O texto já informa que imagens e código continuam no repositório, mas os links relativos da cópia não alcançam esse repositório. Saber da limitação não transforma o clique em um destino utilizável.",
+      "impact": "Quem abre o artefato de CI/sessão consegue chegar ao guia inicial e encontra imagens ausentes e caminhos quebrados justamente ao conferir implementação e arquitetura.",
+      "fix": "Reescrever no pacote os links para arquivos não copiados usando URLs do commit que originou o relatório, ou copiar dependências públicas necessárias preservando caminhos. Manter links entre Markdown que estão no pacote.",
+      "implementation": "Na geração do bundle, resolver cada destino relativo contra o caminho original; se o arquivo fizer parte do bundle, manter caminho relativo; se for público e externo ao bundle, apontar para `https://github.com/arthurjoanes/containerops/blob/<sha>/<path>` (raw para imagens, quando necessário). Não incluir runtime, dumps ou segredos. Incluir aviso de que links de código exigem rede. Para conteúdo local não commitado, marcar que o bundle não possui permalink fiel; não atribuir ao HEAD bytes diferentes.",
+      "affected_files": [
+        "scripts/report.py",
+        "scripts/test_report.py",
+        "docs/report-guide.md",
+        "docs/verification.md"
+      ],
+      "validation": "Gerar bundle em diretório temporário e verificar cada link relativo de Markdown/HTML: deve existir dentro da pasta ou virar URL explícita do commit. Abrir o pacote sem o clone ao lado e conferir Como executar → Compose/Arquitetura.",
+      "effort": "médio",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Bundle mantém links entre guias copiados e converte dependências públicas para URLs do commit, com raw para imagens. Avisa quando há alterações locais e recusa referências não versionadas/externas ao repo.",
+      "files_changed": [
+        "scripts/report.py",
+        "scripts/test_report.py",
+        "docs/report-guide.md"
+      ],
+      "checks_executed": [
+        "260 referências dos guias reais verificadas; testes de links de código/imagem/referência e recusa de .env não versionado; preservação dos fontes e bundles existentes."
+      ],
+      "limitations": [
+        "Links externos exigem rede. Em checkout modificado, referências mostram o commit e o aviso declara que não são permalinks das mudanças locais."
+      ]
+    },
+    {
+      "id": "OPS-03",
+      "title": "Comandos copiáveis do catálogo atendem só ao shell PowerShell",
+      "category": "Documentação / Developer Experience",
+      "severity": "Baixa",
+      "location": "scripts/report.py:241–246 e 320–324; catálogo Cópias de backup",
+      "evidence": "O gerador sempre prefixa `$env:CONTAINEROPS_SESSION='...'` ou `Remove-Item Env:CONTAINEROPS_SESSION` e identifica o bloco como PowerShell. README também suporta Linux com Python 3.11+, Compose e Buildx, sem exigir PowerShell.",
+      "why": "O rótulo evita ambiguidade, mas o usuário Linux não recebe um comando copiável para o mesmo fluxo; precisa traduzir configuração de sessão manualmente.",
+      "impact": "Pequena quebra no onboarding de quem reproduz o projeto em Linux/CI, especialmente na seleção correta do contexto de backup.",
+      "fix": "Oferecer variantes Shell POSIX e PowerShell claramente identificadas. Não detectar o sistema do navegador como substituto do shell escolhido pelo usuário.",
+      "implementation": "Para POSIX: `CONTAINEROPS_SESSION=backup-lab python3 scripts/ops.py restore-test --backup <id>`; para contexto padrão: `env -u CONTAINEROPS_SESSION python3 scripts/ops.py backups list`. Preservar a variante PowerShell atual e a exigência explícita de confiança para cópias importadas. Escapar argumentos pelo shell correspondente e aceitar apenas os slugs/IDs já validados.",
+      "affected_files": [
+        "scripts/report.py",
+        "scripts/report.html",
+        "scripts/report.js (se houver seletor)",
+        "scripts/test_report.py",
+        "docs/report-guide.md"
+      ],
+      "validation": "Copiar variante POSIX para bash e PowerShell para pwsh usando ID fixture; confirmar argumento/ambiente sem executar restore real. Seleção do shell e feedback de cópia devem ser acessíveis pelo teclado.",
+      "effort": "baixo",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "Catálogo oferece blocos PowerShell e POSIX independentes; POSIX preserva ambiente chamador; não acrescenta confiança automaticamente.",
+      "files_changed": [
+        "scripts/report.py",
+        "scripts/test_report.py",
+        "docs/report-guide.md",
+        "docs/examples/report.html"
+      ],
+      "checks_executed": [
+        "Texto gerado executado em bash e PowerShell com funções inofensivas, conferindo sessão/argumentos; copiar por teclado no browser com fallback manual em file://."
+      ],
+      "limitations": [
+        "Nenhum comando de restore real foi executado; clipboard negado no contexto file:// usou a seleção manual prevista."
+      ]
+    },
+    {
+      "id": "OPS-04",
+      "title": "O CSS mantém declarações de espaçamento e borda anuladas no mesmo bloco",
+      "category": "Código e manutenibilidade / artefatos de edição",
+      "severity": "Baixa",
+      "location": "scripts/report.css:51,53,110,116,157",
+      "evidence": "Exemplos: `.surface-panel { margin-bottom:20px; ... margin:0; }`; `.panel-toolbar` define margin-bottom e depois margin:0; `.notice` define border-left e depois border:0; `.record-details` define padding-block:12px e logo padding:0.",
+      "why": "Essas declarações não participam do resultado final. Diferem de overrides intencionais entre breakpoints: estão no mesmo bloco e tornam a regra efetiva menos clara ao editar o componente.",
+      "impact": "Um ajuste feito na primeira declaração não muda a tela; aumenta tentativas e risco de regressão em manutenção. É evidência objetiva de acúmulo de edição, não prova de autoria por IA.",
+      "fix": "Remover somente declarações comprovadamente anuladas e agrupar as regras base por componente, preservando media queries e exceções relevantes.",
+      "implementation": "Por exemplo, em `.surface-panel`, conservar `margin:0` e remover `margin-bottom:20px` se esse for o layout desejado; em `.notice`, remover border-left anulada e manter `border:0; border-top:1px solid var(--line)`. Em `.record-details`, conservar a regra final de padding e excluir a anterior sem efeito.",
+      "affected_files": [
+        "scripts/report.css",
+        "docs/examples/report.html (regenerar)"
+      ],
+      "validation": "Comparar screenshots e estilos computados antes/depois em 320/768/1440, com details aberto/fechado e impressão. A limpeza não deve alterar o resultado visual; não precisa criar testes que apenas espelhem cada declaração.",
+      "effort": "baixo",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "Removidas somente declarações anuladas no mesmo bloco; relatório regenerado com as mesmas evidências históricas.",
+      "files_changed": [
+        "scripts/report.css",
+        "docs/examples/report.html"
+      ],
+      "checks_executed": [
+        "Estilos computados de margens/padding/bordas idênticos antes/depois: 320/768/1440 × screen/print × details aberto/fechado (12 combinações)."
+      ],
+      "limitations": []
+    },
+    {
+      "id": "OPS-05",
+      "title": "Importação interrompida após publicar o pacote perde as marcas de origem externa e proteção",
+      "category": "Segurança, backup e recuperação de falhas",
+      "severity": "Média",
+      "location": "scripts/ops.py:1422–1431; scripts/backup_package.py:661–687; scripts/backup_catalog.py:350–360,415–425; scripts/ops.py:760–766",
+      "evidence": "execute_backups chama import_backup, que finaliza o diretório no destino, e só depois chama register_backup(imported=True, protected=True). Esses flags não estão duravelmente associados à publicação. A prova isolada simulou OSError no registro após a cópia/rename reais. discover reabriu o pacote como valid/imported=false/protected=false; restore_test sem --trusted-source atingiu o preflight. Ao registrar corretamente a mesma cópia, o controle foi recusado antes do preflight. Outra cópia posterior da mesma origem fez a órfã aparecer como candidata em plan_retention(keep_last=0). Recibo e script: _auditoria_2026-10-13/containerops-import-registration-repro.json e probe_import_registration.py.",
+      "why": "O fallback de compatibilidade para backups sem registro atribui imported=False/protected=False. Uma falha entre duas gravações independentes converte ausência de informação em confiança de origem local e ausência de proteção. A importação retorna erro, mas o comando seguinte ainda descobre e seleciona os bytes publicados.",
+      "impact": "Depois de falha de escrita/interrupção nessa janela, restore pode avançar sem o reconhecimento explícito de confiança exigido para pacotes importados; a cópia também pode entrar em plano de retenção. PostgreSQL alerta que restauração executa instruções escolhidas pela origem. O restore continua usando banco descartável e papéis/mounts definidos: não foi demonstrado escape de container, execução real de dump malicioso nem exclusão de backup.",
+      "fix": "Fazer a classificação de origem e a proteção sobreviverem à interrupção entre a publicação do diretório e o catálogo. Enquanto um pacote importado não tiver registro concluído, tratá-lo conservadoramente como pendente/protegido e nunca presumir origem local. Recuperar o registro antes de liberar retenção e manter o reconhecimento explícito de confiança para restore.",
+      "implementation": "Gravar um journal/intenção de importação no runtime, sob operation_lock, antes de publicar o diretório; incluir ID, hashes esperados e imported/protected=true. Após o rename, concluir o registro do catálogo e só então marcar a intenção como concluída. discover/select_backup devem reconhecer a intenção pendente e impedir que defaults imported=false/protected=false a substituam. Alternativa mais simples para o contrato atual: pacotes portáteis sem registro íntegro ficam desconhecidos ou exigem confiança/proteção por padrão até adoção explícita. Não inferir confiança de campos do manifesto recebido nem apenas do prefixo do nome. Preservar política explícita para backups legados sem manifesto e testar a recuperação.",
+      "affected_files": [
+        "scripts/ops.py",
+        "scripts/backup_package.py",
+        "scripts/backup_catalog.py",
+        "tests/test_backup_package.py",
+        "tests/test_backup_catalog.py",
+        "tests/test_operations.py",
+        "docs/security.md",
+        "docs/runbooks.md"
+      ],
+      "validation": "Injetar falha antes do rename, depois do rename/antes do catálogo e durante a gravação do catálogo. Reabrir o runtime em novo processo e provar que nenhum pacote importado fica imported=false/protected=false, que restore sem --trusted-source não passa ao preflight e que retenção não o seleciona. Reexecutar importação normal e recuperação para provar conclusão idempotente, proteção preservada, hashes intactos e compatibilidade com backups legados. Usar somente fixtures sintéticas, sem pg_restore real.",
+      "effort": "médio",
+      "priority": "P1",
+      "effort_level": "médio",
+      "status": "corrigido_validado",
+      "correction": "Pacote portátil sem registro íntegro conserva imported/protected=true; registro posterior preserva esses flags. Recuperação usa backups protect; legado sem manifesto mantém compatibilidade.",
+      "files_changed": [
+        "scripts/backup_catalog.py",
+        "tests/test_backup_package.py",
+        "tests/test_backup_catalog.py",
+        "docs/security.md",
+        "docs/runbooks.md"
+      ],
+      "checks_executed": [
+        "Falhas antes/depois da publicação e durante escrita do catálogo; reabertura em novo processo; restore sem confiança bloqueado antes do preflight; retenção mantém órfão mesmo com cópia posterior; recuperação repetida preserva hashes/flags. Linux: 48 testes de backup passaram."
+      ],
+      "limitations": [
+        "Provas usaram dumps sintéticos e preflight/evidência mockados; nenhum pg_restore, exclusão real de backups ou falha injetada em runtime existente."
+      ]
+    }
+  ],
+  "head_before": "57dc89474b8aa2067a1c8a925f33def0ceb27abe",
+  "status_before": "",
+  "checks": [
+    {
+      "command": "Windows Python3.11 unittest backup_package / backup_catalog / operations / scripts.test_report",
+      "result": "26/26; 21 passed+1skip; 17 passed+1skip; 75/75",
+      "limitation": "Tentativas iniciais Python3.12/3.13 Windows esbarraram em divergência de stat/fstat do fingerprint já existente; Python3.11 e Linux passaram sem relaxar a proteção."
+    },
+    {
+      "command": "Docker Linux/root, containerops-co-20261012-f040d4f5-test:local, fonte atual read-only, rede none: unittest test_backup*.py / test_report.py / test_operations.py",
+      "result": "48/48 backup; 75/75 relatório; 18/18 operações",
+      "limitation": "Fixtures sintéticas; comandos externos mockados; sem restauração de banco real."
+    },
+    {
+      "command": ".venv/Scripts/ruff.exe check .; .venv/Scripts/ruff.exe format --check .",
+      "result": "All checks passed; 66 files formatted",
+      "limitation": null
+    },
+    {
+      "command": "node _correcoes_2026-10-13/backend_ops_browser.cjs",
+      "result": "Chromium: 320/768/1440; navegação/teclado/assets/estilos aprovados; nenhum pageerror",
+      "limitation": "API sintética com probe desativado; OPS snapshot histórico regenerado, sem afirmar disponibilidade atual."
+    },
+    {
+      "command": "py -3.11 _correcoes_2026-10-13/backend_ops_checks.py",
+      "result": "260 referências; comandos shell sintéticos; corpo Python do guia; relatório histórico regenerado",
+      "limitation": "Sem restore real nem consulta comercial externa."
+    }
+  ],
+  "head_after": "57dc89474b8aa2067a1c8a925f33def0ceb27abe",
+  "validation_logs": [
+    "backend-ops-directed-checks.json",
+    "api-qa/browser.json"
+  ],
+  "status_after": " M docs/examples/report.html\n M docs/report-guide.md\n M docs/runbooks.md\n M docs/security.md\n M scripts/backup_catalog.py\n M scripts/report.css\n M scripts/report.py\n M scripts/test_report.py\n M tests/test_backup_catalog.py\n M tests/test_backup_package.py\n"
+}

@@ -1,0 +1,133 @@
+{
+  "repo": "evidencedesk",
+  "head": "e4dd8efe73e50999b9a75896ce74b75d460223da",
+  "date": "2026-10-13",
+  "scope": "Revisão contratual dos sete IDs; correção autorizada apenas das lacunas EVD-02/EVD-05 e esclarecimento documental EVD-03. Alterações anteriores preservadas.",
+  "docs_read": [
+    "README.md",
+    "frontend/README.md",
+    "SECURITY.md",
+    "docs/api-contract.md",
+    "docs/architecture.md",
+    "docs/threat-model.md",
+    "docs/frontend.md",
+    "docs/runbooks/local.md",
+    "docs/runbooks/retention.md",
+    "docs/runbooks/observability.md"
+  ],
+  "instructions": {
+    "repository_files": "Nenhum AGENTS.md, CLAUDE.md ou CONTRIBUTING.md encontrado no checkout público no início desta revisão; nenhum apareceu após o build.",
+    "skill": "C:/Users/arthu/.codex/skills/react-best-practices/SKILL.md lido na revisão compartilhada anterior; orientação React aplicada."
+  },
+  "findings": [
+    {
+      "id": "EVD-02",
+      "status": "corrigido_validado_nesta_revisao",
+      "location": "frontend/src/features/dossiers/dossier-view.tsx:239",
+      "problem": "Depois de A terminal, resposta perdida da nova intenção B deixava exportId=A; próximo clique criava C.",
+      "proof_before": "Função extraída do working tree executada com request sintético, sem rede: após perda da resposta exportId permaneceu terminal-A; duas chamadas com newIntent=true produziram key-1/key-2, keyPreserved=false.",
+      "fix": "Ao admitir uma nova intenção, desvincula exportId do job terminal anterior antes de aguardar a resposta. A chave nova continua no ref; tentativa com resultado desconhecido usa a ação normal e conserva essa chave.",
+      "validation": "3 E2E Chromium, para failed/cancelled/expired: perder respostas do primeiro e terceiro POST, conferir keys[0]===keys[1], keys[2]!==keys[1], keys[3]===keys[2].",
+      "files": [
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/e2e/audit-regressions.spec.ts"
+      ]
+    },
+    {
+      "id": "EVD-05",
+      "status": "corrigido_validado_nesta_revisao",
+      "location": "frontend/src/features/dossiers/dossier-editor.tsx:438",
+      "problem": "Resumo procurava name=claims.0.order_references, mas Pedidos relacionados não tinha name/ref nem associação acessível de erro.",
+      "fix": "Controller mantém array de referências e fornece name/ref/onBlur; erro tem ID estável por field.id, aria-invalid e aria-describedby. O resumo existente encontra e foca o input.",
+      "validation": "1 E2E Chromium: referência de 201 caracteres; descrição contextual, foco após envio e clique no resumo, referência e texto da alegação preservados.",
+      "files": [
+        "frontend/src/features/dossiers/dossier-editor.tsx",
+        "frontend/e2e/audit-regressions.spec.ts"
+      ]
+    },
+    {
+      "id": "EVD-03",
+      "status": "contrato_coerente_documentacao_esclarecida",
+      "location": "docs/frontend.md:90",
+      "fix": "Substituída a pendência genérica de recuperação por cobertura já executada na mesma janela, API interceptada e backend PostgreSQL testado separadamente; reload/fechamento explicitamente sem retomada persistente.",
+      "validation": "Leitura cruzada da documentação, NewImport, teste de replay PostgreSQL e E2E existente; nenhum teste de importação repetido nesta revisão.",
+      "files": [
+        "docs/frontend.md"
+      ]
+    },
+    {
+      "id": "EVD-01",
+      "status": "sem_defeito_confirmavel_na_revisao",
+      "validation": "Contrato, implementação e testes existentes inspecionados; não representa nova execução dessas suítes."
+    },
+    {
+      "id": "EVD-04",
+      "status": "sem_defeito_confirmavel_na_revisao",
+      "validation": "Contrato, implementação e testes existentes inspecionados; não representa nova execução dessas suítes."
+    },
+    {
+      "id": "EVD-06",
+      "status": "sem_defeito_confirmavel_na_revisao",
+      "validation": "Contrato, implementação e testes existentes inspecionados; não representa nova execução dessas suítes."
+    },
+    {
+      "id": "EVD-07",
+      "status": "sem_defeito_confirmavel_na_revisao",
+      "validation": "Contrato, implementação e testes existentes inspecionados; não representa nova execução dessas suítes."
+    }
+  ],
+  "files_changed_this_review": [
+    "frontend/src/features/dossiers/dossier-view.tsx",
+    "frontend/src/features/dossiers/dossier-editor.tsx",
+    "frontend/e2e/audit-regressions.spec.ts",
+    "docs/frontend.md"
+  ],
+  "checks": [
+    {
+      "command": "npm run build",
+      "result": "Aprovado: Next.js 16.3.8, compilação, TypeScript e geração concluídos.",
+      "receipt": "evidencedesk-build.log"
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js src/features/dossiers/dossier-view.tsx src/features/dossiers/dossier-editor.tsx e2e/audit-regressions.spec.ts",
+      "result": "Exit 0; três arquivos direcionados. Resultado observado no retorno do comando, sem saída textual; nenhum arquivo de log foi salvo.",
+      "receipt": null
+    },
+    {
+      "command": "ED_E2E_BASE_URL=http://127.0.0.1:3226 playwright test audit-regressions.spec.ts --grep 'EVD-02|EVD-05:'",
+      "result": "4 passed, 9.0 s; Chromium em build de produção, API interceptada.",
+      "receipt": "evidencedesk-browser/e2e-results.json"
+    },
+    {
+      "command": "prettier --check <três arquivos TS/TSX alterados>",
+      "result": "Aprovado."
+    },
+    {
+      "command": "git diff --check",
+      "result": "Aprovado; aviso de futura normalização CRLF/LF em incidents/routes.py, alteração anterior."
+    },
+    {
+      "command": "Leitura dos recibos anteriores EVD",
+      "result": "214 Python, 81 Vitest, 5 Chromium, sem falhas/skips nos recibos; apenas conferidos, não somados aos testes atuais."
+    }
+  ],
+  "visuals": {
+    "examined_in_pixels": [],
+    "scope": "Este packet cobre a atribuição de revisão/correção de código EvidenceDesk. Imagens documentais não foram reexaminadas nesta atribuição e não são declaradas validadas."
+  },
+  "limitations": [
+    "Browser usa API sintética interceptada; nenhuma exportação real foi gerada, nenhum provedor chamado e nenhuma stack completa criada.",
+    "Não repeti backend, todas as jornadas frontend ou suite Vitest. Testes novos cobrem exclusivamente os dois defeitos corrigidos.",
+    "Importação não oferece persistência de chave após desmontar/recarregar/fechar a tela; documentação esclarece o limite.",
+    "Não houve sessão manual com leitor de tela ou inspeção pixel a pixel da documentação EvidenceDesk nesta atribuição.",
+    "Relatórios globais e pacotes originais de correção não foram alterados; conclusões anteriores sobre EVD-02 devem ser lidas com esta correção complementar."
+  ],
+  "cleanup": "Servidor temporário exclusivamente desta revisão em 127.0.0.1:3226 encerrado após conferir PID 38708 e comando node scripts/start.mjs. Nenhum listener 3226 restante; nenhum serviço do usuário parado.",
+  "logs": [
+    "evidencedesk-build.log",
+    "evidencedesk-playwright.log",
+    "evidencedesk-server.log",
+    "evidencedesk-browser/e2e-results.json"
+  ],
+  "commit_push_pr": false
+}

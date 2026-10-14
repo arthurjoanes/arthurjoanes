@@ -1,0 +1,231 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\evidencedesk\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "audit-regressions.spec.ts",
+      "--grep",
+      "EVD-02|EVD-05:"
+    ],
+    "configFile": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\evidencedesk\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/evidencedesk/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/_revisao_conformidade_2026-10-13/evidencedesk-browser/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/evidencedesk/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/_revisao_conformidade_2026-10-13/evidencedesk-browser/e2e-results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never",
+          "outputFolder": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/_revisao_conformidade_2026-10-13/evidencedesk-browser/playwright-report"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "audit-regressions.spec.ts",
+      "file": "audit-regressions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "EVD-05: related-order errors focus the input and preserve the draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:15:25.086Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-195364c37f36182c7d76",
+          "file": "audit-regressions.spec.ts",
+          "line": 260,
+          "column": 1
+        },
+        {
+          "title": "EVD-02: failed permits a new intention; uncertain delivery reuses its key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1016,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:15:29.557Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-3b19a2d3bf4fef1823ef",
+          "file": "audit-regressions.spec.ts",
+          "line": 314,
+          "column": 3
+        },
+        {
+          "title": "EVD-02: cancelled permits a new intention; uncertain delivery reuses its key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1080,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:15:30.596Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-5d64a85377fbe944804b",
+          "file": "audit-regressions.spec.ts",
+          "line": 314,
+          "column": 3
+        },
+        {
+          "title": "EVD-02: expired permits a new intention; uncertain delivery reuses its key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1100,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:15:31.701Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-90cc4cdceae49d6404de",
+          "file": "audit-regressions.spec.ts",
+          "line": 314,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T00:15:23.959Z",
+    "duration": 9016.848000000002,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

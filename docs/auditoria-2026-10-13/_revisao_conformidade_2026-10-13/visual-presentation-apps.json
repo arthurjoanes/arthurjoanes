@@ -1,0 +1,214 @@
+{
+  "scope": "Pedido de apresentação: remover paletas e priorizar demonstração informativa, sem alterar o produto.",
+  "repositories": [
+    {
+      "name": "varejo-data-pipeline",
+      "head_before": "fccfcf17ddcb4cbffab3cf49217545fa711775b2",
+      "files_changed_by_this_agent": [
+        "README.md",
+        "docs/interface.md"
+      ],
+      "main_before": "docs/readme/dashboard.png",
+      "main_after": "docs/readme/dashboard.png",
+      "changes": [
+        "Retirada a seção Paleta da marca do README, imagem palette.svg e tabela de oito cores.",
+        "No guia de interface, substituído o bloco de paleta por Recursos locais, preservando licença e disponibilidade offline."
+      ],
+      "head_at_receipt": "52906d21d022355b73e05406a6031c0565eee20a"
+    },
+    {
+      "name": "api-sentinel",
+      "head_before": "90a1f2f911fc8f1bd54541422547007a4ca3fac8",
+      "files_changed_by_this_agent": [
+        "README.md"
+      ],
+      "main_before": "docs/readme/incidents.png",
+      "main_after": "docs/readme/incidents.png",
+      "changes": [
+        "Retirado o bloco recolhível Paleta de marca, com imagem, seis cores e explicação cromática."
+      ],
+      "head_at_receipt": "5e01d32197ee4edad5a5cab56737622cfc527f40"
+    },
+    {
+      "name": "containerops",
+      "head_before": "ed9a4047271705477609a1031593b96c625ef29a",
+      "files_changed_by_this_agent": [
+        "README.md",
+        "docs/brand.md",
+        "docs/frontend-quality.md",
+        "docs/report-guide.md",
+        "docs/screenshots.md"
+      ],
+      "main_before": "docs/screenshots/backups-desktop.png",
+      "main_after": "docs/readme/home.png",
+      "changes": [
+        "Demo principal passou ao recorte da página inicial de verificação, com data e duração conferidas no recibo.",
+        "Catálogo de cópias continua ligado no README e visível na galeria.",
+        "Retiradas tabelas e explicações de paleta; conservadas distinções semânticas dos estados, fontes, licenças e assets locais.",
+        "Galeria documenta o recorte histórico e a diferença da navegação; rótulos dos links passaram a identidade/fontes."
+      ],
+      "head_at_receipt": "9cc4101441b0b0037622a8b40a3612a7b2aff26c"
+    }
+  ],
+  "images_actually_seen": [
+    {
+      "path": "varejo-data-pipeline/docs/readme/dashboard.png",
+      "sha256": "3ea83bc2ed5e659e5e79a89b5de40b0952bd3fd487f44791f6abb05511bfc801",
+      "dimensions": [
+        1440,
+        1489
+      ],
+      "inspection": "Pixels opened with tools.view_image in this assignment; no new capture or image editing.",
+      "decision": "principal mantida",
+      "visible": "Visão geral preenchida: receita de R$ 1.141.858,51, 89.903 unidades, 10.008 vendas, ticket de R$ 114,09; barras diárias, lojas e mix. Janela de 01–30/01/2026; publicação registrada em 21/09/2026. A soma dos grupos de produtos visíveis é 89.903.",
+      "purpose_and_caption": "Mostra a página principal com indicadores e gráficos; a legenda existente identifica a fixture sintética e o snapshot histórico.",
+      "same_bytes_as_git_head": true
+    },
+    {
+      "path": "api-sentinel/docs/readme/incidents.png",
+      "sha256": "8c799f8dd1d274790e4b054f24ff56cdd269c3ab19e237e15a24c401f0e4d00c",
+      "dimensions": [
+        1440,
+        1123
+      ],
+      "inspection": "Pixels opened with tools.view_image in this assignment; no new capture or image editing.",
+      "decision": "principal mantida",
+      "visible": "Central de incidentes preenchida: um em andamento, dois finalizados, três no total; histograma de 06–12/10 com três no dia 12; três linhas e probe desabilitado. Referência sintética de 12/10/2026 06:00 UTC.",
+      "purpose_and_caption": "A lista principal já contém contagens e distribuição diária; legenda e guia distinguem fixture de observação em produção.",
+      "same_bytes_as_git_head": true
+    },
+    {
+      "path": "containerops/docs/screenshots/backups-desktop.png",
+      "sha256": "1c9187f42840eb58e66f7344fcf37ca8aaea029e115ffe5ca12317be0c4656d8",
+      "dimensions": [
+        1440,
+        1000
+      ],
+      "inspection": "Pixels opened with tools.view_image in this assignment; no new capture or image editing.",
+      "decision": "anterior; preservada como link e na galeria",
+      "visible": "Catálogo de cópias em desktop, 12 de 12 entradas, IDs e estados de integridade/restore, registro de 12/10/2026 05:04 UTC. As duas primeiras linhas não têm recibo de restore.",
+      "purpose_and_caption": "É uma prova útil do fluxo de cópias, mas o quadro de resultados da aplicação comunica melhor o propósito na primeira imagem.",
+      "same_bytes_as_git_head": true
+    },
+    {
+      "path": "containerops/docs/readme/home.png",
+      "sha256": "b76162852dfb230fc524f6dde72908e5c9a9dde0afef30bcd4c0f7e12014263c",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "inspection": "Pixels opened with tools.view_image in this assignment; no new capture or image editing.",
+      "decision": "nova principal",
+      "visible": "Recorte da página Verificação da aplicação: duração de 246,7 s; critérios aprovados de HTTP pelo proxy, usuário/filesystem e rede isolada; seis requisições simultâneas e um job salvo. Fontes visíveis de 22/09/2026. O próximo título começa no limite inferior; a navegação histórica agrupa backup e restore.",
+      "purpose_and_caption": "Página inicial informativa. Legendas dizem recorte e snapshot histórico. A duração 246,656 s do passo verify em problem-proof-latest.json arredonda para 246,7 s.",
+      "same_bytes_as_git_head": true
+    },
+    {
+      "path": "containerops/docs/screenshots/journey-artifacts.png",
+      "sha256": "e479abb1420070043978c6f5c158064f44523b1ad72031468e0e6a0f6f37a212",
+      "dimensions": [
+        1440,
+        1711
+      ],
+      "inspection": "Pixels opened with tools.view_image in this assignment; no new capture or image editing.",
+      "decision": "alternativa avaliada; não selecionada",
+      "visible": "Página longa de artefatos/release 2.0.0, identidade de imagem, HIGH/CRITICAL zero, build de 18,7 s, 52 pacotes no SBOM e idade de base de 16,9 h. Evidência de 22/09/2026.",
+      "purpose_and_caption": "Há resultados legíveis, mas o foco em uma release específica e a interface histórica são menos adequados à entrada geral do projeto.",
+      "same_bytes_as_git_head": true
+    }
+  ],
+  "checks": [
+    {
+      "repo": "varejo-data-pipeline",
+      "docs": [
+        "README.md",
+        "docs/interface.md"
+      ],
+      "local_links_checked": 81,
+      "broken_links": [],
+      "fenced_code": [
+        {
+          "file": "README.md",
+          "unchanged": true
+        },
+        {
+          "file": "docs/interface.md",
+          "unchanged": true
+        }
+      ],
+      "diff_check_exit": 0,
+      "diff_check_output": "warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "asset_css_diff_exit": 0,
+      "palette_presentation_mentions": []
+    },
+    {
+      "repo": "api-sentinel",
+      "docs": [
+        "README.md"
+      ],
+      "local_links_checked": 82,
+      "broken_links": [],
+      "fenced_code": [
+        {
+          "file": "README.md",
+          "unchanged": true
+        }
+      ],
+      "diff_check_exit": 0,
+      "diff_check_output": "",
+      "asset_css_diff_exit": 0,
+      "palette_presentation_mentions": []
+    },
+    {
+      "repo": "containerops",
+      "docs": [
+        "README.md",
+        "docs/brand.md",
+        "docs/frontend-quality.md",
+        "docs/report-guide.md",
+        "docs/screenshots.md"
+      ],
+      "local_links_checked": 103,
+      "broken_links": [],
+      "fenced_code": [
+        {
+          "file": "README.md",
+          "unchanged": true
+        },
+        {
+          "file": "docs/brand.md",
+          "unchanged": true
+        },
+        {
+          "file": "docs/frontend-quality.md",
+          "unchanged": true
+        },
+        {
+          "file": "docs/report-guide.md",
+          "unchanged": true
+        },
+        {
+          "file": "docs/screenshots.md",
+          "unchanged": true
+        }
+      ],
+      "diff_check_exit": 0,
+      "diff_check_output": "",
+      "asset_css_diff_exit": 0,
+      "palette_presentation_mentions": []
+    }
+  ],
+  "additional_parent_document_link_check": {
+    "file": "varejo-data-pipeline/docs/verification.md",
+    "local_links_checked": 96,
+    "broken_links": [],
+    "ownership": "Parent edited the isolated permissions-check documentation; this agent only checked its link destinations."
+  },
+  "limits": [
+    "Sem execução nova da aplicação, CI ou suítes: mudanças desta atribuição são documentais.",
+    "Capturas existentes históricas, não retratos do runtime atual; nenhum asset apagado ou modificado.",
+    "Os oito documentos alterados não tinham README.en.md equivalente nesses três repositórios.",
+    "O teste de links verifica existência dos destinos locais; anchors históricos dos relatórios globais têm revisão separada no exportador.",
+    "O parent publicou VDP durante o fechamento do recibo e responde pelos testes/CI/permissões; esses resultados não são atribuídos a esta revisão."
+  ]
+}

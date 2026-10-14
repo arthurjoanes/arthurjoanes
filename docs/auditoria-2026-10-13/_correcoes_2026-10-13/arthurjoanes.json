@@ -1,0 +1,50 @@
+{
+  "name": "arthurjoanes",
+  "path": "profile-readme",
+  "findings": [
+    {
+      "id": "PER-01",
+      "title": "Perfil omite os dois projetos que podem ser avaliados diretamente no navegador",
+      "category": "Clareza do propósito e apresentação",
+      "severity": "Média",
+      "location": "README.md:19-45; README.en.md:19-45",
+      "evidence": "Projetos em destaque e Também no portfólio listam seis projetos, sem CycleOps/QuakeExposure. As duas demos públicas abriram durante a auditoria.",
+      "why": "Um avaliador que entra pelo perfil não descobre essas demonstrações sem explorar a lista de repositórios. A ausência reduz o acesso a evidências concretas de UI e interação.",
+      "impact": "A primeira impressão fica dependente de projetos que exigem instalação para navegar.",
+      "fix": "Acrescentar um bloco curto de demos com links de código e execução; ajustar a frase sobre dados sintéticos para reconhecer fontes abertas reais.",
+      "implementation": "Substituir a introdução de Projetos em destaque por:\n\nOs projetos abaixo são demonstrações pessoais. Uso dados sintéticos nos cenários de varejo e operações; CycleOps e QuakeExposure também usam dados públicos, com a origem e os limites descritos nos repositórios.\n\n### Demonstrações no navegador\n\n- [CycleOps](https://arthurjoanes.github.io/cycleops/): disponibilidade de estações de bicicletas de Oslo, prioridades e replay de uma gravação GBFS. [Código](https://github.com/arthurjoanes/cycleops).\n- [QuakeExposure](https://arthurjoanes.github.io/quake-exposure/): exposição de uma carteira fictícia a terremotos, com mapa e comparação de publicações. [Código](https://github.com/arthurjoanes/quake-exposure).\n\nVersão inglesa da introdução:\n\nThese are personal demonstrations. The retail and operations scenarios use synthetic data; CycleOps and QuakeExposure also use public data, with sources and limits described in their repositories.\n\n### Browser demos\n\n- [CycleOps](https://arthurjoanes.github.io/cycleops/): Oslo bike-share availability, priorities and replay of a recorded GBFS feed. [Source](https://github.com/arthurjoanes/cycleops).\n- [QuakeExposure](https://arthurjoanes.github.io/quake-exposure/): earthquake exposure for a fictional portfolio, with a map and publication comparisons. [Source](https://github.com/arthurjoanes/quake-exposure).",
+      "affected_files": [
+        "README.md",
+        "README.en.md"
+      ],
+      "validation": "Abrir os dois links em janela anônima, sem credenciais; conseguir acessar demo e código a partir do perfil. Conferir que a frase sobre origem dos dados é verdadeira em ambos os idiomas.",
+      "effort": "baixo",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Perfil em português e inglês inclui as demos e o código de CycleOps e QuakeExposure, distinguindo dados sintéticos de fontes públicas.",
+      "checks_executed": [
+        "Os quatro links retornaram HTTP 200 em consulta anônima; versões PT/EN revisadas."
+      ],
+      "limitations": [
+        "Alteração local; perfil público ainda não atualizado."
+      ],
+      "files_changed": [
+        "README.md",
+        "README.en.md"
+      ]
+    }
+  ],
+  "head_before": "603c69d889f19d0781f486238a55e242ca55b66e",
+  "status_before": "",
+  "checks": [
+    {
+      "command": "GET anônimo nos quatro links",
+      "result": "4 × HTTP 200"
+    }
+  ],
+  "validation_logs": [
+    "per-01-links.json"
+  ],
+  "head_after": "603c69d889f19d0781f486238a55e242ca55b66e",
+  "status_after": " M README.en.md\n M README.md\n"
+}

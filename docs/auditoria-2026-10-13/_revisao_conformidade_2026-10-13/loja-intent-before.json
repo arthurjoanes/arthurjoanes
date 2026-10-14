@@ -1,0 +1,67 @@
+{
+  "method": "Build existente, Chromium local e todas as APIs interceptadas; nenhuma chamada real ou credencial",
+  "buildId": "PRNHH9YPY3rFsEgtP5RLT",
+  "cases": [
+    {
+      "name": "navegação depois de resultado incerto",
+      "sendEnabledAfterNavigation": true,
+      "typed": "Pergunta nova na conversa B",
+      "posted": [
+        {
+          "question": "Quanto vendi ontem?",
+          "conversation_id": null,
+          "mode": "demo",
+          "store_ids": [
+            "s"
+          ],
+          "period": null,
+          "client_request_id": "d7130cf1-d36c-4a3a-8c5b-de2e038cf186"
+        },
+        {
+          "question": "Quanto vendi ontem?",
+          "conversation_id": null,
+          "mode": "demo",
+          "store_ids": [
+            "s"
+          ],
+          "period": null,
+          "client_request_id": "d7130cf1-d36c-4a3a-8c5b-de2e038cf186"
+        }
+      ],
+      "visibleOptions": [
+        "1. Resposta antiga de B",
+        "2. Quanto vendi ontem?"
+      ],
+      "optionValues": [
+        "b-1",
+        "a-1"
+      ]
+    },
+    {
+      "name": "recuperação 404 envia a intenção pela primeira vez",
+      "posted": [
+        {
+          "question": "Quanto vendi ontem?",
+          "conversation_id": null,
+          "mode": "demo",
+          "store_ids": [
+            "s"
+          ],
+          "period": null,
+          "client_request_id": "9f87a1fa-2809-4a24-b870-4a2d74464b95"
+        },
+        {
+          "question": "Quanto vendi ontem?",
+          "conversation_id": null,
+          "mode": "demo",
+          "store_ids": [
+            "s"
+          ],
+          "period": null,
+          "client_request_id": "9f87a1fa-2809-4a24-b870-4a2d74464b95"
+        }
+      ],
+      "confirmation": "Resposta recuperada. Nenhuma nova consulta foi executada."
+    }
+  ]
+}

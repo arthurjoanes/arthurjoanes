@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-13",
+  "scope": "Correções EVD-01 a EVD-07 e LOJ-01 a LOJ-08; checkout local sem commit",
+  "evidencedesk": [
+    {
+      "command": "python -B -m pytest backend/tests/unit backend/tests/integration/test_audit_recovery.py backend/tests/integration/test_manual_workflow.py backend/tests/integration/test_recent_lists.py -p no:cacheprovider -q --junitxml=../_correcoes_2026-10-13/evidencedesk-final-junit.xml",
+      "result": "214 passed (203 unitários + 11 integrações), 1 warning, 95,53 s",
+      "receipt": "evidencedesk-final-junit.xml; evidencedesk-final-pytest.log"
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=../../_correcoes_2026-10-13/evidencedesk-final-vitest.json",
+      "result": "81 testes aprovados em 14 arquivos",
+      "receipt": "evidencedesk-final-vitest.json; evidencedesk-final-vitest.log"
+    },
+    {
+      "command": "playwright test audit-regressions.spec.ts",
+      "result": "5 passed, 27,9 s; Chromium contra build de produção em 127.0.0.1:3216, API interceptada",
+      "receipt": "evidencedesk-browser-final/e2e-results.json; evidencedesk-final-playwright.log"
+    },
+    {
+      "command": "npm run build; npm run typecheck; npm run lint",
+      "result": "Build Next.js 16.3.8 e TypeScript aprovados; ESLint completo aprovado após ajuste do handler",
+      "receipt": "apps-final-validation.json; evidencedesk-final-eslint.log"
+    },
+    {
+      "command": "ruff check <arquivos Python alterados e novos>; git diff --check",
+      "result": "Aprovados; Git avisa somente normalização futura CRLF→LF em incidents/routes.py",
+      "receipt": "apps-final-validation.json"
+    }
+  ],
+  "loja-assistente": [
+    {
+      "command": "python -B -m pytest backend/tests -p no:cacheprovider -q",
+      "result": "485 passed, 1 warning, 275,06 s",
+      "receipt": "apps-final-validation.json (resumo transcrito da saída da execução, sem log integral)"
+    },
+    {
+      "command": "python -B -m pytest backend/tests/test_query_intents.py backend/tests/test_history_pagination.py backend/tests/test_migrations.py backend/tests/test_login_capacity.py backend/tests/test_secure_config.py -p no:cacheprovider -q --junitxml=../_correcoes_2026-10-13/loja-final-junit.xml",
+      "result": "12 passed, 1 warning, 31,15 s; subconjunto dos 485, não somar",
+      "receipt": "loja-final-junit.xml; loja-final-pytest.log"
+    },
+    {
+      "command": "playwright test audit-regressions.spec.ts domain.spec.ts --reporter=list,json",
+      "result": "32 passed, 27,9 s: 7 navegador e 25 puros; Chromium contra build de produção em 127.0.0.1:3212, API interceptada",
+      "receipt": "loja-browser-final/results.json; loja-final-playwright.log"
+    },
+    {
+      "command": "npm run build; npm run typecheck; npm run lint",
+      "result": "Build Next.js 16.3.8, TypeScript e ESLint completos aprovados",
+      "receipt": "apps-final-validation.json"
+    },
+    {
+      "command": "python scripts/verify_evidence.py",
+      "result": "Aprovado, exclusivamente offline, sem chamadas Azure ou consultas a banco",
+      "receipt": "loja-final-evidence.log"
+    },
+    {
+      "command": "ruff check <arquivos Python alterados e novos>; git diff --check",
+      "result": "Aprovados",
+      "receipt": "apps-final-validation.json"
+    }
+  ],
+  "prior_failures_resolved": [
+    "ESLint EVD detectou construção do handler durante render; handler passou a ser construído no evento. ESLint completo e navegador final passaram.",
+    "Primeira suite Loja: 482/485; corrigido decode permissivo de base64 de cursor e atualizadas expectativas de migração/erro convertido para HTTP500. Suite final: 485/485."
+  ],
+  "limits": [
+    "Execução local Windows com Node e ambiente Python já disponíveis (.venv do EvidenceDesk usada também para Loja); não representa instalação limpa de dependências nem execução do workflow Linux completo.",
+    "PostgreSQL real isolado no projeto Compose auditoria-fix-apps; aplicação e testes executados no host. Não houve implantação das stacks completas nem mudança em bases existentes.",
+    "Navegador Chromium usa APIs sintéticas interceptadas. Testes de backend exercitam banco e autenticação separadamente. Nenhuma credencial real ou chamada LLM paga foi usada.",
+    "Aviso conhecido de depreciação do alias AnyIO BlockingPortal em Starlette, sem falha de teste.",
+    "Sem commit, push ou PR; mudanças permanecem locais para revisão."
+  ],
+  "cleanup": "Servidores temporários nas portas 3212/3216 encerrados. Compose auditoria-fix-apps removido com down -v; inspeção não encontrou containers/volumes desse projeto ou listeners em 3212/3216/15542/15546. Artefatos de teste e logs preservados. Arquivos AGENTS.md/CLAUDE.md gerados pelo Next no EVD removidos; next-env.d.ts da Loja restaurado ao original.",
+  "cleanup_receipt": "apps-fixtures-cleanup.log"
+}

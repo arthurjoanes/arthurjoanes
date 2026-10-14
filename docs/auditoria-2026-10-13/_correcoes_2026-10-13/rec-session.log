@@ -1,0 +1,99 @@
+
+Running 8 tests using 1 worker
+
+(node:30076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\session-safety.spec.ts:89:7 › logout local remove conteúdo e intenção quando a resposta falha antes do commit (2.7s)
+  ok 2 [chromium] › tests\session-safety.spec.ts:89:7 › logout local remove conteúdo e intenção quando a resposta falha após commit (2.2s)
+  x  3 [chromium] › tests\session-safety.spec.ts:144:5 › 401 de operação antiga não encerra o acesso de outra conta (12.0s)
+(node:17912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 [chromium] › tests\session-safety.spec.ts:201:5 › 200 atrasado da conta anterior não reapresenta uma prévia protegida (12.6s)
+(node:22976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 5 [chromium] › tests\session-safety.spec.ts:268:5 › 403 revalida permissões e retira controles de operador revogados (1.9s)
+  ok 6 [chromium] › tests\session-safety.spec.ts:308:5 › 403 com sessão válida conserva o arquivo preenchido e a intenção congelada (2.2s)
+  ok 7 [chromium] › tests\session-safety.spec.ts:368:5 › timeout real de pagamento conserva chave e payload sem reenviar automaticamente (33.1s)
+  ok 8 [chromium] › tests\session-safety.spec.ts:429:5 › JSON inválido em resposta 200 mostra recuperação e preserva o arquivo (2.3s)
+
+
+  1) [chromium] › tests\session-safety.spec.ts:144:5 › 401 de operação antiga não encerra o acesso de outra conta 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Resumo', exact: true })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Resumo', exact: true }) with timeout 10000ms
+      - waiting for getByRole('heading', { name: 'Resumo', exact: true })
+
+
+      10 |   await expect(
+      11 |     page.getByRole("heading", { name: "Resumo", exact: true }),
+    > 12 |   ).toBeVisible();
+         |     ^
+      13 | }
+      14 |
+      15 | async function navigate(page: Page, name: string) {
+        at login (C:\Users\arthu\OneDrive\Documentos\Projetos Portifolio\gestao-recebiveis\frontend\tests\session-safety.spec.ts:12:5)
+        at C:\Users\arthu\OneDrive\Documentos\Projetos Portifolio\gestao-recebiveis\frontend\tests\session-safety.spec.ts:177:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-401-de-oper-8df55-rra-o-acesso-de-outra-conta-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-401-de-oper-8df55-rra-o-acesso-de-outra-conta-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-401-de-oper-8df55-rra-o-acesso-de-outra-conta-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-401-de-oper-8df55-rra-o-acesso-de-outra-conta-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\session-safety.spec.ts:201:5 › 200 atrasado da conta anterior não reapresenta uma prévia protegida 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Resumo', exact: true })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Resumo', exact: true }) with timeout 10000ms
+      - waiting for getByRole('heading', { name: 'Resumo', exact: true })
+
+
+      10 |   await expect(
+      11 |     page.getByRole("heading", { name: "Resumo", exact: true }),
+    > 12 |   ).toBeVisible();
+         |     ^
+      13 | }
+      14 |
+      15 | async function navigate(page: Page, name: string) {
+        at login (C:\Users\arthu\OneDrive\Documentos\Projetos Portifolio\gestao-recebiveis\frontend\tests\session-safety.spec.ts:12:5)
+        at C:\Users\arthu\OneDrive\Documentos\Projetos Portifolio\gestao-recebiveis\frontend\tests\session-safety.spec.ts:248:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-200-atrasad-84d64-esenta-uma-prévia-protegida-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-200-atrasad-84d64-esenta-uma-prévia-protegida-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-200-atrasad-84d64-esenta-uma-prévia-protegida-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\_correcoes_2026-10-13\rec-session-output\session-safety-200-atrasad-84d64-esenta-uma-prévia-protegida-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\session-safety.spec.ts:144:5 › 401 de operação antiga não encerra o acesso de outra conta 
+    [chromium] › tests\session-safety.spec.ts:201:5 › 200 atrasado da conta anterior não reapresenta uma prévia protegida 
+  6 passed (1.2m)

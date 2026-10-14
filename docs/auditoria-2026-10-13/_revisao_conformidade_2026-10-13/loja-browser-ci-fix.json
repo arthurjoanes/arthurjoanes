@@ -1,0 +1,291 @@
+{
+  "generated_at_utc": "2026-10-14T01:49:18.707460+00:00",
+  "repo": "loja-assistente",
+  "base_head": "e20759c1d2f8f6cabac4036071d47759e96d585d",
+  "status": "implemented_targeted_browser_and_static_checks_passed_full_ci_pending",
+  "failure": {
+    "code_sha": "0786395b3c0de79b75c6b5d171801a88e1b8051b",
+    "run": 38494308614,
+    "event": "pull_request da antiga feat/evolucao-loja-assistente-20261012",
+    "job": 115626474480,
+    "url": "https://github.com/arthurjoanes/loja-assistente/actions/runs/38494308614/job/115626474480",
+    "result": "485 backend passaram; etapa de navegador: 41 failed, 57 passed (28.3m).",
+    "receipt": "loja-ci-browser-38494308614-failure-excerpt.log",
+    "scope": "Falha confirmada nesta execução antiga do mesmo código. O delta de e20759c alterou somente README e guia UI/UX; execuções main são registradas separadamente."
+  },
+  "initial_hypothesis": "crypto.randomUUID exige contexto seguro; o navegador da CI usa http://frontend:3102, diferente de localhost usado na validação anterior. A exceção ocorre antes do POST e, antes do ajuste, fora do try/finally, deixando a consulta ocupada.",
+  "confirmation": {
+    "receipt": "loja-uuid-origin-before.json",
+    "script": "loja-uuid-origin-probe.cjs",
+    "browser": "Chromium 153.0.8010.12",
+    "result": "Origem HTTP sintética: isSecureContext=false, randomUUID undefined, getRandomValues function. A chamada original lançou TypeError: crypto.randomUUID is not a function.",
+    "limitation": "Prova do mecanismo no navegador; não é reprodução local das 41 jornadas completas. Nenhum servidor, API ou rede externa usado; route.fulfill respondeu a todas as navegações."
+  },
+  "changes": [
+    {
+      "file": "frontend/src/lib/request-id.ts",
+      "change": "Helper cliente único. Usa randomUUID quando disponível; caso contrário obtém 16 bytes de crypto.getRandomValues e aplica versão 4 e variante RFC. Nenhum Math.random, timestamp, dependência nova ou alteração da entropia criptográfica."
+    },
+    {
+      "file": "frontend/src/features/assistant/use-workspace.ts",
+      "change": "Usa o helper dentro do try/finally existente, preservando uma chave por intenção. Recuperação e reenvio continuam usando a mesma chave e payload. Falha da fonte criptográfica passa pelo tratamento de erro e libera os controles, sem POST."
+    },
+    {
+      "file": "frontend/e2e/request-id.spec.ts",
+      "change": "Três casos Chromium sem servidor: origem HTTP sem randomUUID; origem HTTPS com implementação nativa; recusa quando a fonte criptográfica falha. Conferem formato/versão/variante, consumo de API criptográfica, chaves distintas e proíbem Math.random."
+    },
+    {
+      "file": "frontend/e2e/audit-regressions.spec.ts",
+      "change": "A regressão de resposta perdida conserva POST único/recuperação e agora exige UUIDv4 válido, em vez de apenas chave não vazia."
+    }
+  ],
+  "random_uuid_inventory": {
+    "client": "Somente use-workspace.ts fazia chamada direta; substituída pelo helper.",
+    "server": "frontend/src/app/api/[...path]/route.ts usa randomUUID no runtime Node do proxy; não depende da origem do navegador e permanece inalterado."
+  },
+  "checks": [
+    {
+      "command": "node _revisao_conformidade_2026-10-13/loja-uuid-origin-probe.cjs",
+      "exit_code": 0,
+      "result": "Falha original confirmada em HTTP sem servidor.",
+      "receipt": "loja-uuid-origin-before.json"
+    },
+    {
+      "command": "npx playwright test e2e/request-id.spec.ts --project=chromium --output=../../_revisao_conformidade_2026-10-13/loja-uuid-test-artifacts --reporter=list",
+      "exit_code": 0,
+      "result": "3 passed (1.4s), um worker, sem retry/skip.",
+      "receipt": "loja-uuid-chromium.log"
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "receipt": "loja-browser-ci-lint.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "receipt": "loja-browser-ci-types.log"
+    },
+    {
+      "command": "npm run format:check",
+      "exit_code": 0,
+      "receipt": "loja-browser-ci-format.log"
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "receipt": "loja-browser-ci-build.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "receipt": "loja-browser-ci-diff-check.log"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID",
+      "supports": "randomUUID disponível somente em contexto seguro."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues",
+      "supports": "Bytes aleatórios criptográficos; API disponível também em contexto inseguro."
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-4",
+      "supports": "UUIDv4: bits de versão e variante no identificador de 128 bits."
+    }
+  ],
+  "files": [
+    {
+      "path": "frontend/src/lib/request-id.ts",
+      "sha256": "86747ab1e05807627dc78dce336f91a14889b3a561aa552bd5a69bf9c72f317a"
+    },
+    {
+      "path": "frontend/src/features/assistant/use-workspace.ts",
+      "sha256": "b1345cc0c461f17b60c8112d5a7faa137bb2905c69d6a627c8912f3a6211671b"
+    },
+    {
+      "path": "frontend/e2e/request-id.spec.ts",
+      "sha256": "f25928a75ad28a1906b16187a6eecef33792f295ba096c42de93190c2d747f70"
+    },
+    {
+      "path": "frontend/e2e/audit-regressions.spec.ts",
+      "sha256": "6e0d54d0f98c16175c580e42ff74c423ba540f4dfb79869106724a757e8f2e89"
+    }
+  ],
+  "diff": "loja-browser-ci-fix.diff",
+  "limitations": [
+    "A suíte completa de jornadas da correção ainda depende da próxima CI publicada. Os três testes locais validam a geração da chave em navegador, não o fluxo completo com PostgreSQL.",
+    "Não houve inicialização de servidor local, contorno do bloqueio anterior, alteração de Compose/HTTPS, polyfill global ou relaxamento de teste.",
+    "Nenhum backend, dependência, contrato financeiro, autenticação, autorização ou política de idempotência alterado.",
+    "next-env.d.ts gerado pela build foi restaurado ao conteúdo anterior para não incluir alteração incidental.",
+    "Nenhum commit ou push pelo agente; resultados dos novos workflows serão registrados separadamente."
+  ],
+  "subsequent_publication_and_ci": {
+    "frozen_for_export": true,
+    "freeze_note": "Estado observado às 01:58:35 UTC de 14/10/2026: verify em Browser journeys; suíte completa pendente, sem contagens finais deste SHA. Monitoramento encerrado por solicitação do responsável para exportação. Não constitui aprovação da integração completa.",
+    "published_by": "root após revisão do helper e try/finally",
+    "branch": "main",
+    "sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+    "observed_at_utc": "2026-10-14 01:58:35 UTC",
+    "runs": [
+      {
+        "id": 38498010897,
+        "name": "Local stack checks",
+        "head_branch": "main",
+        "head_sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+        "event": "push",
+        "status": "in_progress",
+        "conclusion": null,
+        "created_at": "2026-10-14T01:52:08Z",
+        "updated_at": "2026-10-14T01:52:13Z",
+        "html_url": "https://github.com/arthurjoanes/loja-assistente/actions/runs/38498010897",
+        "jobs": [
+          {
+            "id": 115638116607,
+            "name": "verify",
+            "status": "in_progress",
+            "conclusion": null,
+            "run_id": 38498010897,
+            "logs_url": null,
+            "steps": [
+              {
+                "name": "Set up job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 1
+              },
+              {
+                "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 2
+              },
+              {
+                "name": "Verify published evidence without API calls",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 3
+              },
+              {
+                "name": "Configure isolated local demo",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 4
+              },
+              {
+                "name": "Build",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 5
+              },
+              {
+                "name": "Scan application runtime images",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 6
+              },
+              {
+                "name": "PostgreSQL integration, contracts, lint, types and evaluations",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 7
+              },
+              {
+                "name": "Ensure verification preserved the published evaluation",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 8
+              },
+              {
+                "name": "Frontend checks",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 9
+              },
+              {
+                "name": "Documented installation and HTTP demonstration",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 10
+              },
+              {
+                "name": "Browser journeys",
+                "status": "in_progress",
+                "conclusion": null,
+                "number": 11
+              },
+              {
+                "name": "Run actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+                "status": "pending",
+                "conclusion": null,
+                "number": 12
+              },
+              {
+                "name": "Stop project containers",
+                "status": "pending",
+                "conclusion": null,
+                "number": 13
+              },
+              {
+                "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+                "status": "pending",
+                "conclusion": null,
+                "number": 26
+              }
+            ]
+          },
+          {
+            "id": 115638116821,
+            "name": "secret-history",
+            "status": "completed",
+            "conclusion": "success",
+            "run_id": 38498010897,
+            "logs_url": null,
+            "steps": [
+              {
+                "name": "Set up job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 1
+              },
+              {
+                "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 2
+              },
+              {
+                "name": "Install checksum-pinned Gitleaks",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 3
+              },
+              {
+                "name": "Scan complete history",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 4
+              },
+              {
+                "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 8
+              },
+              {
+                "name": "Complete job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 9
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "snapshot_receipt": "loja-assistente-ci-published-latest.json",
+    "historical_context": "Os testes locais acima pertencem à preparação sobre e20759c. Falhas de 0786395/e20759c são registros anteriores e não resultado desta publicação."
+  }
+}

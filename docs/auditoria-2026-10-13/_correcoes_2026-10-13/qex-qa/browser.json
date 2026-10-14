@@ -1,0 +1,28 @@
+{
+  "transport": "local built frontend + snapshot fixtures mocked at HTTP routes",
+  "timeoutMs": 15000,
+  "keptPreviousPublication": true,
+  "automaticNextCycle": true,
+  "supersededRequestAborted": true,
+  "pageErrors": [],
+  "widths": [
+    {
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "width": 320,
+      "overflow": 0
+    }
+  ],
+  "heldRequests": 2,
+  "eventCalls": 5
+}

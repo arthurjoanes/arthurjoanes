@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:2820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › e2e\request-id.spec.ts:8:7 › query intent UUID uses browser cryptography on http (200ms)
+  ok 2 [chromium] › e2e\request-id.spec.ts:8:7 › query intent UUID uses browser cryptography on https (162ms)
+  ok 3 [chromium] › e2e\request-id.spec.ts:63:5 › query intent refuses a key when browser cryptography fails (181ms)
+
+  3 passed (1.4s)

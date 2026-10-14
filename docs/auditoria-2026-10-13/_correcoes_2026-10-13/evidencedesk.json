@@ -1,0 +1,299 @@
+{
+  "name": "evidencedesk",
+  "path": "evidencedesk",
+  "findings": [
+    {
+      "id": "EVD-01",
+      "title": "Revisão devolvida oferece um envio que o servidor sempre recusa",
+      "category": "UI/UX e fluxo de negócio",
+      "severity": "Média",
+      "location": "frontend/src/features/dossiers/dossier-view.tsx:370; backend/src/evidencedesk/reviews/service.py:300",
+      "evidence": "O botão “Enviar para revisão” aparece para ['draft','changes_requested']. submit_revision aceita somente draft e devolve 409 revision_not_draft nos demais estados, orientando criar nova versão.",
+      "why": "O estado devolvido é imutável e deve originar uma nova revisão. A interface oferece uma transição que a própria máquina de estados proíbe.",
+      "impact": "Depois de receber pedido de alteração, o autor clica numa ação primária destinada a falhar. Isso compromete o percurso central de revisão humana, sem indicar um defeito na proteção do backend.",
+      "fix": "Exibir envio somente no rascunho e destacar a criação de nova revisão quando houver changes_requested.",
+      "implementation": "Trocar a condição por current.review_status === 'draft'. Para changes_requested, apresentar “Preparar nova revisão” junto ao motivo recebido, reutilizando o editor e o controle de revisão-base existentes. Manter a restrição do servidor.",
+      "affected_files": [
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/e2e/review-regressions.spec.ts"
+      ],
+      "validation": "Criar revisão, submeter e devolver com alterações. Confirmar ausência de envio direto no estado devolvido, motivo visível e nova revisão editável; salvar e enviar a nova versão com sucesso. Requisição direta de submissão da antiga deve continuar retornando 409.",
+      "effort": "baixo (pequeno — 1 a 3 horas)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Envio aparece somente para rascunho. Revisão devolvida oferece Preparar nova revisão com o motivo preservado, reutilizando o editor e a revisão-base imutável.",
+      "files_changed": [
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "backend/tests/integration/test_audit_recovery.py",
+        "docs/api-contract.md"
+      ],
+      "checks_executed": [
+        "Playwright sobre build de produção: motivo visível, envio direto ausente e editor de nova revisão acessível.",
+        "Integração PostgreSQL: criar, submeter, devolver, recusar submissão da antiga com 409 revision_not_draft, criar rascunho sucessor e submeter com sucesso."
+      ],
+      "limitations": [
+        "O percurso de servidor e o de interface foram testados separadamente; os testes de navegador usam API sintética interceptada."
+      ]
+    },
+    {
+      "id": "EVD-02",
+      "title": "Exportação expirada quebra o schema e a mesma tela não cria uma nova tentativa após falha",
+      "category": "Contratos de API, confiabilidade e UI/UX",
+      "severity": "Média",
+      "location": "backend/src/evidencedesk/reviews/routes.py:218; frontend/src/lib/contracts.ts:364; frontend/src/features/dossiers/dossier-view.tsx:194 e :238",
+      "evidence": "A API emite state='expired' quando o prazo termina. exportSchema usa jobStateSchema sem expired; probe atual confirmou rejeição desse payload. exportIntent guarda uma única chave por revisão enquanto o componente vive. Clicar novamente após falha/expiração reutiliza essa chave e recupera o recurso anterior. A renderização/polling tampouco trata expired explicitamente.",
+      "why": "Estado do arquivo exportado e estado do job não são o mesmo contrato. Idempotência deve distinguir repetição da mesma intenção, necessária em falha de rede, de uma nova intenção após término confirmado.",
+      "impact": "Arquivo expirado vira erro genérico de resposta inválida; falha terminal impede nova exportação pela mesma instância da tela sem remontá-la. O usuário pode ficar sem uma ação clara de recuperação.",
+      "fix": "Definir estado de exportação que inclua expired e criar uma ação explícita para nova exportação em estados terminais.",
+      "implementation": "Usar z.union([jobStateSchema,z.literal('expired')]) no schema de exportação. Encerrar polling em expired e exibir “O arquivo expirou. Prepare outra exportação.” Separar recuperar a intenção existente de iniciar uma nova: conservar a chave durante resposta incerta e gerar novo UUID apenas após terminal confirmado e comando explícito do usuário. Tratar failed/cancelled mesmo quando error é null. Documentar esses estados.",
+      "affected_files": [
+        "frontend/src/lib/contracts.ts",
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "docs/api-contract.md",
+        "frontend/e2e/publication-regressions.spec.ts"
+      ],
+      "validation": "Aceitar payload expired no teste de schema; testar falha, cancelamento e expiração sem spinner infinito. Repetir a mesma intenção deve retornar o mesmo recurso; iniciar nova exportação após término deve retornar ID novo. Simular perda da resposta inicial e comprovar que a recuperação não duplica job.",
+      "effort": "médio (médio — 0,5 a 1 dia)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Contrato aceita expired. Polling encerra em failed/cancelled/expired, mensagens existem sem error e uma ação explícita cria nova chave após término confirmado. Transporte incerto conserva a chave; exportação concluída é reconsultada no vencimento.",
+      "files_changed": [
+        "frontend/src/lib/contracts.ts",
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/src/lib/audit-contracts.test.ts",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "docs/api-contract.md"
+      ],
+      "checks_executed": [
+        "Vitest: schemas aceitam failed, cancelled e expired.",
+        "Playwright: três cenários terminais sem spinner infinito; perda da primeira resposta conserva chave no segundo POST, e nova exportação terminal usa outra chave no terceiro."
+      ],
+      "limitations": [
+        "Não foi produzido arquivo de exportação real nesta rodada; perda de resposta e estados terminais foram injetados na API do navegador."
+      ]
+    },
+    {
+      "id": "EVD-03",
+      "title": "Criação inicial de importação não pode ser repetida com segurança após resposta perdida",
+      "category": "Confiabilidade e recursos",
+      "severity": "Média",
+      "location": "frontend/src/features/imports/new-import.tsx:56; backend/src/evidencedesk/ingestion/routes.py:27; backend/src/evidencedesk/ingestion/service.py:69",
+      "evidence": "A tela guarda created apenas depois que POST de criação responde. Esse endpoint não recebe Idempotency-Key; create_import incrementa storage_reserved e cria uuid4 para cada chamada. Se houver commit no servidor seguido de perda da resposta, tentar novamente cria outro lote e outra reserva.",
+      "why": "O caminho de retomada após conhecer o lote está implementado, mas não cobre a incerteza na primeira criação. A exclusão mútua da política de quota não torna duas requisições sequenciais idempotentes.",
+      "impact": "Lotes órfãos/duplicados e reserva duplicada de armazenamento até limpeza ou expiração; a pessoa pode atingir limite com um único conjunto de arquivos reenviado após falha de rede.",
+      "fix": "Adicionar idempotência à admissão do lote e preservar a chave antes de começar a chamada.",
+      "implementation": "Reutilizar o padrão idempotent_resource de jobs/service.py, com escopo tenant/ator/operação e fingerprint canônico do manifesto. Reservar armazenamento somente quando a intenção for nova, na mesma transação. No cliente manter um UUID por manifesto/intenção e reaproveitá-lo ao recuperar resposta incerta; novo manifesto exige nova intenção. Conflito de chave com corpo diferente deve retornar 409.",
+      "affected_files": [
+        "backend/src/evidencedesk/ingestion/routes.py",
+        "backend/src/evidencedesk/ingestion/service.py",
+        "backend/src/evidencedesk/jobs/service.py",
+        "frontend/src/features/imports/new-import.tsx",
+        "docs/api-contract.md"
+      ],
+      "validation": "Teste de integração simula commit seguido de resposta perdida, repete POST com mesma chave e confere mesmo batch_id, uma reserva e um conjunto de arquivos. Corpo diferente com mesma chave deve falhar. Teste da UI deve retomar o lote sem duplicá-lo.",
+      "effort": "médio (médio — 1 a 2 dias)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "POST /imports recebe Idempotency-Key opcional e reutiliza a reserva transacional existente, com escopo tenant/ator/operação e fingerprint do corpo. A UI cria a chave antes da primeira requisição e a conserva para o mesmo manifesto.",
+      "files_changed": [
+        "backend/src/evidencedesk/ingestion/routes.py",
+        "backend/src/evidencedesk/ingestion/service.py",
+        "frontend/src/features/imports/new-import.tsx",
+        "backend/tests/integration/test_audit_recovery.py",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "docs/api-contract.md"
+      ],
+      "checks_executed": [
+        "PostgreSQL: repetir criação já commitada retorna o mesmo lote, exatamente um registro e uma reserva; manifesto diferente com a mesma chave retorna 409.",
+        "Playwright: primeiro POST abortado e segundo POST com a mesma chave retomam upload/finalização e abrem o lote."
+      ],
+      "limitations": [
+        "Clientes antigos sem cabeçalho continuam aceitos, sem garantia de replay; isso está documentado.",
+        "A chave da UI dura durante a instância da tela; recarregar toda a página não foi transformado em retomada persistente nesta correção."
+      ]
+    },
+    {
+      "id": "EVD-04",
+      "title": "Recortes antigos ficam inacessíveis no seletor quando há mais de 50 snapshots",
+      "category": "UI/UX e contrato de dados",
+      "severity": "Média",
+      "location": "backend/src/evidencedesk/incidents/service.py:237; frontend/src/lib/contracts.ts:96; frontend/src/features/incidents/incident-workspace.tsx:408",
+      "evidence": "O backend retorna os primeiros 50 snapshots e available_snapshots_truncated. O schema TypeScript não declara a flag e a lista da tela não tem paginação nem indicação de truncamento; o probe confirmou ausência da propriedade no schema.",
+      "why": "O servidor já distingue coleção completa de amostra, mas essa informação é descartada antes da apresentação. O recorte ativo preservado na consulta não oferece navegação pelos demais recortes antigos.",
+      "impact": "Acima do limite, o usuário interpreta a lista como completa e não consegue selecionar determinados snapshots históricos pelo controle normal.",
+      "fix": "Propagar a flag e oferecer navegação paginada pelos snapshots autorizados.",
+      "implementation": "Incluir available_snapshots_truncated no schema e documentar o campo. Como correção imediata, mostrar “Há recortes anteriores que não estão nesta lista”. Para resolver o acesso, fornecer cursor estável por data/ID e botão “Carregar recortes anteriores”, preservando o selecionado mesmo fora da página. Aplicar autorização no endpoint de cada página.",
+      "affected_files": [
+        "frontend/src/lib/contracts.ts",
+        "frontend/src/features/incidents/incident-workspace.tsx",
+        "backend/src/evidencedesk/incidents/routes.py",
+        "backend/src/evidencedesk/incidents/service.py",
+        "docs/api-contract.md"
+      ],
+      "validation": "Com mais de 50 snapshots autorizados, a indicação aparece e um recorte antigo pode ser carregado e selecionado. Alterar autorização não deve permitir recuperar snapshots proibidos por cursor ou URL.",
+      "effort": "médio (médio — 1 dia)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Flag de truncamento preservada no contrato. Endpoint paginado de snapshots usa cursor assinado por tenant/usuário/incidente e desempate data/ID, reautoriza cada leitura. Seletor carrega páginas anteriores e conserva a opção selecionada.",
+      "files_changed": [
+        "backend/src/evidencedesk/incidents/routes.py",
+        "frontend/src/lib/contracts.ts",
+        "frontend/src/features/incidents/snapshot-select.tsx",
+        "frontend/src/features/incidents/incident-workspace.tsx",
+        "backend/tests/integration/test_audit_recovery.py",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "docs/api-contract.md"
+      ],
+      "checks_executed": [
+        "PostgreSQL: 56 snapshots, incluindo empates de timestamp, sem repetição ou omissão; cursor de outro escopo recusado e grant revogado impede nova leitura.",
+        "Playwright: carregamento de página anterior e seleção de recorte antigo funcionam."
+      ],
+      "limitations": [
+        "A fixture de navegador modela páginas sintéticas; a segurança e a ordenação real foram verificadas separadamente em PostgreSQL."
+      ]
+    },
+    {
+      "id": "EVD-05",
+      "title": "Erros nas listas de lacunas não identificam qual campo ou alegação precisa de ajuste",
+      "category": "Acessibilidade e usabilidade de formulários",
+      "severity": "Média",
+      "location": "frontend/src/features/dossiers/dossier-editor.tsx:252, :498 e :595; frontend/src/lib/form-errors.ts:1",
+      "evidence": "Os textareas de lacunas/verificações usam setValue, sem FieldError, aria-invalid ou aria-describedby. noteList limita 20 linhas/1.000 caracteres por linha. validationMessages deduplica apenas o texto e perde o caminho; campos repetidos produzem a mesma mensagem “Use no máximo 20 linhas...” no rodapé.",
+      "why": "Ao editar várias alegações, a mensagem não permite localizar a entrada inválida. Campos principais do próprio editor já têm associação de erro, mas essas listas ficam de fora.",
+      "impact": "Tentativa e erro para encontrar a lista, especialmente em diálogo extenso e com leitor de tela; validação impede salvar sem apontar o controle responsável.",
+      "fix": "Associar erro a cada textarea e manter campo/índice na lista de erros.",
+      "implementation": "Usar Controller/useController ou registro equivalente que preserve a ref do controle. Gerar IDs estáveis por field.id, incluir aria-invalid e aria-describedby, e renderizar FieldError com mensagens como “Alegação 2 — Informação que falta: use até 20 linhas”. O resumo deve ter links para os campos; ao enviar, focar o primeiro inválido. Referência de critério: [WCAG, identificação de erros](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html).",
+      "affected_files": [
+        "frontend/src/features/dossiers/dossier-editor.tsx",
+        "frontend/src/features/dossiers/dossier-draft.ts",
+        "frontend/src/lib/form-errors.ts",
+        "frontend/e2e/review-regressions.spec.ts"
+      ],
+      "validation": "Inserir 21 linhas ou 1.001 caracteres em cada lista, incluindo segunda alegação. Verificar mensagem específica, associação acessível, foco e persistência do rascunho. Não basta testar a função que deduplica strings.",
+      "effort": "médio (médio — 0,5 a 1 dia)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "As quatro famílias de listas usam Controller com ref, erro associado, aria-invalid e aria-describedby. IDs de alegações usam field.id; resumo preserva caminho e índice, oferece foco no controle e o envio inválido foca o primeiro erro sem apagar edição.",
+      "files_changed": [
+        "frontend/src/features/dossiers/dossier-editor.tsx",
+        "frontend/src/lib/form-errors.ts",
+        "frontend/src/lib/audit-contracts.test.ts",
+        "frontend/e2e/audit-regressions.spec.ts"
+      ],
+      "checks_executed": [
+        "Vitest preserva caminhos de erros repetidos.",
+        "Playwright: 21 linhas na lista geral, 1.001 caracteres na segunda alegação, descrição acessível contextual, foco inicial, foco via resumo e persistência do rascunho.",
+        "ESLint completo e build de produção com TypeScript passaram após ajustar a chamada do handler para ocorrer no evento."
+      ],
+      "limitations": [
+        "Asserções acessíveis do Playwright; não foi conduzida sessão manual com leitor de tela."
+      ]
+    },
+    {
+      "id": "EVD-06",
+      "title": "Resumo atribui toda avaliação inconclusiva à falta de cobertura",
+      "category": "Clareza analítica e UI/UX",
+      "severity": "Baixa",
+      "location": "frontend/src/features/dossiers/dossier-view.tsx:316; backend/src/evidencedesk/reconciliation/rules.py:113 e :214",
+      "evidence": "O contador not_evaluable aparece como “avaliações sem cobertura suficiente”. Regras também emitem not_evaluable para event_identity_conflict e comparação temporal indeterminada, que não equivalem a falta de cobertura.",
+      "why": "A mesma categoria agrupa motivos distintos. O texto resume um deles como se fosse a causa de todos.",
+      "impact": "O leitor pode procurar mais cobertura de dados quando o problema real é conflito de identidade ou precisão temporal, comprometendo a interpretação de um produto de evidências.",
+      "fix": "Nomear o agregado “avaliações inconclusivas” e encaminhar aos motivos individuais.",
+      "implementation": "Substituir o texto por “N avaliações inconclusivas” e uma ajuda curta: “Consulte o motivo de cada registro em Conciliação”. Manter a explicação específica das regras na lista detalhada, sem inventar causa no agregado.",
+      "affected_files": [
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/e2e/review-regressions.spec.ts"
+      ],
+      "validation": "Usar fixture com cobertura suficiente e eventos de mesma identidade conflitantes; o resumo não deve dizer que falta cobertura, e a regra detalhada deve mostrar conflito de identidade.",
+      "effort": "baixo (pequeno — até 1 hora)",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "Agregado passou a dizer avaliações inconclusivas e orienta consultar o motivo individual em Conciliação, preservando as regras detalhadas existentes.",
+      "files_changed": [
+        "frontend/src/features/dossiers/dossier-view.tsx",
+        "frontend/e2e/audit-regressions.spec.ts"
+      ],
+      "checks_executed": [
+        "Playwright: agregado not_evaluable exibe o texto neutro e não exibe sem cobertura suficiente; testes unitários existentes de regras permanecem aprovados."
+      ],
+      "limitations": [
+        "A fixture de UI injeta o agregado; não reconstrói toda a conciliação de conflito de identidade pelo navegador."
+      ]
+    },
+    {
+      "id": "EVD-07",
+      "title": "Erros rejeitados pelo limite de corpo apresentam dois IDs de rastreamento",
+      "category": "Observabilidade e contrato de erro",
+      "severity": "Baixa",
+      "location": "backend/src/evidencedesk/body_limit.py:28–43; backend/src/evidencedesk/app.py:73,107–112",
+      "evidence": "JsonBodyLimit cria um UUID próprio e o coloca no corpo e no cabeçalho de suas rejeições. O middleware externo request_context cria outro UUID, substitui X-Request-ID e usa esse segundo valor no evento http.completed. A prova evd_request_id_probe.json reproduziu HTTP 413 com JSON request_id=92ebc0322a3f4c7d89d12b771dee2661 e X-Request-ID=5f5dd49c9eb5405a9a140b393ac278b4. A mesma construção de rejeição atende tamanho declarado/recebido, Content-Length inválido e timeout.",
+      "why": "O ID que a interface recebe no envelope de erro não é a chave de correlação registrada pelo middleware externo. Os testes do limitador isolado não exercitam essa composição.",
+      "impact": "Um relato de erro com o ID do JSON pode não localizar o evento HTTP correspondente nos logs, dificultando o diagnóstico de falhas de envio. Não foi identificado vazamento de dados nem desvio do limite de tamanho.",
+      "fix": "Definir um único request_id por requisição e reutilizá-lo no limitador, no envelope JSON, no cabeçalho e no evento de conclusão.",
+      "implementation": "Em JsonBodyLimit, obter o ID de scope['state'] já inicializado pelo middleware externo; criar e guardar um fallback somente se não existir. Manter essa regra válida quando o limitador for usado isoladamente. Evitar gerar um novo UUID dentro do ramo de rejeição.",
+      "affected_files": [
+        "backend/src/evidencedesk/body_limit.py",
+        "backend/src/evidencedesk/app.py",
+        "backend/tests/unit/test_body_limit.py"
+      ],
+      "validation": "Adicionar testes da aplicação criada por create_app, além do middleware isolado. Para rejeição por tamanho declarado, tamanho recebido, Content-Length inválido e prazo controlado, afirmar que o ID do JSON, do cabeçalho e do evento http.completed é igual, não vazio e gerado pelo servidor. Usar timeout curto controlado no teste.",
+      "effort": "baixo; estimativa: 1–2 horas",
+      "priority": "P2",
+      "effort_level": "baixo",
+      "status": "corrigido_validado",
+      "correction": "Limitador reutiliza scope.state.request_id, gerando e guardando fallback somente quando ausente; corpo, cabeçalho e evento http.completed passam a compartilhar o mesmo ID.",
+      "files_changed": [
+        "backend/src/evidencedesk/body_limit.py",
+        "backend/tests/unit/test_request_id_composition.py"
+      ],
+      "checks_executed": [
+        "Quatro testes HTTPX da aplicação criada por create_app: corpo declarado excessivo, excesso de bytes efetivos, Content-Length inválido e timeout controlado; ID não vazio coincide em JSON, cabeçalho e log."
+      ],
+      "limitations": [
+        "Timeout curto artificial no teste; não foi realizado ensaio de rede lenta externa."
+      ]
+    }
+  ],
+  "head_before": "e4dd8efe73e50999b9a75896ce74b75d460223da",
+  "status_before": "",
+  "head_after": "e4dd8efe73e50999b9a75896ce74b75d460223da",
+  "status_after": "M backend/src/evidencedesk/body_limit.py\n M backend/src/evidencedesk/incidents/routes.py\n M backend/src/evidencedesk/ingestion/routes.py\n M backend/src/evidencedesk/ingestion/service.py\n M docs/api-contract.md\n M frontend/src/features/dossiers/dossier-editor.tsx\n M frontend/src/features/dossiers/dossier-view.tsx\n M frontend/src/features/imports/new-import.tsx\n M frontend/src/features/incidents/incident-workspace.tsx\n M frontend/src/lib/contracts.ts\n M frontend/src/lib/form-errors.ts\n?? backend/tests/integration/test_audit_recovery.py\n?? backend/tests/unit/test_request_id_composition.py\n?? frontend/e2e/audit-regressions.spec.ts\n?? frontend/src/features/incidents/snapshot-select.tsx\n?? frontend/src/lib/audit-contracts.test.ts",
+  "checks_executed": [
+    {
+      "command": "python -B -m pytest backend/tests/unit backend/tests/integration/test_audit_recovery.py backend/tests/integration/test_manual_workflow.py backend/tests/integration/test_recent_lists.py -p no:cacheprovider -q --junitxml=../_correcoes_2026-10-13/evidencedesk-final-junit.xml",
+      "result": "214 passed (203 unitários + 11 integrações), 1 warning, 95,53 s",
+      "receipt": "evidencedesk-final-junit.xml; evidencedesk-final-pytest.log"
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=../../_correcoes_2026-10-13/evidencedesk-final-vitest.json",
+      "result": "81 testes aprovados em 14 arquivos",
+      "receipt": "evidencedesk-final-vitest.json; evidencedesk-final-vitest.log"
+    },
+    {
+      "command": "playwright test audit-regressions.spec.ts",
+      "result": "5 passed, 27,9 s; Chromium contra build de produção em 127.0.0.1:3216, API interceptada",
+      "receipt": "evidencedesk-browser-final/e2e-results.json; evidencedesk-final-playwright.log"
+    },
+    {
+      "command": "npm run build; npm run typecheck; npm run lint",
+      "result": "Build Next.js 16.3.8 e TypeScript aprovados; ESLint completo aprovado após ajuste do handler",
+      "receipt": "apps-final-validation.json; evidencedesk-final-eslint.log"
+    },
+    {
+      "command": "ruff check <arquivos Python alterados e novos>; git diff --check",
+      "result": "Aprovados; Git avisa somente normalização futura CRLF→LF em incidents/routes.py",
+      "receipt": "apps-final-validation.json"
+    }
+  ],
+  "limitations": [
+    "Execução local Windows com Node e ambiente Python já disponíveis (.venv do EvidenceDesk usada também para Loja); não representa instalação limpa de dependências nem execução do workflow Linux completo.",
+    "PostgreSQL real isolado no projeto Compose auditoria-fix-apps; aplicação e testes executados no host. Não houve implantação das stacks completas nem mudança em bases existentes.",
+    "Navegador Chromium usa APIs sintéticas interceptadas. Testes de backend exercitam banco e autenticação separadamente. Nenhuma credencial real ou chamada LLM paga foi usada.",
+    "Aviso conhecido de depreciação do alias AnyIO BlockingPortal em Starlette, sem falha de teste.",
+    "Sem commit, push ou PR; mudanças permanecem locais para revisão."
+  ],
+  "cleanup": "Servidores temporários nas portas 3212/3216 encerrados. Compose auditoria-fix-apps removido com down -v; inspeção não encontrou containers/volumes desse projeto ou listeners em 3212/3216/15542/15546. Artefatos de teste e logs preservados. Arquivos AGENTS.md/CLAUDE.md gerados pelo Next no EVD removidos; next-env.d.ts da Loja restaurado ao original.",
+  "independent_review": "audit_backend_ops inspecionou somente leitura: intenções, transações, migração, grants, paginação, request_id, SecretStr e semáforo; sem bloqueadores concretos.",
+  "changelog": "CHANGELOG_EVD_LOJ.md"
+}

@@ -1,0 +1,163 @@
+{
+  "observed_at": "2026-10-14 01:58:35 UTC",
+  "repo": "loja-assistente",
+  "sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+  "total_count": 1,
+  "runs": [
+    {
+      "id": 38498010897,
+      "name": "Local stack checks",
+      "head_branch": "main",
+      "head_sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "created_at": "2026-10-14T01:52:08Z",
+      "updated_at": "2026-10-14T01:52:13Z",
+      "html_url": "https://github.com/arthurjoanes/loja-assistente/actions/runs/38498010897",
+      "jobs": [
+        {
+          "id": 115638116607,
+          "name": "verify",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_id": 38498010897,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Verify published evidence without API calls",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Configure isolated local demo",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Scan application runtime images",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "PostgreSQL integration, contracts, lint, types and evaluations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Ensure verification preserved the published evaluation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Frontend checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Documented installation and HTTP demonstration",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Browser journeys",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 11
+            },
+            {
+              "name": "Run actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+              "status": "pending",
+              "conclusion": null,
+              "number": 12
+            },
+            {
+              "name": "Stop project containers",
+              "status": "pending",
+              "conclusion": null,
+              "number": 13
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "pending",
+              "conclusion": null,
+              "number": 26
+            }
+          ]
+        },
+        {
+          "id": 115638116821,
+          "name": "secret-history",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 38498010897,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Install checksum-pinned Gitleaks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Scan complete history",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "freeze_note": "Recibo congelado por solicitação do responsável em 2026-10-14 01:58:35 UTC. Browser journeys ainda em execução; não há aprovação da suíte completa nem contagens finais para este SHA. Monitoramento encerrado para exportação do pacote."
+}

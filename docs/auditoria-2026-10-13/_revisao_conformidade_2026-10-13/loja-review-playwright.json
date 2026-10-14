@@ -1,0 +1,552 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\loja-assistente\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/audit-regressions.spec.ts",
+      "--reporter=list,json",
+      "--output=../../_revisao_conformidade_2026-10-13/loja-review-test-output"
+    ],
+    "configFile": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\loja-assistente\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/loja-assistente/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/_revisao_conformidade_2026-10-13/loja-review-test-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/loja-assistente/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "audit-regressions.spec.ts",
+      "file": "audit-regressions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "LOJ-02: favorites failure preserves history and pending clarification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:55.655Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-4de9ee3ac8d072cdbb79",
+          "file": "audit-regressions.spec.ts",
+          "line": 108,
+          "column": 5
+        },
+        {
+          "title": "LOJ-02: history failure has an explicit recovery and is not empty content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 365,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:56.301Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-5987c1ba67e7678ec9f9",
+          "file": "audit-regressions.spec.ts",
+          "line": 132,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: a lost query response recovers its durable intent without posting twice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 609,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:56.677Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-3a11fd126bf85c62c27d",
+          "file": "audit-regressions.spec.ts",
+          "line": 160,
+          "column": 5
+        },
+        {
+          "title": "LOJ-03: previous conversations and the 101st response remain reachable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 644,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:57.294Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-df66d4b49ffe89d123dd",
+          "file": "audit-regressions.spec.ts",
+          "line": 196,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: navigation and favorites cannot clear an uncertain query",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1042,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:57.946Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-d1968fd224dcaebe3a18",
+          "file": "audit-regressions.spec.ts",
+          "line": 252,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: a missing admission resends the same intent with an accurate confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:58.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-0540fc1943cef32b6111",
+          "file": "audit-regressions.spec.ts",
+          "line": 316,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: starting another analysis abandons local recovery without another automatic request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:34:59.654Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-3f71b182c94771b8c7a9",
+          "file": "audit-regressions.spec.ts",
+          "line": 350,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: changing accounts clears an uncertain intent without recovering or reposting it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 772,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:35:00.386Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-d07ab2f23e70a45b952e",
+          "file": "audit-regressions.spec.ts",
+          "line": 389,
+          "column": 5
+        },
+        {
+          "title": "LOJ-01: receiving a different conversation cannot merge its answers or pagination cursor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:35:01.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-a7eb7bb4be04d9c39361",
+          "file": "audit-regressions.spec.ts",
+          "line": 467,
+          "column": 5
+        },
+        {
+          "title": "LOJ-04: civil dates cover leap years, year boundaries, 90 days and upper bound",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T00:35:02.544Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd4a11782f3aa674d53-d54f2f64aa19c7d63337",
+          "file": "audit-regressions.spec.ts",
+          "line": 516,
+          "column": 5
+        }
+      ],
+      "suites": [
+        {
+          "title": "UTC",
+          "file": "audit-regressions.spec.ts",
+          "line": 485,
+          "column": 8,
+          "specs": [
+            {
+              "title": "LOJ-04/05: included end dates and timestamps agree",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 457,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-14T00:35:01.181Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fcd4a11782f3aa674d53-8346b78e3b08c609d429",
+              "file": "audit-regressions.spec.ts",
+              "line": 487,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "America/Los_Angeles",
+          "file": "audit-regressions.spec.ts",
+          "line": 485,
+          "column": 8,
+          "specs": [
+            {
+              "title": "LOJ-04/05: included end dates and timestamps agree",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 450,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-14T00:35:01.648Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fcd4a11782f3aa674d53-2fb4cf870da2cfd27f93",
+              "file": "audit-regressions.spec.ts",
+              "line": 487,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "America/Sao_Paulo",
+          "file": "audit-regressions.spec.ts",
+          "line": 485,
+          "column": 8,
+          "specs": [
+            {
+              "title": "LOJ-04/05: included end dates and timestamps agree",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 427,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-14T00:35:02.108Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fcd4a11782f3aa674d53-7f945302fea9b0bc3aa2",
+              "file": "audit-regressions.spec.ts",
+              "line": 487,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T00:34:54.982Z",
+    "duration": 7670.625,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

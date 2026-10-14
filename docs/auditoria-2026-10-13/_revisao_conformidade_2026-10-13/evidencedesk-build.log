@@ -1,0 +1,37 @@
+
+> evidencedesk-frontend@0.1.0 build
+> next build
+
+▲ Next.js 16.3.8 (Turbopack)
+✓ Running next.config.ts took 187ms
+- Experiments (use with caution):
+  · cpus: 1
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 10.7s
+  Running TypeScript ...
+  Finished TypeScript in 8.4s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/6) ...
+  Generating static pages using 1 worker (1/6) 
+  Generating static pages using 1 worker (2/6) 
+  Generating static pages using 1 worker (4/6) 
+✓ Generating static pages using 1 worker (6/6) in 377ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /api/v1/[...path]
+├ ○ /icon.svg
+├ ƒ /imports
+├ ƒ /imports/[id]
+├ ƒ /imports/new
+└ ƒ /incidents/[id]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

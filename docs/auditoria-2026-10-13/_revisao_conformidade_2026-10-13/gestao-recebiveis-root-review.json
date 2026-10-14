@@ -1,0 +1,423 @@
+{
+  "repo": "gestao-recebiveis",
+  "docs_read": [
+    "README; docs/architecture; docs/api-contract e novo api-read-v2; docs/decisoes-tecnicas; docs/demo; docs/frontend-quality; docs/image-captures; docs/restore-proof: lidos antes da conclusão.",
+    "docs/security; fontes-e-afirmacoes e trechos relacionados de problem-solution, data-contract, provider-integration-plan e SECURITY-REVIEW-2026-10-03; não atribuir leitura integral às saídas truncadas.",
+    "Código/diff: rotas, schemas, respostas, reporting/v2, navegação workspace-route e testes de navegação/v2."
+  ],
+  "conclusion": "Propósito, telas e regras financeiras são coerentes: importar, conferir saldo, registrar parcelas e reconciliar lembretes simulados. Nenhum novo defeito de execução confirmado. O diagrama e as descrições de capturas precisavam acompanhar o contrato v2 e separar as datas das provas.",
+  "actions": [
+    "README e arquitetura agora identificam leituras /api/v2 junto de /api/v1.",
+    "Diagrama de componentes teve sobreposição entre rótulos de polling/claim removida, sem alterar os módulos.",
+    "restore-proof não chama todas as imagens de atuais; image-captures explicita aritmética, recortes e dois prints históricos ainda carregando."
+  ],
+  "findings_reviewed": [
+    "REC-01: URL validada, histórico nativo, links e retomada após login conferidos em código/teste.",
+    "REC-02: aging normaliza status para open no formulário e URL.",
+    "REC-03: ordem do breakpoint tablet preserva grade900/901/1050/1100.",
+    "REC-04: v2 limita linhas no SQL e conserva totais globais/snapshot; detalhe pagina separadamente.",
+    "REC-05: axe-core direto no manifesto/lock, require.resolve; advisory dev separado permanece aberto.",
+    "REC-06: labels e singular/plural centralizados; PNGhistórico não foi adulterado.",
+    "REC-07: roteiro atual cita revisãoe71c2f, locks/recusa/downgrade.",
+    "REC-08: NUL rejeitado antes da persistência; contrato de senha não normalizado."
+  ],
+  "visual_files": [
+    {
+      "path": "gestao-recebiveis/docs/contact/linkedin.svg",
+      "sha256": "f412000aba3b47898ec33ee8a719a938cf1550913362912be5d7c57957fbbc23",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/img/carteira.png",
+      "sha256": "459708dc634f5e2c4c7ec206151f5053bb5abb0ebaf036bb72fe7b42672813fb",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Carteira/tabela com 240 títulos, filtros, valores e vencimentos. Versão verde anterior separada da versão azul."
+    },
+    {
+      "path": "gestao-recebiveis/docs/img/resumo.png",
+      "sha256": "2a96d3f5ab351a4a1524380b4e4c72d0e898f5014aa132fdd2aaffc3f8e84faa",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Resumo histórico da carteira; valores/datas variam conforme rodada mencionada. Indicadores e tabela, sem série temporal. O histórico não comprova o checkout posterior."
+    },
+    {
+      "path": "gestao-recebiveis/docs/img/titulo.png",
+      "sha256": "ac1152d87ce49fd3466f9a2749ca93da05e2d08fd6c40e658f39c491f9d8906f",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Detalhe de título 1217,39 e ações/histórico daquela versão; recorte não mostra todos os estados possíveis."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/badges/architecture.svg",
+      "sha256": "6b0550c39b8b02f591c2a2d38ff60abe5c2377bf55a6733cac630dc90870f5aa",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/badges/demo.svg",
+      "sha256": "2313ad60c39e8d2b4e149c9ccf43f8cf656aade1eea856dee9e7a2c58b3aef4f",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/badges/evidence.svg",
+      "sha256": "ed1334eb66b17a0b449cfe31b8a5e1860c8642ad70a568251af1b53405672b5b",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/badges/linkedin.svg",
+      "sha256": "e120ecbfd46f00c1ed3e0786754456be8f96af63f2152da970c0420c134070ba",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/badges/run.svg",
+      "sha256": "ed91870dd2a52de94704398f7feb44517569f3e3ae58e1d12ca66c627d2bcdc7",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/home.png",
+      "sha256": "cf8d4813e3afb9938a31d9e86064317ec8f4763949308819226958b24aac94a4",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Resumo histórico da carteira; valores/datas variam conforme rodada mencionada. Indicadores e tabela, sem série temporal. O histórico não comprova o checkout posterior."
+    },
+    {
+      "path": "gestao-recebiveis/docs/readme/overview.png",
+      "sha256": "7a02c12fa084626da43e5944932c38cd4450e79aadaa80554e63c72e17df3355",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Resumo e tabela atuais da captura 12/10:516653,77  aberto = 244250,17  vencido + 272403,60  a vencer. Recebido 118316,93  tem recorte próprio. Não há gráfico de série."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/carteira.png",
+      "sha256": "5b02237f25f724d89f10978de38c1a6646022f9c57892ab4758a862dca3bf943",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Carteira/tabela com 240 títulos, filtros, valores e vencimentos. Versão verde anterior separada da versão azul."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/importacoes.png",
+      "sha256": "da61607ab943fd16ffdca21655bd63daeec9481b9f4830dcee7cade807671257",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tela de selecionarCSV antes de enviar. Não demonstra prévia/confirmação concluída."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/lembretes.png",
+      "sha256": "be16a39ed3a2bb4def07c4a8896e8f0d06fcb8729978ed773c776f961aaf499a",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Fila 144 lembretes com estado e data; não demonstra entrega externa."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/resumo-mobile.png",
+      "sha256": "36903f51f4cbac73330451dd693d027201921b2e21479e039998518db337e41f",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Indicadores recortados em 390 px; recebido pode ficar fora do crop. Não é página móvel inteira."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/resumo.png",
+      "sha256": "7b0ec309c6556d897efdbb2ba79d2140d9d90c784b14adeaad6e60336bcd031f",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Resumo histórico da carteira; valores/datas variam conforme rodada mencionada. Indicadores e tabela, sem série temporal. O histórico não comprova o checkout posterior."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/current-20260922/titulo.png",
+      "sha256": "8d67da29a09b5e4575211450478296ba2967574533380e0e96e8eb70ea3a8382",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Detalhe de título 1217,39 e ações/histórico daquela versão; recorte não mostra todos os estados possíveis."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/publication-20260922/overview.png",
+      "sha256": "ca432d43fb20cbfa3a5a4014c179354ffc79bdf94e964c0aea3af7e72ac9b1ba",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Resumo histórico da carteira; valores/datas variam conforme rodada mencionada. Indicadores e tabela, sem série temporal. O histórico não comprova o checkout posterior."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/1054efee71e84949a4951d5f752c5be2/03-mesma-tentativa-reconciliada.png",
+      "sha256": "0e57284992be902b442847bfafba3374d8b40add2585591ae89f01b17f5006cf",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tentativa 1 concluída/entrega simulada 1. A versão 11 ad é 75; versões posteriores 50. Não misturar as rodadas nem inferir entrega externa."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/1054efee71e84949a4951d5f752c5be2/04-mesma-baixa-preservada.png",
+      "sha256": "d1d2cdf9843f3297d2fe1c0b83f72d56bc15235287be7064b10ae0563e076775",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Título 50 pago, saldo 0 e pagamento 50. Mesmo ID após restore é verificado nos recibos; print é foto do estado final."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/1054efee71e84949a4951d5f752c5be2/05-parcela-saldo-preservados.png",
+      "sha256": "162b3dbf2bf5f75d107fc1fc9748dfe5336b9b169f72c73dacd3aed67ec3dfc5",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Título 75, recebido 25, saldo 50; mostra pagamento parcial coerente com extrato."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/1054efee71e84949a4951d5f752c5be2/06-extrato-operacional.png",
+      "sha256": "39bf243d16d3fd936a70860b0d266ef382b0554bc8e555af825f5db1f0c187af",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tentativa histórica mostra Carregando…, sem relatório pronto. Não sustenta conclusão financeira; a prova final 6 e 75361 b fornece extrato/aging completos."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/1054efee71e84949a4951d5f752c5be2/07-aging-residual.png",
+      "sha256": "bc766e80a4fb1ba84db7f099e000ce271e41ddb81d038b548a24efd5e00ce672",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tentativa histórica mostra Carregando…, sem relatório pronto. Não sustenta conclusão financeira; a prova final 6 e 75361 b fornece extrato/aging completos."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/11adf9df35ba4314945ffdd4fbaeabfc/01-lote-confirmado.png",
+      "sha256": "ae0ee12c55b1f6a197888a845a6fcd35276d8162a2cb34fe0ae7712b0f179d67",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Importação confirmada com dois títulos 50+75=125. Pixels mostram estado; identidade/idempotência depende da consulta do manifesto."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/11adf9df35ba4314945ffdd4fbaeabfc/02-conflito-sem-alteracao-financeira.png",
+      "sha256": "99c2660de2754eeab014cca01a5db81e39a5d6e03d982b9e5dbfb74b3d6bd0d9",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "CSV rejeitado 150=51+99, divergindo do título original 50. Novo é diagnóstico, não inclusão confirmada. Saldo 125 preservado depende de prova do banco."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/11adf9df35ba4314945ffdd4fbaeabfc/03-mesma-tentativa-reconciliada.png",
+      "sha256": "a62a27e9085cdb60060b6c5c9f3caa05c2ba471ede9cb7aa8e5a8e657d0e533d",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tentativa 1 concluída/entrega simulada 1. A versão 11 ad é 75; versões posteriores 50. Não misturar as rodadas nem inferir entrega externa."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/11adf9df35ba4314945ffdd4fbaeabfc/04-mesma-baixa-preservada.png",
+      "sha256": "4b97f57a10227a0b6970cc9d16c4e32e9485ef11c31c0af6c4dda99553481420",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Título 50 pago, saldo 0 e pagamento 50. Mesmo ID após restore é verificado nos recibos; print é foto do estado final."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/6e75361b018645ffa98bce7ad338d4d4/03-mesma-tentativa-reconciliada.png",
+      "sha256": "ac085b743c54b49223cec0a0f4e623fd70e95158cd259d8ea21fc4cb31235872",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Tentativa 1 concluída/entrega simulada 1. A versão 11 ad é 75; versões posteriores 50. Não misturar as rodadas nem inferir entrega externa."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/6e75361b018645ffa98bce7ad338d4d4/04-mesma-baixa-preservada.png",
+      "sha256": "d036ff0b067a82c2ef867e7612fdadbdb2654558e50dc839e967f5952e4285ad",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Título 50 pago, saldo 0 e pagamento 50. Mesmo ID após restore é verificado nos recibos; print é foto do estado final."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/6e75361b018645ffa98bce7ad338d4d4/05-parcela-saldo-preservados.png",
+      "sha256": "3f499bd43bac2af37fe83e29d3ea582b1fd76548e46b9ed9f41c65a0082b83b0",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Título 75, recebido 25, saldo 50; mostra pagamento parcial coerente com extrato."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/6e75361b018645ffa98bce7ad338d4d4/06-extrato-operacional.png",
+      "sha256": "1ae9eb6ad634b2f5bcc619689ca6565753997f98bf8d2d22141aeb6f5311c2ed",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Extrato final 125 original−75 recebido=50 saldo; títulos 50 quitado/75 parcial, recebimentos 50+25; intervalos/datas de negócio explícitos."
+    },
+    {
+      "path": "gestao-recebiveis/docs/screenshots/restore-proof/6e75361b018645ffa98bce7ad338d4d4/07-aging-residual.png",
+      "sha256": "03b66b648b39d7cb3dfaf45f048d8467bc237560893fd4dc3bbff4e753fcfc42",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Agingfinal 50  na faixa A vencer, demais 0,um título. Texto histórico 1 títulos antecedeREC 06; não editarPNGpara mascarar."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/docker.svg",
+      "sha256": "d6a20ef1d5ae3890534c223641f812666a74cf7ca61d3728857214cc69b1374b",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/fastapi.svg",
+      "sha256": "9ad95ccc969f8092e978444da6e3880ef269bcba170af2b00d0434e176bbcfb3",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/nextjs.svg",
+      "sha256": "ae646ed1e334a805afc652373538a7cf4c998105c22d107745850d54a59abb80",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/postgresql.svg",
+      "sha256": "b52b0212f066652965db98e02c0bd17306f37fb342b61ce7cdc8cd61438a961e",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/python.svg",
+      "sha256": "0218b5f3c8f49b5df57c004693b4b030cf892da79c3edb87228c72aa939037ae",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/react.svg",
+      "sha256": "17aaf6649f45ec46461b2d5775e48fb729e2cbaca074a05574f7f39e81fe6ec6",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/docs/stack/typescript.svg",
+      "sha256": "34f1d4c866d51eff1ea4bca363796917e0e863288ed66c25b538613d6c144fdb",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/mark-mono.svg",
+      "sha256": "730873d937888ebcee827048a1d4db7bdc07827920053ea5a19924bb80657e31",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/mark-reverse.svg",
+      "sha256": "66f0510e2320af8533eb4a011af207388d3aa5645cbb1e073253661e21bef282",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/mark.svg",
+      "sha256": "d2f3c85354d3601694877e047f9559a9285f075d960d354b053d1ff46e6df913",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/mono.svg",
+      "sha256": "c1f9c9c2a8ac50d85ac6e0a7b40f30fb4c6ec7341644543f008d4546ca003910",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/reverse.svg",
+      "sha256": "9490b10a875f78bfd2bdb777ab4b6b5dca565a33ac3ea958bc377efff70b321c",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/public/brand/wordmark.svg",
+      "sha256": "b0b14cd7cf55c089716b8187d9a2ed626186a48332c74550bb2a6439325c4652",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    },
+    {
+      "path": "gestao-recebiveis/frontend/src/app/icon.svg",
+      "sha256": "ba187835b033f794bdc201e86c58851747b09629c554320406d35d79155bde6e",
+      "unchanged": true,
+      "visual_content_reviewed": true,
+      "method": "pixels: PNGs em pranchas; originais ampliados quando densos; SVGs renderizados em Chromium",
+      "observation": "Marca R/Recebíveis, badge de navegação ou ícone de stack/contato; renderizado sem deformação. Variantes reversas sobre fundo escuro. Não comprova operação."
+    }
+  ],
+  "diagram_review": [
+    {
+      "document": "gestao-recebiveis/README.md",
+      "line": 46,
+      "source": "flowchart TB\r\n    Browser[\"Operador ou leitor\"]\r\n    Web[\"Next.js :3101<br/>carteira, CSV e histórico\"]\r\n    API[\"FastAPI :8101<br/>sessão, CSRF e perfil<br/>importação, parcelas e relatórios\"]\r\n    DB[(\"PostgreSQL interno<br/>lotes, carteira e pagamentos<br/>sessões, fila e auditoria\")]\r\n    Worker[\"Worker Python<br/>etapas D-3 / D0 / D+3 / D+7<br/>lease e token de posse\"]\r\n    Fake[\"FakeProvider no worker<br/>resultado por tentativa<br/>entrega por chave idempotente\"]\r\n    Browser -->|\"HTTP · cookie e CSRF\"| Web\r\n    Web -->|\"proxy /api/v1 e /api/v2\"| API\r\n    API -->|\"SQL · commit antes da resposta\"| DB\r\n    DB -.->|\"polling de jobs\"| Worker\r\n    Worker -->|\"autoriza e finaliza em transações\"| DB\r\n    Worker -->|\"send após commit\"| Fake\r\n    Fake -->|\"resultado e entrega persistidos\"| DB\r\n",
+      "file": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\_revisao_conformidade_2026-10-13\\gestao-recebiveis-vectors\\diagram-1.png",
+      "ok": true
+    },
+    {
+      "document": "gestao-recebiveis/docs/architecture.md",
+      "line": 13,
+      "source": "flowchart TB\r\n    Browser[\"Navegador · operador ou leitor\"]\r\n    Web[\"frontend · Next.js :3101<br/>rewrite /api para api:8101\"]\r\n    subgraph ApiProcess[\"api · FastAPI :8101\"]\r\n        Guard[\"routes.py + auth.py<br/>sessão, Origin, CSRF e perfil\"]\r\n        Import[\"import_csv.py + imports.py<br/>prévia e confirmação do CSV\"]\r\n        Financial[\"receivables.py + reporting.py<br/>baixa, cancelamento e consultas\"]\r\n    end\r\n    subgraph WorkerProcess[\"worker · Python\"]\r\n        Schedule[\"schedule + policy.py<br/>etapas e reserva do dia\"]\r\n        Execute[\"claim → authorize → finish<br/>heartbeat e token de posse\"]\r\n        Fake[\"FakeProvider.send<br/>módulo local, transação própria\"]\r\n    end\r\n    subgraph Database[\"db · PostgreSQL interno · volume postgres-data\"]\r\n        Access[(\"users · sessions<br/>login_admission · demo_state\")]\r\n        Ledger[(\"customers · receivables · payments<br/>import_batches · import_lines<br/>audit_events\")]\r\n        Queue[(\"reminders · attempts<br/>reminder_day_guards\")]\r\n        ProviderLedger[(\"provider_results · deliveries\")]\r\n    end\r\n    Browser -->|\"HTTP /api/v1 e /api/v2 · cookie e CSRF\"| Web\r\n    Web -->|\"proxy HTTP na rede Compose\"| Guard\r\n    Guard -->|\"identidade e estado demo\"| Access\r\n    Guard -->|\"operador: importar\"| Import\r\n    Guard -->|\"consulta; operador: mutação\"| Financial\r\n    Import -->|\"bytes, diagnóstico e savepoint financeiro\"| Ledger\r\n    Financial -->|\"locks, baixa e auditoria\"| Ledger\r\n    Financial -->|\"cancela pendências na mesma transação\"| Queue\r\n    Schedule -->|\"lê vencimentos e estado do título\"| Ledger\r\n    Schedule -->|\"insere etapa e reserva diária\"| Queue\r\n    Execute -->|\"revalida título sob lock\"| Ledger\r\n    Execute -->|\"claim e atualização com lease/token\"| Queue\r\n    Execute -->|\"após commit da autorização\"| Fake\r\n    Fake -->|\"lê payload autorizado\"| Queue\r\n    Fake -->|\"grava resultado e entrega\"| ProviderLedger\r\n",
+      "file": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\_revisao_conformidade_2026-10-13\\gestao-recebiveis-vectors\\diagram-2.png",
+      "ok": true
+    },
+    {
+      "document": "gestao-recebiveis/docs/architecture.md",
+      "line": 121,
+      "source": "sequenceDiagram\r\n    participant W as Worker\r\n    participant DB as PostgreSQL\r\n    participant P as FakeProvider no worker\r\n    W->>DB: claim: SKIP LOCKED, lease e token + 1\r\n    DB-->>W: COMMIT da posse\r\n    W->>DB: authorize: lock título → job, grava attempt\r\n    DB-->>W: COMMIT da autorização e attempt_id\r\n    Note over W,P: Nenhum lock financeiro atravessa send()\r\n    W->>P: send(attempt_id)\r\n    P->>DB: grava delivery e provider_result\r\n    DB-->>P: COMMIT da aceitação\r\n    P--xW: ResponseLost após commit\r\n    W->>DB: finish: attempt unknown, job retry_scheduled\r\n    DB-->>W: COMMIT, aguarda next_attempt_at\r\n    W->>DB: novo claim + authorize, recupera mesma attempt\r\n    DB-->>W: COMMIT, token novo e mesmo attempt_id\r\n    W->>P: send(mesmo attempt_id)\r\n    P->>DB: lê provider_result já persistido\r\n    DB-->>P: resultado original\r\n    P-->>W: success, sem nova delivery\r\n    W->>DB: finish confere token/lease e marca sent\r\n",
+      "file": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\_revisao_conformidade_2026-10-13\\gestao-recebiveis-vectors\\diagram-3.png",
+      "ok": true
+    }
+  ],
+  "tests_this_phase": "Renderização de SVGs/Mermaid, inspeção visual e conferência documental; suítes anteriores não reexecutadas pelo root.",
+  "limitations": [
+    "Capturas históricas não comprovam visual do código posterior.",
+    "Sem leitor de tela, dispositivos físicos, nova medição de contraste ou estudo com pessoas.",
+    "Documentos de fonte/contratos relacionados foram lidos; licenças e logs brutos não receberam leitura integral."
+  ]
+}

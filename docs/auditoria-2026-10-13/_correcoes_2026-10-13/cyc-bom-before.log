@@ -1,0 +1,46 @@
+
+ RUN  v5.0.3 C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/CycleOps/apps/web
+
+ ❯ tests/unit/artifact-loading.test.ts (11 tests | 6 failed) 1296ms
+   ❯ artifact downloads (11)
+     × rejects an added UTF-8 BOM in catalog.json, encoded=false 128ms
+     × rejects an added UTF-8 BOM in catalog.json, encoded=true 72ms
+     × rejects an added UTF-8 BOM in diagnostics.json, encoded=false 128ms
+     × rejects an added UTF-8 BOM in diagnostics.json, encoded=true 70ms
+     × rejects an added UTF-8 BOM in events.ndjson.gz, encoded=false 117ms
+     × rejects an added UTF-8 BOM in events.ndjson.gz, encoded=true 64ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in catalog.json, encoded=false
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in catalog.json, encoded=true
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in diagnostics.json, encoded=false
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in diagnostics.json, encoded=true
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in events.ndjson.gz, encoded=false
+ FAIL  tests/unit/artifact-loading.test.ts > artifact downloads > rejects an added UTF-8 BOM in events.ndjson.gz, encoded=true
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/artifact-loading.test.ts:108:66
+    106|       return new Response(changed === name ? Buffer.concat([bom, Buffe…
+    107|     }));
+    108|     await expect(loadArtifact("synthetic").then(() => undefined)).reje…
+       |                                                                  ^
+    109|   });
+    110| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 5 passed (11)
+   Start at  20:48:09
+   Duration  54.23s (environment 80%, setup 16%, tests 2%, transform 2%)
+

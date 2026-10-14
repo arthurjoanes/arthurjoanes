@@ -1,0 +1,18 @@
+﻿{
+    "limitation":  "Stub sintético. Nenhum daemon, recurso real ou comando Docker executado.",
+    "session_rejected_before_docker":  true,
+    "parser_errors":  0,
+    "default_docker_stub_calls":  1,
+    "default_argv":  [
+                         "compose",
+                         "--project-directory",
+                         "C:\\synthetic-clone",
+                         "-p",
+                         "pf-containerops",
+                         "-f",
+                         "C:\\synthetic-clone\\compose.yaml",
+                         "ps",
+                         "-a"
+                     ],
+    "result":  "passed"
+}

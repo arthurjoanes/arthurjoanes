@@ -1,0 +1,593 @@
+{
+  "repo": "api-sentinel",
+  "head": "a0e1375bfecabcdf0a5e98802598bff63bbe44f6",
+  "status": "revisado_com_ajustes_documentais",
+  "docs_read": [
+    "README.md",
+    "docs/architecture.md",
+    "docs/demo.md",
+    "docs/verification.md",
+    "docs/incident-console.md",
+    "docs/screenshots.md",
+    "docs/operational-story.md",
+    "docs/security.md",
+    "docs/decisoes-tecnicas.md",
+    "docs/problem-solution.md"
+  ],
+  "code_read": [
+    "diff alert_receiver/storage.py",
+    "diff alert_receiver/ui.py",
+    "diff alert_receiver/app.py",
+    "diff scripts/render_ui_preview.py",
+    "diff tests/unit/test_data_private_file.py",
+    "diff tests/unit/test_receiver_ui.py",
+    "tests/unit/test_receiver_pagination_ids.py",
+    "src/api_sentinel/config.py (quota)"
+  ],
+  "ids_reviewed": [
+    {
+      "id": "API-01",
+      "result": "conforme",
+      "evidence": "Migração BEGIN IMMEDIATE, FK suspensa antes da transação, copia IDs/eventos, restaura índices e verifica foreign_key_check. Limite de IDs já apagados documentado; testes retenção/reabertura/rollback."
+    },
+    {
+      "id": "API-02",
+      "result": "conforme",
+      "evidence": "Consulta limit+1, desempate por ID, cursor por filtro e retenção, navegação/retorno preservados. Snapshot entre páginas explicitamente não congelado; teste205/100-100-5."
+    },
+    {
+      "id": "API-03",
+      "result": "conforme",
+      "evidence": "copytree assets públicos, teste bytes e manifest; doc raiz HTTP. Recibo anterior confirma4assets/fonte/marca."
+    },
+    {
+      "id": "API-04",
+      "result": "conforme",
+      "evidence": "Bloco Python3 urllib lê token UTF-8 e imprime só3campos. Recibo anterior validou com transporte sintético; não afirmada consulta real nova."
+    },
+    {
+      "id": "API-05",
+      "result": "conforme",
+      "evidence": "Conteúdo UTF-8 portável,0600 condicionado POSIX; testes Linux/root preservados."
+    }
+  ],
+  "changes": [
+    {
+      "path": "docs/demo.md",
+      "reason": "Explicar paginação além de100 e ID como atalho."
+    },
+    {
+      "path": "docs/decisoes-tecnicas.md",
+      "reason": "Atualizar limite por página, navegação e GCRA já existente, mantendo janela fixa padrão."
+    },
+    {
+      "path": "docs/problem-solution.md",
+      "reason": "Gráfico usa página atual, não sempre primeiros100 do filtro."
+    },
+    {
+      "path": "docs/screenshots.md",
+      "reason": "Identificar capturas anteriores à paginação e HTML histórico que depende de assets da execução."
+    }
+  ],
+  "checks_current": [
+    {
+      "command": "node render-other-review.cjs api-sentinel api",
+      "result": "24SVGs e1HTML renderizados. 25PNGs originais vistos individualmente (mobile em2partes).",
+      "limitation": "Primeira tentativa de screenshot SVG direto expirou; segunda via img local concluída. HTML histórico sem CSS/JS originais."
+    },
+    {
+      "command": "node render-review-diagrams.cjs api-sentinel",
+      "result": "3 diagramas renderizados e vistos."
+    },
+    {
+      "command": "git -C api-sentinel diff --check",
+      "result": "aprovado"
+    },
+    {
+      "command": "SHA256 dos49visuais+1HTML",
+      "result": "50/50 preservados"
+    }
+  ],
+  "previous_receipts_reviewed": [
+    "_correcoes_2026-10-13/api-sentinel.json:384 Windows e386 Linux, lint/tipos e limites registrados; nenhuma suíte reexecutada nesta revisão.",
+    "_correcoes_2026-10-13/api-qa/browser.json:205itens em3páginas,320/768/1440,teclado/retorno/assets aprovados; é recibo anterior."
+  ],
+  "visual_matrix": {
+    "palette": "Azul/petróleo atual separa marca de estados vermelho/verde/neutro; fotos antigas verde/laranja identificadas como históricas.",
+    "typography": "Títulos, números e horários legíveis em pixels nativos; labels menores exigem abrir imagem original.",
+    "spacing": "Fila desktop e coluna móvel preservam grupos; capturas parciais do runbook/topo não alegam fluxo completo.",
+    "icons": "24SVGs vistos, marca/seta, stack, badges; ícones com rótulos.",
+    "charts": "Barra1:2, três inícios no dia12 e fixture8500+4000=12500 conferidos. Dados sintéticos e amostra explícitos.",
+    "states": "Ativo, recuperado, administrativo, firing atrasado, vazio e probe validado/desativado visíveis. Não é saúde atual."
+  },
+  "visuals": [
+    {
+      "path": "api-sentinel/alert_receiver/assets/favicon.svg",
+      "viewed": true,
+      "sha256": "ef70b05afcec9faedbad79724a331d61b23e9bdcb4040bdad3c17845cdd484d8",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00864"
+      ]
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/mark-light.svg",
+      "viewed": true,
+      "sha256": "7d376b76cd28f1eb35dea9af99afdc189d03c7fbe4823977bb459da3ed313fb1",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00863"
+      ]
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/mark-mono.svg",
+      "viewed": true,
+      "sha256": "394d0abffd86fe9aef1173c7916de6edbbd501838953bc1e08f33d9230c6e299",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/mark.svg",
+      "viewed": true,
+      "sha256": "ef70b05afcec9faedbad79724a331d61b23e9bdcb4040bdad3c17845cdd484d8",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/wordmark-light.svg",
+      "viewed": true,
+      "sha256": "69a70623ac200fd9817c53729fb2978ef21c0740e1ffb63ddf51c7008ddcf967",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/wordmark-mono.svg",
+      "viewed": true,
+      "sha256": "1bc2bbf5b1f090654ff3eda53dfb41bd008026cc20417fad9417287a0687dc27",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/alert_receiver/assets/wordmark.svg",
+      "viewed": true,
+      "sha256": "8d2fb649bd6e133a4740aed582e053d373c10f65408a582d9e83f21774ffdfba",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/contact/linkedin.svg",
+      "viewed": true,
+      "sha256": "f412000aba3b47898ec33ee8a719a938cf1550913362912be5d7c57957fbbc23",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00530"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/architecture.svg",
+      "viewed": true,
+      "sha256": "4f55345ff09b0267672e360764a16173a4094bac957c189d7a467d81ccd39bee",
+      "hash_preserved": true,
+      "conclusion": "Mapa SVG aberto individualmente: Bearer→NGINX→API, PostgreSQL/Redis/ERP e telemetria em um host; setas e legendas legíveis e coerentes.",
+      "reference_ids": [
+        "use-00514",
+        "use-00549"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/badges/architecture.svg",
+      "viewed": true,
+      "sha256": "f5fbada0cbaf0e1fe65f2b2316220f9e7edd14f91fbc346d4342deb8d56c296a",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00518"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/badges/demo.svg",
+      "viewed": true,
+      "sha256": "a03dbe9eef9d07c5dc83b7e3684d250fcb8ff6e09d3509970f072bea15fbabaf",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00517"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/badges/evidence.svg",
+      "viewed": true,
+      "sha256": "b0be2714334673cba6397889757d45d09fb1998f1b68ee7a8cca57a023c2d3e1",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00520"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/badges/linkedin.svg",
+      "viewed": true,
+      "sha256": "e120ecbfd46f00c1ed3e0786754456be8f96af63f2152da970c0420c134070ba",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00521"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/badges/run.svg",
+      "viewed": true,
+      "sha256": "165b861aa9ca3961a67c026945ec8c9ddbdee58f0994c608e1ed16b26d5ba1d6",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00519"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/commercial-fixture.svg",
+      "viewed": true,
+      "sha256": "f148adbc29fabd9f9ef2c301edd8d3131eea8f04324bc8fbae50ed01efd88e29",
+      "hash_preserved": true,
+      "conclusion": "Gráfico SVG individual: eixo0–10000 centavos, barras8500/4000 proporcionais; soma12500,4unidades,2pedidos,ticket62,50 corretos.",
+      "reference_ids": [
+        "use-00513",
+        "use-00548"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/home.png",
+      "viewed": true,
+      "sha256": "c909e7adc9d036832e5dabce9359cea0ae462c36fdad7e1cd867bfebc74809f9",
+      "hash_preserved": true,
+      "conclusion": "Central anterior azul, 21 finalizados, zero ativos, probe validado; viewport parcial, sem afirmar saúde atual.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/readme/incident-detail.png",
+      "viewed": true,
+      "sha256": "231253ca41a14961805ec521c9fd0244e6072c7041f1185c3e23c0217d4f82c8",
+      "hash_preserved": true,
+      "conclusion": "Detalhe sintético ERP ativo #1: intervalo 05:40–06:00 UTC, dois eventos às06:00. Escopo prévia12/10 explícito.",
+      "reference_ids": [
+        "use-00512",
+        "use-00536",
+        "use-00547"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/incidents.png",
+      "viewed": true,
+      "sha256": "8c799f8dd1d274790e4b054f24ff56cdd269c3ab19e237e15a24c401f0e4d00c",
+      "hash_preserved": true,
+      "conclusion": "Central sintética12/10:1 ativo e2 finalizados; barra1:2 e três inícios no dia12, seis dias zerados; probe desativado. Legenda correta.",
+      "reference_ids": [
+        "use-00511",
+        "use-00535",
+        "use-00546"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/readme/palette.svg",
+      "viewed": true,
+      "sha256": "1fe73a96229107977cf510e798708150fdc75babd661c8d87c58d9de50b62c83",
+      "hash_preserved": true,
+      "conclusion": "Seis cores com códigos e nomes coerentes com tabela README; contraste não medido nesta rodada.",
+      "reference_ids": [
+        "use-00515"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/central-desktop.png",
+      "viewed": true,
+      "sha256": "4a98d82c352a625587a3e9dbdbb475159313be7ba948c907ef1ee494977b2c3a",
+      "hash_preserved": true,
+      "conclusion": "Central histórica laranja:1 ativo18recuperados; página parcial, sem confundir com design atual.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/central-mobile.png",
+      "viewed": true,
+      "sha256": "668ed0593d14ef4d610c8f4e7f665205696704de25354d213ad511d3c0a5f61b",
+      "hash_preserved": true,
+      "conclusion": "Versão móvel histórica laranja com probe e contadores legíveis; só topo da página.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/editorial-20260922/01-fixture-validada-detalhe.png",
+      "viewed": true,
+      "sha256": "48afe1ea77dc18348fa930cf6a34f77d8d52e5eae559f8bdeefef284d80cb7d2",
+      "hash_preserved": true,
+      "conclusion": "Recorte nativo do probe:125/2/62,50, success,8ms, validade15s e2réplicas desejadas. Não é latência garantida.",
+      "reference_ids": [
+        "use-00537"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/editorial-20260922/01-fixture-validada.png",
+      "viewed": true,
+      "sha256": "500a06026dbb564741de3f081f40cf53ce6bf713f45c1a03995a488e43a341c3",
+      "hash_preserved": true,
+      "conclusion": "Página histórica sem incidentes e probe validado22/09 12:52:13; mesma referência125/2/62,50.",
+      "reference_ids": [
+        "use-00538"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/editorial-20260922/02-incidente-ativo.png",
+      "viewed": true,
+      "sha256": "eb2678f40b49bb683069f3fb0b3dd7d87fd6fd8b6b478d4b2e20fec7f939fe69",
+      "hash_preserved": true,
+      "conclusion": "Ocorrência#2 ativa; início12:53:23 e entrega12:53:33, identidade e runbook visíveis.",
+      "reference_ids": [
+        "use-00539",
+        "use-00540"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/editorial-20260922/03-mesma-ocorrencia-recuperada-detalhe.png",
+      "viewed": true,
+      "sha256": "7660bd18e34db469c5164c039567e2af9134fd9ead2822ab280b3be1de5f0923",
+      "hash_preserved": true,
+      "conclusion": "Histórico#2: abertura12:53:33 e recuperação12:53:53, fingerprint preservado. Confere legenda.",
+      "reference_ids": [
+        "use-00516",
+        "use-00541"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/editorial-20260922/03-mesma-ocorrencia-recuperada.png",
+      "viewed": true,
+      "sha256": "6cd0fe7f05d22c5cac26a56375737c8ff105cdf4261be0ea266154413f641e27",
+      "hash_preserved": true,
+      "conclusion": "Ocorrência#2 resolvida, período termina12:53:43; recebimento12:53:53 separado. Sem confundir relógios.",
+      "reference_ids": [
+        "use-00542"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/focused-20260922/fila-foco.png",
+      "viewed": true,
+      "sha256": "6cea7333e5da99f47395a61e2e88ac5d8cf9794658176a296bb33c26cb16bd86",
+      "hash_preserved": true,
+      "conclusion": "Recorte da fila21finalizados; duas linhas completas com recuperação e investigação.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/focused-20260922/fila-movel-foco.png",
+      "viewed": true,
+      "sha256": "18ea63f067e3e8cf64a003a88cf5fa0fbf7066c5b0b97c412c7f221a9bf3345a",
+      "hash_preserved": true,
+      "conclusion": "Fila móvel com21finalizados; primeira linha, investigação e datas legíveis.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/focused-20260922/historico-foco.png",
+      "viewed": true,
+      "sha256": "fd996225908265c332c90575280f71de2870dea71613bc15095188c2d4029235",
+      "hash_preserved": true,
+      "conclusion": "Histórico21/09 com abertura04:19:08 e recuperação04:19:28; duas entregas.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/incident-history-desktop.png",
+      "viewed": true,
+      "sha256": "06f91d63f1f212c660ab732b1ea58962e60ad3b0e154f1267c358f7654a0bcdf",
+      "hash_preserved": true,
+      "conclusion": "Prévia antiga verde #42 resolvida, firing atrasado ignorado e três eventos visíveis; quatro entregas acumuladas não equivalem à retenção.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/incidents-desktop.png",
+      "viewed": true,
+      "sha256": "7b241d5903fc1aa6ee13388cbf033eaeb630f81f02f24b9f85d345446147cc4a",
+      "hash_preserved": true,
+      "conclusion": "Prévia antiga verde com1ativo,2finalizados, estados recuperado e administrativo diferenciados.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/incidents-mobile.png",
+      "viewed": true,
+      "sha256": "5e36e4675738ad7de8173c1c5aa9d381c41d7833429db28cb6f82bcd3a9ed864",
+      "hash_preserved": true,
+      "conclusion": "Mesma prévia móvel; duas partes inspecionadas, três ocorrências e rodapé legíveis. Não prova UI atual.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t053056476675z/01-fixture-validada.png",
+      "viewed": true,
+      "sha256": "15a9ee4406d0ac37f4ef41dce17fdc66d7351e85be8b3cf854d2b522b4d56167",
+      "hash_preserved": true,
+      "conclusion": "Tentativa histórica05:30: central vazia, probe05:33:09 success e125/2/62,50.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t053056476675z/02-incidente-ativo.png",
+      "viewed": true,
+      "sha256": "d99db8a48d1af36a0f9758aaace6068f08516f9bb5c7af69f8502b6a2104552e",
+      "hash_preserved": true,
+      "conclusion": "Tentativa05:30: #3 ativa, início05:34:18, recebimento05:34:28.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t053056476675z/03-mesma-ocorrencia-recuperada.png",
+      "viewed": true,
+      "sha256": "5a0ed1b5bd425b3134fc3865131f6b371282741e31b0a6682e3d8f1672362349",
+      "hash_preserved": true,
+      "conclusion": "Tentativa05:30: mesma#3 resolvida; origem05:34:43 e recebimento05:34:48.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t054206130821z/01-fixture-validada.png",
+      "viewed": true,
+      "sha256": "0db6a49f9935536b2aee35a8a0c126246313f33bffd10bb3b9bad737669a1acd",
+      "hash_preserved": true,
+      "conclusion": "Tentativa selecionada05:42: central vazia, probe05:44:17 e125/2/62,50.",
+      "reference_ids": [
+        "use-00543"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t054206130821z/02-incidente-ativo.png",
+      "viewed": true,
+      "sha256": "7ff610793cf222d005eebfafa5934740d818e0a7330a2da4f84bbba428c38f74",
+      "hash_preserved": true,
+      "conclusion": "Tentativa05:42: #3ativa com entrega05:45:38 e início05:45:33.",
+      "reference_ids": [
+        "use-00544"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/operational-story-20260922/20260922t054206130821z/03-mesma-ocorrencia-recuperada.png",
+      "viewed": true,
+      "sha256": "d4bcb4573be1b5ed910565f9f205f0ffb65882071f24b856800ff80a5df875fa",
+      "hash_preserved": true,
+      "conclusion": "Tentativa05:42: mesma#3resolvida, origem05:45:48 e recebimento05:45:58; confere história.",
+      "reference_ids": [
+        "use-00545"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/runbook-desktop.png",
+      "viewed": true,
+      "sha256": "8a8db3ea28f20b5ce2ce2f102a1edc696556013c3612e717cce3c319415b72a2",
+      "hash_preserved": true,
+      "conclusion": "Runbook antigo perda de réplica; título, comandos PromQL e Docker legíveis. Captura termina antes do fim do procedimento.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/runbooks-desktop.png",
+      "viewed": true,
+      "sha256": "c87a4b3a592414acce4bf30705af2678babc54f5516c626801661a9b0a817c76",
+      "hash_preserved": true,
+      "conclusion": "Índice antigo dos sete runbooks com ações claras; prévia declarada.",
+      "reference_ids": []
+    },
+    {
+      "path": "api-sentinel/docs/screenshots/syntax-20260922/runbook-code.png",
+      "viewed": true,
+      "sha256": "2926b5183a86fb54b89c4478559af880a82159817ae7e05488627432e02b8414",
+      "hash_preserved": true,
+      "conclusion": "Recorte de código PromQL/PowerShell legível, rótulos e linhas não cortados.",
+      "reference_ids": [
+        "use-00534"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/docker.svg",
+      "viewed": true,
+      "sha256": "d6a20ef1d5ae3890534c223641f812666a74cf7ca61d3728857214cc69b1374b",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00526"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/fastapi.svg",
+      "viewed": true,
+      "sha256": "9ad95ccc969f8092e978444da6e3880ef269bcba170af2b00d0434e176bbcfb3",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00523"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/grafana.svg",
+      "viewed": true,
+      "sha256": "b81c379652837cc5c138295faa93a32aacb202c0120ae53dd208659a8eaaaa33",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00529"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/nginx.svg",
+      "viewed": true,
+      "sha256": "e336125ae1a6061451527ea39901aaecaa7a27bad8802cb70667ea1ffa8f2dd6",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00527"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/postgresql.svg",
+      "viewed": true,
+      "sha256": "b52b0212f066652965db98e02c0bd17306f37fb342b61ce7cdc8cd61438a961e",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00524"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/prometheus.svg",
+      "viewed": true,
+      "sha256": "26716de70a31db28395f6286c4d2db81b4975d300c1963eb9c0865bcf745d433",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00528"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/python.svg",
+      "viewed": true,
+      "sha256": "0218b5f3c8f49b5df57c004693b4b030cf892da79c3edb87228c72aa939037ae",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00522"
+      ]
+    },
+    {
+      "path": "api-sentinel/docs/stack/redis.svg",
+      "viewed": true,
+      "sha256": "77dd9d148e3368159ee9cd2be7c71b0b4d0e92707b3b13850e70cd8103abbe1f",
+      "hash_preserved": true,
+      "conclusion": "SVG visto na prancha: marca/badge/logotipo coerente com o rótulo, legível; não constitui medição.",
+      "reference_ids": [
+        "use-00525"
+      ]
+    },
+    {
+      "path": "api-sentinel/artifacts/problem-review/20260921t064944662185z/central.html",
+      "viewed": true,
+      "sha256": "afd03c5a038c7992c161e505ff6c4d0e5814c12189572410616dd24c319fc05a",
+      "hash_preserved": true,
+      "conclusion": "HTML histórico de21/09 lido no browser:0ativos7resolvidos, probe06:57:34. CSS/JS absolutos ausentes ao abrir arquivo; conteúdo visível sem layout original. Limitação agora explícita na galeria; bytes preservados."
+    },
+    {
+      "path": "api-sentinel/README.md:77",
+      "viewed": true,
+      "conclusion": "Mermaid11 visto: rótulos e setas legíveis, sem cortes; diagrama de módulos, sequência autorizada e observação correspondem à documentação. Render local não presume GitHub."
+    },
+    {
+      "path": "api-sentinel/docs/architecture.md:13",
+      "viewed": true,
+      "conclusion": "Mermaid11 visto: rótulos e setas legíveis, sem cortes; diagrama de módulos, sequência autorizada e observação correspondem à documentação. Render local não presume GitHub."
+    },
+    {
+      "path": "api-sentinel/docs/architecture.md:50",
+      "viewed": true,
+      "conclusion": "Mermaid11 visto: rótulos e setas legíveis, sem cortes; diagrama de módulos, sequência autorizada e observação correspondem à documentação. Render local não presume GitHub."
+    }
+  ],
+  "limitations": [
+    "Sem stack nova, suites gerais, scan ou medição de carga.",
+    "Não certificada acessibilidade completa ou WCAG nesta inspeção de pixels.",
+    "Não migrada base real; revisão estática e recibos anteriores separam-se de execução atual.",
+    "Imagens históricas e HTML mantidos byte a byte; renderer local não equivale ao GitHub."
+  ]
+}

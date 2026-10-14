@@ -1,0 +1,33 @@
+{
+  "guide_links": {
+    "checked": 260,
+    "bundle": "C:\\Users\\arthu\\OneDrive\\Documentos\\Projetos Portifolio\\_correcoes_2026-10-13\\ops-guides\\documentation\\db91c079a29bebb0",
+    "urls": {
+      "readme_url": "documentation/db91c079a29bebb0/README.md",
+      "runbooks_url": "documentation/db91c079a29bebb0/docs/runbooks.md",
+      "verification_url": "documentation/db91c079a29bebb0/docs/verification.md"
+    }
+  },
+  "report": {
+    "source": "docs/evidence/containerops-evolution-20261012/evidence",
+    "output": "docs/examples/report.html",
+    "new_operations_executed": false
+  },
+  "shell_proofs": [
+    {
+      "namespace": "default",
+      "bash": "SESSION=unset\nARG=scripts/ops.py\nARG=restore-test\nARG=--backup\nARG=synthetic-id\nAFTER=outer\n",
+      "powershell": "SESSION=\nARG=scripts/ops.py\nARG=restore-test\nARG=--backup\nARG=synthetic-id\n"
+    },
+    {
+      "namespace": "backup-lab",
+      "bash": "SESSION=backup-lab\nARG=scripts/ops.py\nARG=restore-test\nARG=--backup\nARG=synthetic-id\nAFTER=outer\n",
+      "powershell": "SESSION=backup-lab\nARG=scripts/ops.py\nARG=restore-test\nARG=--backup\nARG=synthetic-id\n"
+    }
+  ],
+  "linux_guide_python": {
+    "output": "revenue_cents: 12500\norder_count: 2\naverage_ticket_cents: 6250\n",
+    "synthetic_transport": true,
+    "live_stack": false
+  }
+}

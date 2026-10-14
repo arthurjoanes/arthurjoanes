@@ -1,0 +1,233 @@
+{
+  "checked_at_utc": "2026-10-14 01:57:43 UTC",
+  "scope": "GitHub Actions for exact published commits via GitHub connector after unauthenticated REST hit rate limit; absence of runs is not a pass.",
+  "repositories": [
+    {
+      "repository": "arthurjoanes",
+      "sha": "1ffdd6753ed3f8c1332f4a5066897dfc820aa963",
+      "branch": "main",
+      "total_count": 0,
+      "runs": []
+    },
+    {
+      "repository": "gestao-recebiveis",
+      "sha": "bd5eef405232e7bc8f49c8f642926e44af7b4b71",
+      "branch": "main",
+      "total_count": 2,
+      "runs": [
+        {
+          "id": 38496290589,
+          "name": "Git history security",
+          "head_sha": "bd5eef405232e7bc8f49c8f642926e44af7b4b71",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/gestao-recebiveis/actions/runs/38496290589",
+          "created_at": "2026-10-14T01:32:27Z",
+          "updated_at": "2026-10-14T01:32:37Z",
+          "event": "push"
+        },
+        {
+          "id": 38496290602,
+          "name": "Gestão de recebíveis checks",
+          "head_sha": "bd5eef405232e7bc8f49c8f642926e44af7b4b71",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/gestao-recebiveis/actions/runs/38496290602",
+          "created_at": "2026-10-14T01:32:27Z",
+          "updated_at": "2026-10-14T01:38:32Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "evidencedesk",
+      "sha": "39bb1e1c1427beea2fe813f46401dc3153bd48cb",
+      "branch": "main",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 38496429519,
+          "name": "EvidenceDesk checks",
+          "head_sha": "39bb1e1c1427beea2fe813f46401dc3153bd48cb",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/evidencedesk/actions/runs/38496429519",
+          "created_at": "2026-10-14T01:34:03Z",
+          "updated_at": "2026-10-14T01:41:56Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "cycleops",
+      "sha": "1bbecdf355c16e76fba1c5624019cbb020cd6926",
+      "branch": "main",
+      "total_count": 2,
+      "runs": [
+        {
+          "id": 38496995231,
+          "name": "pages",
+          "head_sha": "1bbecdf355c16e76fba1c5624019cbb020cd6926",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/cycleops/actions/runs/38496995231",
+          "created_at": "2026-10-14T01:40:31Z",
+          "updated_at": "2026-10-14T01:41:10Z",
+          "event": "workflow_run"
+        },
+        {
+          "id": 38496435278,
+          "name": "ci",
+          "head_sha": "1bbecdf355c16e76fba1c5624019cbb020cd6926",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/cycleops/actions/runs/38496435278",
+          "created_at": "2026-10-14T01:34:07Z",
+          "updated_at": "2026-10-14T01:40:29Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "quake-exposure",
+      "sha": "45ef5ee956e652a208e6ad43d78e78b451e8da4a",
+      "branch": "main",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 38496440631,
+          "name": "CI",
+          "head_sha": "45ef5ee956e652a208e6ad43d78e78b451e8da4a",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/quake-exposure/actions/runs/38496440631",
+          "created_at": "2026-10-14T01:34:10Z",
+          "updated_at": "2026-10-14T01:37:01Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "api-sentinel",
+      "sha": "5e01d32197ee4edad5a5cab56737622cfc527f40",
+      "branch": "main",
+      "total_count": 2,
+      "runs": [
+        {
+          "id": 38496499639,
+          "name": "Git history security",
+          "head_sha": "5e01d32197ee4edad5a5cab56737622cfc527f40",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/api-sentinel/actions/runs/38496499639",
+          "created_at": "2026-10-14T01:34:53Z",
+          "updated_at": "2026-10-14T01:35:04Z",
+          "event": "push"
+        },
+        {
+          "id": 38496499623,
+          "name": "API Sentinel — verificações",
+          "head_sha": "5e01d32197ee4edad5a5cab56737622cfc527f40",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/api-sentinel/actions/runs/38496499623",
+          "created_at": "2026-10-14T01:34:53Z",
+          "updated_at": "2026-10-14T01:50:40Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "containerops",
+      "sha": "9cc4101441b0b0037622a8b40a3612a7b2aff26c",
+      "branch": "main",
+      "total_count": 2,
+      "runs": [
+        {
+          "id": 38496509742,
+          "name": "Git history security",
+          "head_sha": "9cc4101441b0b0037622a8b40a3612a7b2aff26c",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/containerops/actions/runs/38496509742",
+          "created_at": "2026-10-14T01:35:00Z",
+          "updated_at": "2026-10-14T01:35:10Z",
+          "event": "push"
+        },
+        {
+          "id": 38496509744,
+          "name": "ContainerOps",
+          "head_sha": "9cc4101441b0b0037622a8b40a3612a7b2aff26c",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/containerops/actions/runs/38496509744",
+          "created_at": "2026-10-14T01:35:00Z",
+          "updated_at": "2026-10-14T01:43:13Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "varejo-data-pipeline",
+      "sha": "c7d3eb0e64826196f54f0f1c5ac17e4fab153f33",
+      "branch": "main",
+      "total_count": 2,
+      "runs": [
+        {
+          "id": 38497092947,
+          "name": "Verificação local Spark e Delta",
+          "head_sha": "c7d3eb0e64826196f54f0f1c5ac17e4fab153f33",
+          "head_branch": "main",
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/arthurjoanes/varejo-data-pipeline/actions/runs/38497092947",
+          "created_at": "2026-10-14T01:41:39Z",
+          "updated_at": "2026-10-14T01:41:43Z",
+          "event": "push"
+        },
+        {
+          "id": 38497092931,
+          "name": "Git history security",
+          "head_sha": "c7d3eb0e64826196f54f0f1c5ac17e4fab153f33",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/arthurjoanes/varejo-data-pipeline/actions/runs/38497092931",
+          "created_at": "2026-10-14T01:41:39Z",
+          "updated_at": "2026-10-14T01:41:58Z",
+          "event": "push"
+        }
+      ]
+    },
+    {
+      "repository": "loja-assistente",
+      "sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+      "branch": "main",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 38498010897,
+          "name": "Local stack checks",
+          "head_sha": "d46a980f520e7ac7c8610c8852f5e829566cfdc9",
+          "head_branch": "main",
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/arthurjoanes/loja-assistente/actions/runs/38498010897",
+          "created_at": "2026-10-14T01:52:08Z",
+          "updated_at": "2026-10-14T01:52:13Z",
+          "event": "push"
+        }
+      ]
+    }
+  ]
+}

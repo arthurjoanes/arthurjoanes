@@ -1,0 +1,392 @@
+{
+  "name": "loja-assistente",
+  "path": "loja-assistente",
+  "findings": [
+    {
+      "id": "LOJ-01",
+      "title": "Reenvio de pergunta após resposta perdida pode criar outro resultado e outra chamada paga",
+      "category": "Confiabilidade e uso de recursos",
+      "severity": "Média",
+      "location": "frontend/src/features/assistant/use-workspace.ts:348 e :398; backend/src/loja_assistente/assistant/service.py:66 e :154",
+      "evidence": "ask restaura a pergunta depois de erro, inclusive transporte/timeout, e libera nova execução. A chamada não carrega chave idempotente. O serviço cria novo UUID e persiste/commita antes de devolver a resposta. Já perform(execution=true) trata 0/408/503/504 como resultado incerto e orienta verificar histórico, mas ask não usa esse caminho.",
+      "why": "Não receber resposta não prova que a consulta não foi concluída. A trava da conversa impede concorrência simultânea, mas não identifica replay depois do commit ou nova conversa sem ID conhecido.",
+      "impact": "O usuário pode repetir a consulta, gerar respostas/conversas duplicadas e consumir outra chamada LLM. Em acompanhamento de conversa, o segundo envio também pode usar um contexto já alterado. Nenhuma duplicação paga foi provocada nesta auditoria.",
+      "fix": "Dar à intenção de consulta uma identidade recuperável e tratar transporte incerto antes de permitir repetição.",
+      "implementation": "Gerar client_request_id antes do primeiro envio, com unicidade por organização/usuário e fingerprint do corpo no backend. Persistir reserva/estado da intenção e devolver resultado existente para replay; não repetir chamada externa cujo resultado permaneça desconhecido. Expor recuperação por ID. Como primeiro patch, aplicar a mesma mensagem de incerteza de perform, preservar texto e exigir recarregar histórico antes de executar nova intenção.",
+      "affected_files": [
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/lib/api.ts",
+        "backend/src/loja_assistente/assistant/routes.py",
+        "backend/src/loja_assistente/assistant/service.py",
+        "backend/src/loja_assistente/assistant/contracts.py",
+        "backend/migrations (nova migração de intenções)",
+        "docs/api-contract.md"
+      ],
+      "validation": "Simular resposta perdida após commit. Repetir mesma chave deve produzir uma resposta e uma chamada ao provider; corpo diferente com mesma chave deve retornar 409. Nova chave deve ser nova intenção explícita. Estado incerto do provider não pode ser convertido em retry pago automático.",
+      "effort": "médio (médio — 1 a 2 dias)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Consulta ganhou client_request_id opcional, reserva durável única por tenant/usuário/chave antes da interpretação, fingerprint e recuperação autenticada. Vínculo intenção/resposta é commitado junto com a resposta. UI preserva intenção e pergunta, bloqueia reenvio incerto e recupera pelo ID; nova análise é ação explícita.",
+      "files_changed": [
+        "backend/migrations/versions/0006_query_intents.py",
+        "backend/src/loja_assistente/models.py",
+        "backend/src/loja_assistente/assistant/contracts.py",
+        "backend/src/loja_assistente/assistant/intents.py",
+        "backend/src/loja_assistente/assistant/routes.py",
+        "backend/src/loja_assistente/assistant/service.py",
+        "backend/tests/test_query_intents.py",
+        "backend/tests/test_migrations.py",
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/features/assistant/conversation-state.ts",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "docs/api-contract.md",
+        "frontend/src/features/assistant/workspace.tsx",
+        "docs/architecture.md"
+      ],
+      "checks_executed": [
+        "PostgreSQL: mesma chave após commit retorna a mesma resposta e chama a interpretação demo uma vez; corpo divergente recebe 409; nova chave explícita chama outra vez.",
+        "Falha controlada após admissão deixa reserva durável; replay e recuperação retornam 409 sem repetir interpretação.",
+        "Migrações de banco vazio e upgrade com dados preexistentes passaram até 0006_query_intents.",
+        "Playwright: primeira resposta perdida bloqueia novo envio, preserva a intenção e recupera sem segundo POST."
+      ],
+      "limitations": [
+        "Nenhuma chamada LLM real; contagem usa interpretação demo instrumentada e falha sintética.",
+        "Resultado de uma execução interrompida permanece incerto (409), sem retry automático. Clientes antigos sem client_request_id mantêm o contrato anterior.",
+        "A intenção da UI reside na instância da tela; recuperação automática após recarregar toda a página não foi adicionada.",
+        "Migração 0006 testada apenas no PostgreSQL descartável. Atualização de uma instalação real exige executar alembic upgrade head no fluxo de implantação."
+      ],
+      "conformity_review": {
+        "status": "corrigido_validado",
+        "packet": "../_revisao_conformidade_2026-10-13/loja-code-review.json",
+        "correction": "Guard de intenção nos caminhos de abertura/execução, manutenção do conflito ao consultar favoritos, aviso de recuperação persistente, nova intenção criada apenas depois do guard, reducer separando conversas e cursor, confirmação correta para recuperação 404.",
+        "checks": "13 testes direcionados (11 navegador e 2 puros), mais 2 puros de estado; build, tipos, lint, formato e links offline aprovados."
+      }
+    },
+    {
+      "id": "LOJ-02",
+      "title": "Falha de favoritos impede carregar histórico e restaurar esclarecimento pendente",
+      "category": "UI/UX e tolerância a falhas",
+      "severity": "Média",
+      "location": "frontend/src/features/assistant/use-workspace.ts:104 e :111; frontend/src/features/assistant/workspace.tsx:148",
+      "evidence": "O bootstrap define session antes de Promise.all entre GET /conversations e fetchFavorites. fetchFavorites registra seu erro e o relança. Se favoritos falhar, setHistory e restauração do pending abaixo do await não executam. O catch genérico só define notice; o componente mostra notice no Login, que já foi substituído pela área autenticada.",
+      "why": "Duas leituras independentes foram ligadas num único sucesso obrigatório. Existe estado de erro de favoritos, mas ele não explica por que o histórico válido desapareceu.",
+      "impact": "Um 503 de favoritos deixa a lista de conversas vazia e impede retomar um esclarecimento, mesmo que o endpoint de histórico tenha respondido corretamente. A tela pode apresentar ausência de conteúdo no lugar de falha de carga.",
+      "fix": "Carregar histórico e favoritos de modo independente, com estados e recuperação separados.",
+      "implementation": "Usar operações separadas ou Promise.allSettled, preservar os guards de geração/revisão e tratar 401/403 pela rotina global. Hidratar histórico e pending assim que a leitura de conversas chegar. Criar historyLoading/historyError com botão de recarga e mostrar esse erro na região de histórico; manter erro próprio dos favoritos.",
+      "affected_files": [
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/assistant/workspace.tsx"
+      ],
+      "validation": "Com sessão válida, histórico existente e pending, responder 503 somente a /favorites: histórico e pending devem aparecer; favoritos devem exibir erro próprio. Falha somente em /conversations não pode virar “Nenhuma conversa”. 401/403 continuam limpando o estado protegido.",
+      "effort": "médio (médio — 0,5 a 1 dia)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Histórico e favoritos carregam independentemente. Histórico tem loading, erro e recarga próprios, hidrata pending assim que chega e mantém guardas de geração/revisão; erros de autenticação continuam limpando o estado protegido.",
+      "files_changed": [
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/assistant/workspace.tsx",
+        "frontend/e2e/audit-regressions.spec.ts"
+      ],
+      "checks_executed": [
+        "Playwright: 503 somente em favoritos preserva histórico e esclarecimento pendente e mostra erro de favoritos; 503 somente no histórico mostra erro em vez de lista vazia e permite recuperação.",
+        "Casos de domínio existentes de mudança de identidade e limpeza de análise passaram."
+      ],
+      "limitations": [
+        "Falhas injetadas no navegador; nenhum serviço externo foi indisponibilizado."
+      ]
+    },
+    {
+      "id": "LOJ-03",
+      "title": "Limites de 50 conversas e 100 respostas são silenciosos na experiência de histórico",
+      "category": "UI/UX e acesso ao histórico",
+      "severity": "Média",
+      "location": "backend/src/loja_assistente/conversations/routes.py:41 e :103; frontend/src/features/assistant/analysis-sidebar.tsx",
+      "evidence": "A listagem busca no máximo 50 conversas; o detalhe mantém as 100 respostas mais recentes. A UI usa a quantidade carregada como “conversas” e não oferece cursor, carregar anteriores ou indicação desses recortes. docs/api-contract.md informa os limites, mas a tela não.",
+      "why": "Limitar a consulta é razoável; apresentar o subconjunto sem informar a limitação impede distinguir retenção, paginação e perda de histórico. A filtragem de acesso ocorre depois do limite da listagem, podendo ainda reduzir a página visível.",
+      "impact": "Depois de ultrapassar os limites, conversas antigas somem da navegação e mensagens anteriores não podem ser alcançadas na conversa. O usuário não sabe se os dados foram apagados ou omitidos.",
+      "fix": "Explicitar a amostra e fornecer paginação estável de conversas e respostas autorizadas.",
+      "implementation": "Responder items/next_cursor/has_more, ordenando por created_at e id. Aplicar o escopo autorizado antes de formar a página, ou preencher a página sem vazar metadados. Adicionar “Carregar conversas anteriores” e “Carregar respostas anteriores”. Enquanto isso, rotular “Últimas 50 conversas” e “100 respostas mais recentes” apenas quando o limite for atingido, sem inventar total.",
+      "affected_files": [
+        "backend/src/loja_assistente/conversations/routes.py",
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/assistant/workspace.tsx",
+        "docs/api-contract.md"
+      ],
+      "validation": "Fixtures com 51 conversas e 101 respostas devem permitir acessar os itens mais antigos ou, na correção inicial, indicar a limitação. Paginar com datas iguais não deve repetir/pular itens. Revogação de loja não pode expor conversa nem contagem proibida.",
+      "effort": "médio (médio — 1 a 2 dias)",
+      "priority": "P1",
+      "status": "corrigido_validado",
+      "correction": "Novos endpoints paginam conversas e mensagens com cursores HMAC vinculados a tenant/usuário/escopo e ordenação por data/ID. Listagem preenche a página com registros autorizados; detalhe reautoriza grants. UI permite carregar e selecionar registros antigos, sem anunciar total inexistente.",
+      "files_changed": [
+        "backend/src/loja_assistente/conversations/pagination.py",
+        "backend/src/loja_assistente/conversations/routes.py",
+        "backend/src/loja_assistente/conversations/service.py",
+        "backend/tests/test_history_pagination.py",
+        "frontend/src/lib/contracts.ts",
+        "frontend/src/features/assistant/use-workspace.ts",
+        "frontend/src/features/assistant/conversation-state.ts",
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/assistant/workspace.tsx",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "frontend/e2e/quality.spec.ts",
+        "frontend/e2e/round-2-fields.spec.ts",
+        "docs/api-contract.md"
+      ],
+      "checks_executed": [
+        "PostgreSQL: 51 conversas empatadas por data, outro tenant omitido, cursor adulterado recusado; 101 respostas sem duplicação/omissão; revogação bloqueia mensagens e remove conversa da listagem.",
+        "Playwright: conversa da segunda página acessível e resposta anterior selecionável entre 101 opções.",
+        "Suite completa preserva os contratos antigos usados pelos clientes existentes."
+      ],
+      "limitations": [
+        "GET /conversations antigo conserva a primeira página para compatibilidade; a UI passou a usar /conversations/page.",
+        "Não foi feito teste de carga com histórico muito grande."
+      ]
+    },
+    {
+      "id": "LOJ-04",
+      "title": "Filtro pede ao lojista que raciocine sobre uma data final excluída",
+      "category": "UI/UX e linguagem do domínio",
+      "severity": "Baixa",
+      "location": "frontend/src/features/assistant/analysis-filters.tsx:130; frontend/src/features/assistant/period-selection.ts",
+      "evidence": "O input é rotulado “Fim (excluído)”, enquanto o resultado e outros percursos apresentam o período humano com data final incluída. Para pedir somente um dia pelo formulário, a pessoa precisa escolher o dia seguinte como fim.",
+      "why": "Intervalo semiaberto é apropriado ao contrato técnico, mas demanda uma conversão mental evitável na tarefa de consultar vendas por dia. Há inconsistência entre edição e leitura do mesmo período.",
+      "impact": "Escolha frequente de um dia a menos, erro em consultas de um único dia e dúvida se as vendas da data final entraram no cálculo.",
+      "fix": "Editar datas inicial/final incluídas na UI e converter a data final para o limite exclusivo da API.",
+      "implementation": "Rotular “Até (incluído)”. Exibir shiftDate(period.end,-1) e converter seleção com shiftDate(valor,1), usando o utilitário de data civil existente. Validar período com a mesma regra de 90 dias e lidar explicitamente com o maior dia suportado. Manter o intervalo [start,end) no backend e nos detalhes técnicos.",
+      "affected_files": [
+        "frontend/src/features/assistant/analysis-filters.tsx",
+        "frontend/src/features/assistant/period-selection.ts",
+        "docs/interface.md"
+      ],
+      "validation": "Selecionar início=fim visível deve representar um dia; testar virada de mês/ano, ano bissexto e 90 dias. O período exibido após executar deve ser idêntico ao escolhido, sem depender do fuso do navegador.",
+      "effort": "baixo (pequeno — 2 a 4 horas)",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "Formulário edita Até (incluído) e converte datas civis para o fim exclusivo da API. Mesmo início/fim visível representa um dia; mantém 90 dias e trata limite máximo suportado sem depender do fuso local.",
+      "files_changed": [
+        "frontend/src/features/assistant/period-selection.ts",
+        "frontend/src/features/assistant/analysis-filters.tsx",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "frontend/e2e/round-2-fields.spec.ts",
+        "docs/interface.md"
+      ],
+      "checks_executed": [
+        "Teste puro cobre ano bissexto, virada do ano, 90/91 dias, vazio e limite 9999-12-30 incluído.",
+        "Playwright em UTC, America/Los_Angeles e America/Sao_Paulo aceita 29/02/2024 até o mesmo dia visível; 24 testes de domínio existentes passaram."
+      ],
+      "limitations": [
+        "A UI não admite 9999-12-31 como final incluído porque o contrato exclusivo mantém ano de quatro dígitos; limite declarado no controle."
+      ]
+    },
+    {
+      "id": "LOJ-05",
+      "title": "Histórico e resposta mostram o mesmo horário em fusos diferentes",
+      "category": "Consistência de UI/UX",
+      "severity": "Baixa",
+      "location": "frontend/src/features/assistant/analysis-sidebar.tsx:170; frontend/src/features/analytics/result.tsx:49",
+      "evidence": "analysis-sidebar usa toLocaleString('pt-BR') sem timeZone, portanto adota o navegador. A data da resposta usa timeZone='America/Sao_Paulo'. Para pessoas fora desse fuso, o mesmo registro muda de horário e pode mudar de data entre as duas áreas.",
+      "why": "O produto tem um fuso analítico definido, mas aplica duas políticas de apresentação sem explicá-las.",
+      "impact": "Dificuldade de associar conversa ao resultado, especialmente perto da meia-noite, e aparência de divergência temporal no próprio histórico.",
+      "fix": "Adotar uma única política explícita para timestamps apresentados.",
+      "implementation": "Extrair formatTimestamp com America/Sao_Paulo para os dois componentes, incluir identificação legível do fuso no detalhe/tooltip e preservar dateTime ISO. Alternativamente usar fuso local em ambos, se essa for a decisão de produto; documentar a escolha.",
+      "affected_files": [
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/analytics/result.tsx",
+        "frontend/src/lib (utilitário compartilhado de formato)"
+      ],
+      "validation": "Renderizar o mesmo instante com navegador em UTC, America/Los_Angeles e America/Sao_Paulo; sidebar e resultado devem concordar. Incluir instante próximo à troca de data.",
+      "effort": "baixo (pequeno — 1 a 2 horas)",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "formatTimestamp compartilhado usa America/Sao_Paulo no histórico e no resultado; mantém dateTime ISO e tooltip indicando o fuso.",
+      "files_changed": [
+        "frontend/src/lib/format.ts",
+        "frontend/src/features/assistant/analysis-sidebar.tsx",
+        "frontend/src/features/analytics/result.tsx",
+        "frontend/e2e/audit-regressions.spec.ts",
+        "docs/interface.md"
+      ],
+      "checks_executed": [
+        "Playwright nos três fusos: instante 2026-10-13T01:30:00Z aparece como 12/10/2026, 22:30 tanto no histórico quanto no resultado."
+      ],
+      "limitations": [
+        "Política de exibição fixa em São Paulo; não foi adicionado seletor de fuso."
+      ]
+    },
+    {
+      "id": "LOJ-06",
+      "title": "Resultados de várias rodadas competem pela leitura rápida no README",
+      "category": "Documentação e apresentação profissional",
+      "severity": "Baixa",
+      "location": "README.md:55, :57 e :156",
+      "evidence": "O README apresenta 477/57/79, logo depois 477/57/85, e mais adiante 69 casos Playwright de outro commit. Os links e datas permitem distinguir as rodadas; não há evidência de falsificação ou contradição, mas a repetição exige investigação para entender qual conjunto é o mais recente.",
+      "why": "A porta de entrada deve dar um retrato curto e apontar para a proveniência detalhada. Repetir denominadores parecidos dispersa a evidência técnica mais forte do projeto.",
+      "impact": "Recrutador ou revisor pode comparar números que pertencem a escopos distintos ou gastar a primeira leitura reconciliando contagens.",
+      "fix": "Manter uma rodada principal com data/escopo e uma tabela curta das anteriores; centralizar detalhes no guia de verificação.",
+      "implementation": "Consolidar os dois parágrafos próximos em uma seção de evidências que destaque a revisão UI/UX de 12/10/2026 e preserve a evolução de 79 casos como rodada anterior. Identificar os 69 casos de 22/09 como histórico e sua composição de 39 puros/30 navegador. Não somar rodadas nem afirmar que a auditoria reexecutou 477 testes.",
+      "affected_files": [
+        "README.md",
+        "docs/verification.md"
+      ],
+      "validation": "A primeira leitura deve identificar a rodada principal, distinguir testes de domínio/avaliação/navegador e alcançar os recibos em um clique. Conferir datas/contagens contra cada recibo e rodar os verificadores offline existentes.",
+      "effort": "baixo (pequeno — 1 a 2 horas)",
+      "priority": "P2",
+      "status": "corrigido_validado",
+      "correction": "README destaca a rodada histórica de UI/UX de 12/10/2026, identifica a composição dos 85 casos e resume as rodadas anteriores de 79 e 69 em tabela. Guia centraliza contexto e distingue recibos históricos da validação atual.",
+      "files_changed": [
+        "README.md",
+        "docs/verification.md"
+      ],
+      "checks_executed": [
+        "Leitura cruzada dos recibos preservados e contagens: rodada principal 477 backend/57 avaliação/85 Playwright (41 puros e 44 navegador); 22/09 possui 69 (39 puros e 30 navegador).",
+        "python scripts/verify_evidence.py passou: hashes, fontes congelados, páginas e somas históricas consistentes; comando exclusivamente offline."
+      ],
+      "limitations": [
+        "Os 55 calls/48 execuções e custos que o verificador imprime são históricos. Nenhuma chamada Azure foi refeita nem seus números foram somados aos testes desta correção."
+      ]
+    },
+    {
+      "id": "LOJ-07",
+      "title": "Login permite concorrência de Argon2 incompatível com o limite de memória do contêiner",
+      "category": "Autenticação e disponibilidade",
+      "severity": "Média",
+      "location": "backend/src/loja_assistente/auth/service.py:18; backend/src/loja_assistente/auth/routes.py:68–70; backend/src/loja_assistente/database.py:13–24; backend/src/loja_assistente/auth/admission.py:16–18; compose.yaml:46",
+      "evidence": "PasswordHasher() usa 65536 KiB por verificação no runtime inspecionado. O login faz SELECT e verifica a senha de forma síncrona antes de encerrar a Session, mantendo sua conexão. O engine permite 5 conexões mais 10 de overflow, e o runtime AnyIO disponibiliza 40 threads. A admissão limita 5 tentativas por conta e 30 por origem em 60 segundos, sem um semáforo global de verificações. Quinze identidades distintas cabem nesse allowance inicial. A prova isolada, com admissão e hasher substituídos, confirmou 15 chamadas simultaneamente no ponto de verificação; também verificou a retenção da conexão por Session após um SELECT em SQLite. Quinze verificações no custo configurado representam 960 MiB de memória Argon2, enquanto o backend declara mem_limit=768m.",
+      "why": "Controle de tentativas por janela não limita suficientemente o número de operações caras simultâneas. Os limites de banco/thread e a configuração do hash permitem um orçamento de trabalho maior que a memória total do serviço, antes de considerar Python, conexões e demais requisições.",
+      "impact": "Uma rajada de logins para contas distintas pode competir por memória, CPU e conexões, degradando o login e outras rotas. Sob pressão, pode haver falhas ou reinício do contêiner; isso é risco deduzido da configuração, não OOM observado. O Compose publica em loopback, a origem é validada e já há limites por conta/origem, o que restringe o contexto de exposição e reduz a severidade. Não foi alegado ataque remoto ao ambiente do usuário.",
+      "fix": "Adicionar limite explícito de verificações de senha simultâneas, dimensionado com a memória do contêiner e o número de processos, mantendo a admissão durável já existente.",
+      "implementation": "Adquirir um slot por processo antes do trabalho Argon2 e liberá-lo em finally; na falta de slot, retornar erro transitório controlado com Retry-After, sem fila ilimitada. Para o processo único atual, começar com um limite conservador como duas verificações e validar a margem de memória. Documentar processos × slots × memória por hash, incluindo o restante do serviço. Não reduzir os parâmetros de senha automaticamente para compensar a falta de controle de concorrência. Se a leitura do usuário for desacoplada da Session antes do hash, revalidar estado/permissões antes de criar a sessão autenticada.",
+      "affected_files": [
+        "backend/src/loja_assistente/auth/service.py",
+        "backend/src/loja_assistente/auth/routes.py",
+        "backend/src/loja_assistente/config.py",
+        "backend/tests/test_login_admission.py",
+        "compose.yaml",
+        "docs/security.md"
+      ],
+      "validation": "Com hasher barato bloqueável, disparar mais tentativas do que os slots e demonstrar que nunca há mais verificações ativas que o limite, que os excedentes recebem resposta transitória e que slots são liberados em sucesso e exceção. Preservar testes de admissão por conta/origem. Em ambiente descartável com Docker, medir posteriormente pico de memória e latência com o hash real e o número de workers previsto; não tratar a prova atual como esse ensaio.",
+      "effort": "médio; estimativa: 0,5–1 dia",
+      "priority": "P1",
+      "effort_level": "médio",
+      "status": "corrigido_validado",
+      "correction": "BoundedSemaphore por processo limita a duas verificações Argon2 simultâneas, rejeita excesso com 503 e Retry-After: 1 sem fila ilimitada, e libera slot em finally. Parâmetros do hash e admissão durável por conta/origem foram preservados.",
+      "files_changed": [
+        "backend/src/loja_assistente/auth/service.py",
+        "backend/tests/test_login_capacity.py",
+        "docs/security.md"
+      ],
+      "checks_executed": [
+        "Hasher barato bloqueável comprova máximo de dois trabalhos ativos, recusa controlada do excedente e liberação após sucesso e exceção.",
+        "Suite backend completa mantém testes de admissão de login aprovados."
+      ],
+      "limitations": [
+        "Duas verificações × 64 MiB = 128 MiB é orçamento por processo, não medição de RSS. Não foi realizado ensaio de carga ou pico de memória com Argon2 real; vários workers exigem redimensionamento conforme documentado."
+      ]
+    },
+    {
+      "id": "LOJ-08",
+      "title": "Erro de configuração pode incluir partes de valores sensíveis no diagnóstico de inicialização",
+      "category": "Privacidade e configuração",
+      "severity": "Baixa",
+      "location": "backend/src/loja_assistente/config.py:11,13,17,21,55–67",
+      "evidence": "SettingsConfigDict não habilita hide_input_in_errors e database_url, session_secret e openai_api_key são strings comuns. O módulo instancia Settings() durante o import, antes dos handlers HTTP que sanitizam erros. Com _env_file=None, segredo de sessão sintético válido e COOKIE_SECURE=false fora de DEMO_MODE, str(ValidationError) incluiu input_value e o sufixo c-key-NOT-A-CREDENTIAL da chave sintética. A prova registrou synthetic_key_visible_in_str_exception=false e synthetic_key_suffix_visible=true: não houve exposição do marcador completo nem uso de credencial real.",
+      "why": "Os validadores corretamente impedem uma configuração insegura, mas a representação padrão da falha também pode reproduzir partes do dicionário de configuração. A sanitização de erros HTTP não cobre a construção de Settings no import.",
+      "impact": "Diagnósticos de startup coletados por terminal, CI ou plataforma de logs podem conter fragmentos de valores sensíveis quando a configuração falha. A reprodução demonstrou somente exposição parcial de marcador artificial; não demonstrou vazamento de uma chave utilizável, acesso público aos logs ou vazamento real no projeto.",
+      "fix": "Ocultar valores de entrada nas mensagens de validação de Settings e modelar campos sensíveis com tipos que mascaram sua representação.",
+      "implementation": "Adicionar hide_input_in_errors=True a SettingsConfigDict. Usar SecretStr para chave do provedor, segredo de sessão e URL com credenciais, adaptando os pontos de consumo para get_secret_value() somente onde necessário. Ocultar inputs continua necessário mesmo com SecretStr, pois a validação pode falhar sobre dados brutos. Manter mensagens com nome do campo e causa segura; não registrar model_dump() nem errors() com input incluído.",
+      "affected_files": [
+        "backend/src/loja_assistente/config.py",
+        "backend/tests/test_secure_config.py",
+        "backend/src/loja_assistente/database.py",
+        "backend/src/loja_assistente/auth/service.py",
+        "backend/src/loja_assistente/auth/admission.py",
+        "backend/src/loja_assistente/auth/routes.py",
+        "backend/src/loja_assistente/assistant/interpretation.py"
+      ],
+      "validation": "Criar testes com marcadores sintéticos distintos para cada campo sensível e configurações inválidas por cookie/endpoint. Assegurar que str(ValidationError) e um diagnóstico de startup controlado não contêm o marcador nem seus fragmentos identificáveis, e que a causa da rejeição continua compreensível. Após a migração para SecretStr, verificar os usos legítimos de conexão, HMAC, presença da chave e cliente do provedor sem chamada externa.",
+      "effort": "baixo; estimativa: 1–3 horas para ocultar entradas e cobrir o erro; até 0,5 dia com migração dos consumidores para SecretStr",
+      "priority": "P2",
+      "effort_level": "baixo",
+      "status": "corrigido_validado",
+      "correction": "Settings usa hide_input_in_errors=True e SecretStr nos três campos sensíveis. Consumidores legítimos de conexão, HMAC, migração e cliente do provedor usam get_secret_value apenas no ponto de uso; documentação alerta sobre dumps estruturados com input.",
+      "files_changed": [
+        "backend/src/loja_assistente/config.py",
+        "backend/src/loja_assistente/database.py",
+        "backend/migrations/env.py",
+        "backend/src/loja_assistente/auth/service.py",
+        "backend/src/loja_assistente/auth/admission.py",
+        "backend/src/loja_assistente/assistant/interpretation.py",
+        "backend/src/loja_assistente/conversations/pagination.py",
+        "backend/tests/test_secure_config.py",
+        "backend/tests/test_budget_postgres.py",
+        "backend/tests/test_filter_limits.py",
+        "backend/tests/test_provider_evidence.py",
+        "backend/tests/test_live_evaluation.py",
+        "docs/security.md"
+      ],
+      "checks_executed": [
+        "Settings com _env_file=None, três marcadores sintéticos distintos e ambiente controlado: repr mascara campos; erros de cookie e endpoint não contêm input_value nem marcadores.",
+        "Suite backend completa, conexão PostgreSQL, migrações, sessões e HMAC passaram após migração dos consumidores; clientes externos permanecem simulados."
+      ],
+      "limitations": [
+        "A proteção cobre representações textuais padrão; a API estruturada errors() pode incluir inputs caso o chamador a solicite, e a documentação orienta não registrá-los.",
+        "Provas usam apenas marcadores sintéticos, sem carregar .env local ou credenciais reais."
+      ]
+    }
+  ],
+  "head_before": "075ea83a0a7b99ccef5868050609c3c36c4d907f",
+  "status_before": "",
+  "head_after": "075ea83a0a7b99ccef5868050609c3c36c4d907f",
+  "status_after": "M README.md\n M backend/migrations/env.py\n M backend/src/loja_assistente/assistant/contracts.py\n M backend/src/loja_assistente/assistant/interpretation.py\n M backend/src/loja_assistente/assistant/routes.py\n M backend/src/loja_assistente/assistant/service.py\n M backend/src/loja_assistente/auth/admission.py\n M backend/src/loja_assistente/auth/service.py\n M backend/src/loja_assistente/config.py\n M backend/src/loja_assistente/conversations/routes.py\n M backend/src/loja_assistente/conversations/service.py\n M backend/src/loja_assistente/database.py\n M backend/src/loja_assistente/models.py\n M backend/tests/test_budget_postgres.py\n M backend/tests/test_filter_limits.py\n M backend/tests/test_live_evaluation.py\n M backend/tests/test_migrations.py\n M backend/tests/test_provider_evidence.py\n M backend/tests/test_secure_config.py\n M docs/api-contract.md\n M docs/interface.md\n M docs/security.md\n M docs/verification.md\n M frontend/e2e/quality.spec.ts\n M frontend/e2e/round-2-fields.spec.ts\n M frontend/src/features/analytics/result.tsx\n M frontend/src/features/assistant/analysis-filters.tsx\n M frontend/src/features/assistant/analysis-sidebar.tsx\n M frontend/src/features/assistant/conversation-state.ts\n M frontend/src/features/assistant/period-selection.ts\n M frontend/src/features/assistant/use-workspace.ts\n M frontend/src/features/assistant/workspace.tsx\n M frontend/src/lib/contracts.ts\n M frontend/src/lib/format.ts\n?? backend/migrations/versions/0006_query_intents.py\n?? backend/src/loja_assistente/assistant/intents.py\n?? backend/src/loja_assistente/conversations/pagination.py\n?? backend/tests/test_history_pagination.py\n?? backend/tests/test_login_capacity.py\n?? backend/tests/test_query_intents.py\n?? frontend/e2e/audit-regressions.spec.ts",
+  "checks_executed": [
+    {
+      "command": "python -B -m pytest backend/tests -p no:cacheprovider -q",
+      "result": "485 passed, 1 warning, 275,06 s",
+      "receipt": "apps-final-validation.json (resumo transcrito da saída da execução, sem log integral)"
+    },
+    {
+      "command": "python -B -m pytest backend/tests/test_query_intents.py backend/tests/test_history_pagination.py backend/tests/test_migrations.py backend/tests/test_login_capacity.py backend/tests/test_secure_config.py -p no:cacheprovider -q --junitxml=../_correcoes_2026-10-13/loja-final-junit.xml",
+      "result": "12 passed, 1 warning, 31,15 s; subconjunto dos 485, não somar",
+      "receipt": "loja-final-junit.xml; loja-final-pytest.log"
+    },
+    {
+      "command": "playwright test audit-regressions.spec.ts domain.spec.ts --reporter=list,json",
+      "result": "32 passed, 27,9 s: 7 navegador e 25 puros; Chromium contra build de produção em 127.0.0.1:3212, API interceptada",
+      "receipt": "loja-browser-final/results.json; loja-final-playwright.log"
+    },
+    {
+      "command": "npm run build; npm run typecheck; npm run lint",
+      "result": "Build Next.js 16.3.8, TypeScript e ESLint completos aprovados",
+      "receipt": "apps-final-validation.json"
+    },
+    {
+      "command": "python scripts/verify_evidence.py",
+      "result": "Aprovado, exclusivamente offline, sem chamadas Azure ou consultas a banco",
+      "receipt": "loja-final-evidence.log"
+    },
+    {
+      "command": "ruff check <arquivos Python alterados e novos>; git diff --check",
+      "result": "Aprovados",
+      "receipt": "apps-final-validation.json"
+    }
+  ],
+  "limitations": [
+    "Execução local Windows com Node e ambiente Python já disponíveis (.venv do EvidenceDesk usada também para Loja); não representa instalação limpa de dependências nem execução do workflow Linux completo.",
+    "PostgreSQL real isolado no projeto Compose auditoria-fix-apps; aplicação e testes executados no host. Não houve implantação das stacks completas nem mudança em bases existentes.",
+    "Navegador Chromium usa APIs sintéticas interceptadas. Testes de backend exercitam banco e autenticação separadamente. Nenhuma credencial real ou chamada LLM paga foi usada.",
+    "Aviso conhecido de depreciação do alias AnyIO BlockingPortal em Starlette, sem falha de teste.",
+    "Sem commit, push ou PR; mudanças permanecem locais para revisão."
+  ],
+  "cleanup": "Servidores temporários nas portas 3212/3216 encerrados. Compose auditoria-fix-apps removido com down -v; inspeção não encontrou containers/volumes desse projeto ou listeners em 3212/3216/15542/15546. Artefatos de teste e logs preservados. Arquivos AGENTS.md/CLAUDE.md gerados pelo Next no EVD removidos; next-env.d.ts da Loja restaurado ao original.",
+  "independent_review": "audit_backend_ops inspecionou somente leitura: intenções, transações, migração, grants, paginação, request_id, SecretStr e semáforo; sem bloqueadores concretos.",
+  "changelog": "CHANGELOG_EVD_LOJ.md",
+  "conformity_review": {
+    "status": "corrigido_validado",
+    "packet": "../_revisao_conformidade_2026-10-13/loja-code-review.json",
+    "correction": "Guard de intenção nos caminhos de abertura/execução, manutenção do conflito ao consultar favoritos, aviso de recuperação persistente, nova intenção criada apenas depois do guard, reducer separando conversas e cursor, confirmação correta para recuperação 404.",
+    "checks": "13 testes direcionados (11 navegador e 2 puros), mais 2 puros de estado; build, tipos, lint, formato e links offline aprovados."
+  }
+}

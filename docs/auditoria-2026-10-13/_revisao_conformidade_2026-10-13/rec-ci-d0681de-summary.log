@@ -1,0 +1,10 @@
+2026-10-14T01:23:03.8595287Z All checks passed!
+2026-10-14T01:23:03.8746896Z 43 files already formatted
+2026-10-14T01:23:15.6837628Z Success: no issues found in 29 source files
+2026-10-14T01:24:13.5581084Z ======================= 220 passed, 2 warnings in 49.99s =======================
+2026-10-14T01:24:52.2958026Z Upgrade passed: legacy IDs, timestamps, hashes and 48 receipts preserved and replayed; partial receipts supported, inconsistent upgrade and destructive downgrade refused; roles idempotent.
+2026-10-14T01:25:35.3605292Z All matched files use Prettier code style!
+2026-10-14T01:27:01.1585967Z   ✓  15 [chromium] › tests/journey.spec.ts:1041:5 › carteira compacta mantém recorte aplicado, validação e retorno ao controle (1.2s)
+2026-10-14T01:28:11.3781129Z   1 failed
+2026-10-14T01:28:11.3782222Z   38 passed (1.9m)
+2026-10-14T01:28:17.2506009Z With the provided path, there will be 57 files uploaded

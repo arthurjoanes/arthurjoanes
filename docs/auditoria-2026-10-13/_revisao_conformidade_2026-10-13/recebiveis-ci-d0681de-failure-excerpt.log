@@ -1,0 +1,42 @@
+  1) [chromium] › tests/journey.spec.ts:726:5 › saldo abre títulos com busca e vencimento preservados e retorno mantém recorte 
+2026-10-14T01:28:11.3765547Z 
+2026-10-14T01:28:11.3765916Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-14T01:28:11.3766337Z 
+2026-10-14T01:28:11.3766520Z     Locator: locator('tbody .badge').first()
+2026-10-14T01:28:11.3766992Z     Expected: "Em aberto"
+2026-10-14T01:28:11.3767725Z     Timeout: 10000ms
+2026-10-14T01:28:11.3768080Z     Error: element(s) not found
+2026-10-14T01:28:11.3768341Z 
+2026-10-14T01:28:11.3768702Z     Call log:
+2026-10-14T01:28:11.3769231Z       - Expect "toHaveText" locator('tbody .badge').first() with timeout 10000ms
+2026-10-14T01:28:11.3769922Z       - waiting for locator('tbody .badge').first()
+2026-10-14T01:28:11.3770274Z 
+2026-10-14T01:28:11.3770279Z 
+2026-10-14T01:28:11.3770811Z       812 |     page.getByRole("combobox", { name: "Situação", exact: true }),
+2026-10-14T01:28:11.3771431Z       813 |   ).toHaveValue("current");
+2026-10-14T01:28:11.3772078Z     > 814 |   await expect(page.locator("tbody .badge").first()).toHaveText("Em aberto");
+2026-10-14T01:28:11.3772630Z           |                                                      ^
+2026-10-14T01:28:11.3772937Z       815 | });
+2026-10-14T01:28:11.3773147Z       816 |
+2026-10-14T01:28:11.3773950Z       817 | test("prévia pagina 51 registros sem gravar títulos e trata arquivo vazio e grande", async ({
+2026-10-14T01:28:11.3774508Z         at /app/tests/journey.spec.ts:814:54
+2026-10-14T01:28:11.3774723Z 
+2026-10-14T01:28:11.3775119Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-14T01:28:11.3775894Z     ../artifacts/journey-saldo-abre-títulos-e97d4-os-e-retorno-mantém-recorte-chromium/test-failed-1.png
+2026-10-14T01:28:11.3776632Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:28:11.3776918Z 
+2026-10-14T01:28:11.3777377Z     Error Context: ../artifacts/journey-saldo-abre-títulos-e97d4-os-e-retorno-mantém-recorte-chromium/error-context.md
+2026-10-14T01:28:11.3777842Z 
+2026-10-14T01:28:11.3778198Z     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-14T01:28:11.3778889Z     ../artifacts/journey-saldo-abre-títulos-e97d4-os-e-retorno-mantém-recorte-chromium/trace.zip
+2026-10-14T01:28:11.3779344Z     Usage:
+2026-10-14T01:28:11.3779480Z 
+2026-10-14T01:28:11.3779978Z         npx playwright show-trace ../artifacts/journey-saldo-abre-títulos-e97d4-os-e-retorno-mantém-recorte-chromium/trace.zip
+2026-10-14T01:28:11.3780461Z 
+2026-10-14T01:28:11.3780759Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-14T01:28:11.3781046Z 
+2026-10-14T01:28:11.3781129Z   1 failed
+2026-10-14T01:28:11.3781685Z     [chromium] › tests/journey.spec.ts:726:5 › saldo abre títulos com busca e vencimento preservados e retorno mantém recorte 
+2026-10-14T01:28:11.3782222Z   38 passed (1.9m)
+2026-10-14T01:28:17.0593941Z 
+2026-10-14T01:28:17.0658846Z ##[error]Process complet
