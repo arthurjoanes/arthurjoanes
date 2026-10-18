@@ -1,5 +1,0 @@
-
-> evidencedesk-frontend@0.1.0 test
-> vitest run --reporter=json --outputFile=../../_correcoes_2026-10-13/evidencedesk-final-vitest.json
-
-JSON report written to C:/Users/arthu/OneDrive/Documentos/Projetos Portifolio/_correcoes_2026-10-13/evidencedesk-final-vitest.json

@@ -1,8 +1,0 @@
-......sss.................s.................s...                         [100%]
-=========================== short test summary info ===========================
-SKIPPED [1] tests\unit\test_report_publication.py:79: requires isolated Linux root test process
-SKIPPED [1] tests\unit\test_report_publication.py:102: requires isolated Linux root test process
-SKIPPED [1] tests\unit\test_report_publication.py:116: requires isolated Linux root test process
-SKIPPED [1] tests\unit\test_report_server.py:50: production uses Linux rename semantics
-SKIPPED [1] tests\unit\test_report_server.py:141: Cria��o de symlink indispon�vel neste host; CI Linux cobre o caso.
-43 passed, 5 skipped in 9.75s

@@ -1,6 +1,0 @@
-......sss                                                                [100%]
-=========================== short test summary info ============================
-SKIPPED [1] tests/unit/test_report_publication.py:87: run python scripts/check_report_permissions.py in its isolated test container
-SKIPPED [1] tests/unit/test_report_publication.py:108: run python scripts/check_report_permissions.py in its isolated test container
-SKIPPED [1] tests/unit/test_report_publication.py:120: run python scripts/check_report_permissions.py in its isolated test container
-6 passed, 3 skipped in 0.46s

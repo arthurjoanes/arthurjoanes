@@ -1,6 +1,0 @@
-
-> gestao-recebiveis-frontend@1.0.0 lint
-> eslint . && prettier --check .
-
-Checking formatting...
-All matched files use Prettier code style!

@@ -1,9 +1,0 @@
-
-Running 2 tests using 1 worker
-
-(node:12824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-  ok 1 [chromium] › e2e\domain.spec.ts:103:5 › esclarecimento preserva filtros; troca de identidade limpa toda análise (7ms)
-  ok 2 [chromium] › e2e\domain.spec.ts:135:5 › pendência ativa vem do estado da conversa e resposta antiga não a ressuscita (1ms)
-
-  2 passed (554ms)

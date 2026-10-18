@@ -1,7 +1,0 @@
-{
-  "command": "python -m uv run --with markdown-it-py[linkify]==4.0.0 --with github-slugger==0.0.3 python scripts/check_repository_docs.py",
-  "cwd": "evidencedesk",
-  "exit_code": 0,
-  "result": {"documents": 45, "readme": "README.md", "links": 829, "external_not_checked": 83, "problems": []},
-  "provenance": "Resultado registrado pelo coordenador a partir da saída de exec_command, chunk 99f4a0; não é uma segunda execução."
-}

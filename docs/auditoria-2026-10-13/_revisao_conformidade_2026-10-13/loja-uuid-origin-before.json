@@ -1,9 +1,0 @@
-{
-  "browser": "153.0.8010.12",
-  "network": "All requests fulfilled locally by Playwright; no server or backend.",
-  "origin": "http://uuid-demo.example.invalid",
-  "secureContext": false,
-  "randomUUID": "undefined",
-  "getRandomValues": "function",
-  "originalError": "TypeError: crypto.randomUUID is not a function"
-}
