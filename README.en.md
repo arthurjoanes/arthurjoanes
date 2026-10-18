@@ -2,20 +2,18 @@
 
 [Português](README.md) · [LinkedIn](https://www.linkedin.com/in/arthur-joanes-6a2967373/) · [Email](mailto:arthurjoanes@hotmail.com)
 
-I'm a **mid-level software developer** with over three years of experience. I work on Python APIs, web applications, data engineering and applied AI for retail operations.
-
-My work connects ERP integrations to the interfaces used by teams, including access permissions, data quality and monitoring applications in production.
+I'm a mid-level software developer with over three years of experience in Python APIs, web applications and data for retail operations. My work includes ERP integrations, applied AI and monitoring applications in production.
 
 ## Professional experience
 
-- **AI for store data queries.** I developed Sol, a WhatsApp assistant using Meta's official API, with permission checks, data isolation between stores and response verification.
-- **Financial automation.** I integrated an ERP with WhatsApp using Python, FastAPI and Next.js to automate payment reminders, freeing one person from a manual routine that took their entire workday.
-- **Data at scale.** I maintain Microsoft Fabric pipelines for a platform with **over 3.8 billion records**, serving **more than 800 stores across 23 Brazilian states**. I implemented checks that block incomplete data from publication and allow periods to be reprocessed without duplicating records.
-- **AI observability.** I developed a dashboard with FastAPI, Next.js and KQL in Azure Log Analytics to investigate failures and track response cost and quality.
+- I developed Sol, a WhatsApp data assistant using Meta's official API. Each store can access only its own data, with permission checks and response verification.
+- I automated payment reminders by connecting an ERP to WhatsApp with Python, FastAPI and Next.js. This freed one person from a manual routine that took their entire workday.
+- I maintain Microsoft Fabric pipelines for a platform with over 3.8 billion records and more than 800 stores across 23 Brazilian states. Validation blocks incomplete data and allows periods to be reprocessed without duplication.
+- I built a dashboard with FastAPI, Next.js and KQL in Azure Log Analytics to investigate AI failures and track response cost and quality.
 
 ## Selected projects
 
-These are personal demonstrations. The retail and operations scenarios use synthetic data; CycleOps and QuakeExposure also use public data, with sources and limits described in their repositories.
+These are personal projects using synthetic data. CycleOps and QuakeExposure also use public data; their repositories list the sources.
 
 ### Browser demos
 
@@ -24,27 +22,27 @@ These are personal demonstrations. The retail and operations scenarios use synth
 
 ### [EvidenceDesk](https://github.com/arthurjoanes/evidencedesk)
 
-Investigates discrepancies between orders and payments using verifiable sources, optional AI drafts and review by another person before approval. The analysis workflow also works without AI generation.
+Investigates discrepancies between orders and payments, with access to source material and review by another person before approval. Optional AI helps prepare drafts.
 
 **Python · FastAPI · PostgreSQL · Next.js · Optional Azure OpenAI**
 
 ### [Gestão de Recebíveis](https://github.com/arthurjoanes/gestao-recebiveis)
 
-An accounts receivable application with CSV imports, payment recording without duplication and recovery of interrupted jobs. Reminders use a simulated provider, distinguishing delivery attempts from confirmed delivery.
+Tracks accounts receivable, imports CSV files, records payments and resumes interrupted jobs. It prevents duplicate payments and distinguishes reminder attempts from confirmed deliveries. The messaging provider is simulated.
 
 **Python · FastAPI · PostgreSQL · Next.js · Docker**
 
 ### [Varejo Data Pipeline](https://github.com/arthurjoanes/varejo-data-pipeline)
 
-A sales data pipeline with coverage validation, revision handling and consistent publication of indicators. Blocked or failed batches preserve the previous publication, with local failure and recovery scenarios.
+Processes sales, checks data coverage and publishes metrics. Previous metrics remain available if a batch fails or is blocked. Includes local scenarios for testing revisions and recovery.
 
 **Python · PySpark · Delta Lake · SQL · Docker**
 
 Also in my portfolio:
 
-- [**Loja Assistente**](https://github.com/arthurjoanes/loja-assistente) — sales queries in Portuguese, with store-level authorization, backend calculations and optional AI.
-- [**API Sentinel**](https://github.com/arthurjoanes/api-sentinel) — a B2B API with organization isolation, shared quotas and observability for failures and recovery.
-- [**ContainerOps**](https://github.com/arthurjoanes/containerops) — an API and worker operations lab covering job recovery, backup, restore and rollback.
+- [Loja Assistente](https://github.com/arthurjoanes/loja-assistente): sales queries in Portuguese, with store-level access, backend calculations and optional AI.
+- [API Sentinel](https://github.com/arthurjoanes/api-sentinel): a B2B API with data isolated by organization, shared quotas and monitoring for failures and recovery.
+- [ContainerOps](https://github.com/arthurjoanes/containerops): a lab for operating an API and a worker, recovering jobs and testing backup, restore and rollback.
 
 ## Technologies I use at work
 
@@ -59,6 +57,6 @@ Also in my portfolio:
 
 ## Education and contact
 
-I'm studying **Computer Science at Rede de Ensino Doctum**, currently in my eighth semester. Based in **Raul Soares, Minas Gerais, Brazil**, I'm interested in fully remote opportunities in software development, applied AI and data.
+I'm studying Computer Science at Rede de Ensino Doctum, currently in my eighth semester. I live in Raul Soares, Minas Gerais, Brazil, and am looking for fully remote opportunities in software development, applied AI and data.
 
-Connect with me on [LinkedIn](https://www.linkedin.com/in/arthur-joanes-6a2967373/) or email **[arthurjoanes@hotmail.com](mailto:arthurjoanes@hotmail.com)**.
+[LinkedIn](https://www.linkedin.com/in/arthur-joanes-6a2967373/) · [arthurjoanes@hotmail.com](mailto:arthurjoanes@hotmail.com)
